@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JedisSampleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JedisSampleApplication.class, args);
+		 SpringApplication.run(JedisSampleApplication.class, args);
 	}
 }
