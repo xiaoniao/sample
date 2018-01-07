@@ -1,0 +1,473 @@
+线程（Java并发编程的艺术，读书笔记）
+
+1、什么是线程？
+线程的内存结构
+2、为什么使用多线程？
+3、线程优先级
+4、线程的状态
+5、Daemon线程
+6、启动线程
+7、中断信号
+8、终止线程
+9、线程间通信
+10、等待|通知机制
+11、ThreadLocal
+12、线程池
+
+
+1、线程是操作系统调度的最小单位，每个线程都各自的计数器，堆栈和局部变量，还可以访问共享的内存地址。处理器在这些线程上高速的切换，让人感觉是在同时执行，在多核CPU上更为明显和高效。
+
+	通过 ThreadMXBean 可以查看程序正在运行的线程。
+
+	public static void main(String[] args) {
+		ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+		ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(false, false);
+		for (ThreadInfo threadInfo : threadInfos) {
+			System.out.println(threadInfo.getThreadId() + " - " + threadInfo.getThreadName() + " - " + threadInfo.getThreadState());
+		}
+	}
+
+	运行结果：一个基本的 Java 程序就包括了四个线程，说明Java内置就对对多线程进行了支持，
+		4 - Signal Dispatcher - RUNNABLE // 分发处理发送给 JVM信号 的线程
+		3 - Finalizer - WAITING          // 调用对象 finalize 方法的线程
+		2 - Reference Handler - WAITING  // 清除 Reference 的线程 （垃圾回收）
+		1 - main - RUNNABLE              // main 线程
+
+2、
+	1) CPU朝更多的核心发展，而一个线程在同一时刻只能运行在一个处理器核心上，可以更好的例如多核。
+	2) 更快的响应时间，把非重要的业务逻辑交由队列让线程池来处理
+	3) 更好的编程模型
+
+3、
+	线程的运行原理是CPU通过时间片轮训来执行线程，线程优先级就是希望让CPU多分点时间或者少分点时间，但最终决定的还是操作系统。
+
+	建议：针对频繁阻塞/休眠/IO操作的线程设置高优先级，偏重计算过多消耗CPU时间的线程设置低优先级。
+
+	测试代码：
+	/**
+	 * 线程优先级
+	 * 运行结果 1的次数为 145255 10的次数为 145422 两者优先级执行次数相差不大
+	 */
+	public class Priority {
+
+		private static volatile boolean notStart = true;
+		private static volatile boolean notEnd = true;
+
+		public static void main(String[] args) {
+			List<Job> jobs = new ArrayList<Job>();
+
+			for (int i = 0; i < 10; i++) {
+				int priority = i < 5 ? Thread.MIN_PRIORITY : Thread.MAX_PRIORITY;
+				Job job = new Job(priority);
+				jobs.add(job);
+
+				Thread thread = new Thread(job, "Thread" + i);
+				thread.start();
+			}
+			notStart = false;
+
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			notEnd = false;
+
+			for (Job job : jobs) {
+				System.out.println(job.priority + " - " + job.jobCount);
+			}
+			
+			long total = 0;
+			for (int i = 0; i < 5; i++) {
+				total += jobs.get(i).jobCount;
+			}
+			System.out.println(total / 5);
+			
+			total = 0;
+			for (int i = 5; i < 10; i++) {
+				total += jobs.get(i).jobCount;
+			}
+			System.out.println(total / 5);
+		}
+
+		static class Job implements Runnable {
+
+			private int priority;
+			private long jobCount;
+
+			public Job(int priority) {
+				this.priority = priority;
+			}
+
+			public void run() {
+				while (notStart) {
+					Thread.yield();
+				}
+				while (notEnd) {
+					Thread.yield();
+					jobCount++;
+				}
+			}
+		}
+	}
+
+4、
+	有6种状态
+		NEW              初始状态： Thread t = new Thread();
+		RUNNABLE         运行状态： 就绪和运行两种状态称为运行中  run() { ... } run() { Thread.yield() }
+		BLOCKED          阻塞状态： 被锁阻塞住等待中 等待的过程中。run() { synchronized(xxx) {}}
+		WAITING          等待状态：
+		TIME_WAITING     超时等待状态：
+		TREMINATED       终止状态：
+
+	借助java提供的jps和jstack可以查看进程的线程状态
+
+		liuzhuangzhuang:~ liuzhuang$ jps
+		62952 ThreadState
+		62955 Jps
+		liuzhuangzhuang:~ liuzhuang$ jstack 62952
+
+5、
+	Daemon线程是一种后台线程，当进程中没有非Daemon线程的时候，Daemon线程会自动立即停止，进程退出。
+	如何设置Daemon，在thread.start()前，设置Thread.setDaemon(true);
+
+6、
+	不管是继承Thread还是实现Runnable还是Callable启动线程的方式都是 new Thread().start();
+
+	调用start()方法之后，当前线程会同步告知JVM虚拟机，只要线程规划空闲，应立即启动调用start()方法的线程。
+
+7、
+	对线程调用thread.interrupt()方法会修改标志位，如果在线程内捕获了InterruptedException异常或者使用Thread.interrupted()判断是否发送过中断信号，会把标志位复位，代表这次中断我已经处理了，如果没有处理标志位还是true。
+
+	// 捕获异常
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		// 会对标志位复位
+	}
+
+	// Thread.interrupted()
+	if (Thread.interrupted()) { // 会对标志位复位
+		
+	} else {
+		
+	}
+
+	** thread.interrupt();
+	** 异常和Thread.interrupted()会对标志位复位
+
+8、
+	1) 发送中断信号，接收到信号后，退出run方法
+	2) 变量控制 退出run方法
+
+	package com.liuzhuang.thread;
+
+	public class Shutdown {
+
+		public static void main(String[] args) {
+			Thread t = new Thread(new InterruptRunner());
+			t.start();
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			t.interrupt();
+			
+			try {
+				t.join();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			
+			FlagQuitRunner r2 = new FlagQuitRunner();
+			Thread t2 = new Thread(r2);
+			t2.start();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			r2.cancel();
+		}
+		
+		static class InterruptRunner implements Runnable {
+			public void run() {
+				// Thread.interrupted()
+				while (true && !Thread.currentThread().isInterrupted()) {
+					
+				}
+				System.out.println("shutdown");
+			}
+		}
+		
+		static class FlagQuitRunner implements Runnable {
+			
+			private volatile boolean isQuit = false;
+			
+			public void run() {
+				while (true && !isQuit) {
+					
+				}
+				System.out.println("shutdown2");
+			}
+			
+			public void cancel() {
+				isQuit = true;
+			}
+		}
+	}
+
+
+9、
+	1) 使用valatile和synchronized强制修改线程的行为
+
+	使用volatile，volatile 用来修饰成员变量，就是告知程序任何对该变量的访问均需要从共享内存中获取，而对它的改变必须同步刷新回共享内存，它能保证所有线程对变量访问的可见性。
+
+	使用synchronized 可以修饰方法或者以同步块的形式来进行使用，它主要确保多个线程再同一时刻，只能有一个线程处于方法或者同步块中，它保证了线程对变量访问的可见性和排它性。
+
+	关于synchronized：
+		任意一个对象都拥有自己的监听器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进入同步块或者同步方法，而没有获取到监视器的线程将会被阻塞在同步块和同步方法的入口处，进入 BLOCK 状态。
+
+	2) 使用输入输出流
+
+		package com.liuzhuang.thread;
+
+		import java.io.IOException;
+		import java.io.PipedReader;
+		import java.io.PipedWriter;
+
+		public class Piped {
+
+			public static void main(String[] args) throws IOException {
+				PipedWriter out = new PipedWriter();
+				PipedReader in = new PipedReader();
+				out.connect(in);
+				
+				Thread printThread = new Thread(new Print(in), "PrintThread");
+				printThread.start();
+				
+				int receive = 0;
+				try {
+					while ((receive = System.in.read()) != -1) {
+						out.write(receive);
+					}
+				} catch (IOException e) {
+					
+				} finally {
+					out.close();
+				}
+			}
+			
+			static class Print implements Runnable {
+				
+				private PipedReader in;
+				
+				public Print(PipedReader in) {
+					this.in = in;
+				}
+				
+				public void run() {
+					int receive = 0;
+					try {
+						while ((receive = in.read()) != -1) {
+							System.out.println((char) receive);
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+
+
+10、
+	定义：一个线程修改了一个对象的值，而另一个线程感知到了变化，然后进行操作，整个过程开始于一个线程，执行又是另一个线程，前面是生产者，后面是消费者
+
+
+	简单的模型是在消费者线程中一直循环检查是否有值变化，但是开销太大。因为线程一直是Runnable状态。
+	while() {
+
+	}
+
+	使用对象的 wait() 和 notify() 可以实现消费者生产模式
+
+		wait() 释放当前线程锁住的对象的锁，线程变为 WAITING 状态，只有等待其他线程 notify() 或者 interrupt中断才返回 RUNNABLE 状态。
+
+		notify() 通知等待在此对象上的线程，使其从 wait() 方法返回，返回的前提是该线程获取到了对象的锁。
+
+		notifyAll() 会通知所有等待再该对象上的线程，使其从 wait() 方法返回，返回的前提是该线程获取到了对象的锁。
+
+		wait(long) 超时等待一段时间。
+
+		wait(long, int) 超时等待一段时间，可选择时间单位。
+
+	示例：
+	package com.liuzhuang.thread;
+
+	public class WaitNotifyMine {
+		
+		private static Object o = new Object();
+
+		public static void main(String[] args) throws InterruptedException {
+			new Thread(new Wait(1)).start();
+			Thread.sleep(1000);
+			new Thread(new Wait(2)).start();
+			Thread.sleep(1000);
+			new Thread(new Notify()).start();
+		}
+		
+		static class Wait implements Runnable {
+			
+			private int count;
+			
+			public Wait(int count) {
+				this.count = count;
+			}
+			
+			public void run() {
+				synchronized (o) {
+					try {
+						o.wait(); // 1、释放锁 进入 WAITING 状态
+					} catch (InterruptedException e) {
+						
+					}
+				}
+				System.out.println("Wait exit " + count + "...");
+			}
+		}
+		
+		static class Notify implements Runnable {
+			public void run() {
+				synchronized (o) {
+					//o.notify();
+					o.notifyAll(); // 2、o上线程从 WAITING 状态变为 BLOCK 状态
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						
+					}
+					// 3、释放锁 接着 o.wait()返回重新进入Runnable状态
+				}
+			}
+		}
+	}
+
+
+	1) 使用 wait() notify() notifyAll() 需要先对调用对象加锁。
+	2) 调用 wait() 方法后，线程状态由 RUNNING 变为 WAITING ，释放当前对象锁，并将当前线程放置到对象的等待队列中。
+	3) notify() notifyAll() 方法调用后，等待线程依旧不会从 wait() 方法返回，需要调用 notify() notifyAll() 的线程释放锁之后，等待线程才有机会从 wait() 返回。
+	4) notify() 方法将队列中的一个等待线程从等待队列中移动同步队列中，notifyAll() 方法则是讲等待队列中的所有线程全部移到同步队列，被移动的线程状态从 WAITING 变为 BLOCKED
+	5) 从 wait() 方法返回的前提是获得了调用对象的锁。
+
+	几块概念
+	  对象
+	  对象监视器
+	  对象的等待队列
+	  对象的同步队列
+
+
+	一个简单的消费生产模式
+	package com.liuzhuang.thread;
+
+	import java.util.ArrayList;
+	import java.util.List;
+
+	public class WaitNotifySample {
+		
+		// 考虑如何对list进行同步 
+		static List<String> list = new ArrayList<String>();
+		static Object lock = new Object();
+
+		public static void main(String[] args) throws InterruptedException {
+			new Thread(new Customer()).start();
+			Thread.sleep(1000);
+
+			Producter p = new Producter();
+			new Thread(p).start();
+			Thread.sleep(100);
+
+			System.out.println("====");
+
+			int count = 10000;
+			while (count > 0) {
+				if (count % 2 == 0) {
+					p.add("" + count);
+					Thread.sleep(100);
+				}
+				count--;
+			}
+		}
+
+		/**
+		 * 消费者
+		 */
+		static class Customer implements Runnable {
+
+			public void run() {
+				while (true) {
+					synchronized (lock) {
+						System.out.println("消费者");
+						
+						// 实际是使用Lock进行加锁
+						int size = 0;
+						synchronized (list) {
+							size = list.size();
+						}
+						
+						if (size == 0) {
+							try {
+								lock.wait();
+							} catch (InterruptedException e) {
+
+							}
+						} else {
+							synchronized (list) {
+								for (String string : list) {
+									System.out.println(string);
+								}
+								list.clear();
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * 生产者
+		 */
+		static class Producter implements Runnable {
+			private volatile boolean isNotify = false;
+
+			public void run() {
+				// 注意不能 synchronized (lock) while (true) 这样会永远不释放锁
+				while (true) {
+					synchronized (lock) {
+						if (isNotify) {
+							lock.notifyAll();
+							isNotify = false;
+						}
+					}
+				}
+			}
+
+			public void add(String string) {
+				synchronized (list) {
+					list.add(string);
+					isNotify = true;
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+

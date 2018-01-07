@@ -1,0 +1,109 @@
+Difference Between "Implements Runnable" And "Extends Thread" In Java
+
+集成Thread和实现Runnable的区别
+
+
+How to instantiate a Thread in java either by implementing Runnable or extending Thread class . 
+We will go through the difference between "implements Runnable" and "extends Thread" . 
+It will help us to choose the correct way to instantiate the Thread in our application.
+
+Although, in the real world application you are much more likely to implement Runnable interface than extends Thread.
+Extending the Thread class is easiest but not a good Object Oriented practice.
+In this post we will see the difference between "implements Runnable" and "extends Thread".
+This is one of the basic interview question on the topic of Threads.
+
+
+1. Inheritance Option: 继承性
+
+	The limitation with "extends Thread" approach is that if you extend Thread, you can not extend anything else . Java does not support multiple inheritance.  In reality , you do not need Thread class behavior , because in order to use a thread you need to instantiate one anyway. Thread不能继承其他类
+	
+	On the other hand,
+	Implementing the Runnable interface gives you the choice to extend any class you like , but still define behavior that will be run by separate thread. Runnable可以继承类
+
+
+2. Reusability :  重用代码
+
+	In "implements Runnable" , we are creating a different Runnable class for a specific behavior job (if the work you want to be done is job). 
+	It gives us the freedom to reuse the specific behavior job whenever required. Runnable是被重用的，Thread不可以被重用
+
+	"extends Thread"  contains both thread and job specific behavior code. Hence once thread completes execution , it can not be restart again.
+
+	
+3. Object Oriented Design: 面向对象设计 实现接口比集成类好
+
+	Implementing Runnable should be preferred . 
+	It does not specializing or modifying the thread behavior .  不用特别指定和修改线程行为，接口比继承侵入性小
+	You are giving thread something to run. 
+	We conclude that Composition is the better way. 
+	Composition means two objects A and B satisfies has-a relationship. Composition意思是A和B满足一个关系
+	
+	"extends Thread" is not a good Object Oriented practice.
+
+
+4 Loosely-coupled : 松耦合
+
+	"implements Runnable" makes the code loosely-coupled and easier to read . 接口 可读性高 因为代码分布在两个类中
+	Because the code is split into two classes . 
+	Thread class for the thread specific code and your Runnable implementation class for your job that should be run by a thread code. 在Thread类中就是 Thread去执行Runnable的run()方法
+	
+	"extends Thread"  makes the code tightly coupled . Single class contains the thread code as well as the job that needs to be done by the thread.
+
+
+5 Functions overhead :  方法重载
+
+	"extends Thread"  means inheriting all the functions of the Thread class which we may do not need . 继承的话需要实现所有的方法，不管你需不需要，而接口不需要
+	job can be done easily by Runnable without the Thread class functions overhead.
+	
+	
+---------------------------------------------------------------------------------
+	
+	
+什么时候使用extend Thread 而不是 implement Runnable
+When to use "extends Thread" over "implements Runnable"
+
+
+当你更需要Thread特定的特性的时候（用runnable就不可以了吗 是的）
+The only time it make sense to use "extends Thread"  is when you have a more specialized version of Thread class. In other words , because you have more  specialized thread specific behavior.	
+	
+But the conditions are that the thread work you want is really just a job to be done by a thread.
+In that case you need to use "implements Runnable" which also leaves your class free to extend some other class.
+
+
+---------------------------------------------------------------------------------
+
+表格说明
+
+ ------------------------------------------------------------------
+|						implements Runnable	 		extends Thread |
+|------------------------------------------------------------------|
+|Inheritance option		extends any java class 		    No         |
+|------------------------------------------------------------------|
+|Reusability				 Yes						No         |
+|------------------------------------------------------------------|
+|Object Oriented Design	Good,allows composition 	    Bad        |
+|------------------------------------------------------------------|
+|Loosely Coupled			 Yes 						No         |
+|------------------------------------------------------------------|
+|Function Overhead		     No							Yes        |
+ ------------------------------------------------------------------
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
