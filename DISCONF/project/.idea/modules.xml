@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-demos-java.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-demos-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-core/disconf-spring-boot-core.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-core/disconf-spring-boot-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-demo.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-web/disconf-spring-boot-web.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-web/disconf-spring-boot-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-standalone-demo/disconf-standalone-demo.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-standalone-demo/disconf-standalone-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/disconf-demos-java/disconf-standalone-dubbo-demo/disconf-standalone-dubbo-demo.iml" filepath="$PROJECT_DIR$/disconf-demos-java/disconf-standalone-dubbo-demo/disconf-standalone-dubbo-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/project.iml" filepath="$PROJECT_DIR$/.idea/project.iml" />
+    </modules>
+  </component>
+</project>
