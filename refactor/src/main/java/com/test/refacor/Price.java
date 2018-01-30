@@ -1,6 +1,8 @@
 package com.test.refacor;
 
 /**
+ * 重构去除参数
+ *
  * Created by liuzz on 2018/01/30
  */
 public class Price {
