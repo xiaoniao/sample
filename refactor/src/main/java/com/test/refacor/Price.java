@@ -15,24 +15,28 @@ public class Price {
      */
     private double itemPrice;
 
+    /**
+     * 获得打折等级，计算价格
+     *
+     * @return
+     */
     public double getPrice() {
-        double basePrice = quantity * itemPrice;
-
-        int discountLevel;
-        if (quantity > 100) {
-            discountLevel = 2;
+        if (getDiscountLevel() == 2) {
+            return getBasePrice() * 0.1;
         } else {
-            discountLevel = 1;
+            return getBasePrice() * 0.05;
         }
-        double finalPrice = discountedPrice(basePrice, discountLevel);
-        return finalPrice;
     }
 
-    private double discountedPrice(double basePrice, int discountLevel) {
-        if (discountLevel == 2) {
-            return basePrice * 0.1;
+    private double getBasePrice() {
+        return quantity * itemPrice;
+    }
+
+    private int getDiscountLevel() {
+        if (quantity > 100) {
+            return 2;
         }
-        return basePrice * 0.05;
+        return 1;
     }
 
     public static void main(String[] args) {
