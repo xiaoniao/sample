@@ -1,0 +1,20 @@
+
+不加Error 抛出异常到ErrorAdvice（ControllerAdvice）
+
+加了Error 会进入Controller
+
+
+AbstractMessageConverterMethodArgumentResolver
+    isBindExceptionRequired
+
+
+RequestResponseBodyMethodProcessor
+    if (binder.getBindingResult().hasErrors() && isBindExceptionRequired(binder, parameter)) {
+        throw new MethodArgumentNotValidException(parameter, binder.getBindingResult());
+    }
+
+
+InvocableHandlerMethod
+    getMethodArgumentValues 获得方法参数值
+
+HandlerMethodArgumentResolverComposite

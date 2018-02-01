@@ -1,0 +1,125 @@
+URL到框架的映射
+http请求参数绑定
+http响应的生成和输出
+
+
+
+
+URL映射-------------
+	/**
+	 * Return the HandlerExecutionChain for this request.
+	 * <p>Tries all handler mappings in order.
+	 * @param request current HTTP request
+	 * @return the HandlerExecutionChain, or {@code null} if no handler could be found
+	 */
+	protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		for (HandlerMapping hm : this.handlerMappings) {
+			if (logger.isTraceEnabled()) {
+				logger.trace(
+						"Testing handler map [" + hm + "] in DispatcherServlet with name '" + getServletName() + "'");
+			}
+			HandlerExecutionChain handler = hm.getHandler(request);
+			if (handler != null) {
+				return handler;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * No handler found -> set appropriate HTTP response status.
+	 * @param request current HTTP request
+	 * @param response current HTTP response
+	 * @throws Exception if preparing the response failed
+	 */
+	protected void noHandlerFound(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (pageNotFoundLogger.isWarnEnabled()) {
+			pageNotFoundLogger.warn("No mapping found for HTTP request with URI [" + getRequestUri(request) +
+					"] in DispatcherServlet with name '" + getServletName() + "'");
+		}
+		if (this.throwExceptionIfNoHandlerFound) {
+			throw new NoHandlerFoundException(request.getMethod(), getRequestUri(request),
+					new ServletServerHttpRequest(request).getHeaders());
+		}
+		else {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+		}
+	}
+
+HandlerExecutionChain
+    private final Object handler;  
+    private HandlerInterceptor[] interceptors;
+
+
+HandlerAdapter - 根据 handler 获取ModelAndView视图和数据
+    ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+
+    RequestMappingHandlerAdapter
+        handleInternal
+
+        ModelAndView invokeHandlerMethod(HttpServletRequest request,HttpServletResponse response, HandlerMethod handlerMethod) throws Exception
+
+        // 解析参数
+        HandlerMethodArgumentResolverComposite argumentResolvers
+        // 解析返回值
+        HandlerMethodReturnValueHandlerComposite returnValueHandlers
+        // 获取参数名称
+        ParameterNameDiscoverer parameterNameDiscoverer DefaultParameterNameDiscoverer
+
+            DefaultParameterNameDiscoverer
+                    StandardReflectionParameterNameDiscoverer 通过反射获取参数名称
+                    LocalVariableTableParameterNameDiscoverer 
+
+
+        ServletInvocableHandlerMethod 
+            invokeAndHandle 处理方法调用
+
+                InvocableHandlerMethod ****
+                    invokeForRequest 执行controller方法调用
+
+
+
+                    HandlerMethodArgumentResolverComposite 从request中取值
+
+                    RequestResponseBodyMethodProcessor @ResponseBody 对应的方法解析
+
+                    AbstractMessageConverterMethodArgumentResolver ***** 解析请求的数据到对象参数
+
+                    通过反射调用controller方法
+                        protected Object doInvoke(Object... args) throws Exception {
+                            ReflectionUtils.makeAccessible(getBridgedMethod());
+                            try {
+                                return getBridgedMethod().invoke(getBean(), args);
+                            }
+                        }
+
+
+                    ServletRequestMethodArgumentResolver
+                        用于注入 HttpSession 参数 public String cookie(HttpServletRequest request, HttpSession httpSession)
+
+
+handler 其实是 HandlerMethod
+
+
+返回数据
+
+json
+logger.debug("Null ModelAndView returned to DispatcherServlet with name '" + getServletName() +
+						"': assuming HandlerAdapter completed request handling");
+
+
+DefaultCorsProcessor
+
+
+
+
+
+
+
+---httpSession
+RequestFacade
+
+
+
+
+
