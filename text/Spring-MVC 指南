@@ -1,0 +1,74 @@
+pring的web框架围绕DispatcherServlet设计，DispatcherServlet的作用是将请求分发到不同的处理器。
+
+Spring的web框架包括可配置的，处理器（handler）映射，视图（view）解析，本地化（local）解析，主题（theme）解析，文件上传
+
+Spring的Web框架中缺省的处理器是Controller 接口，这是一个非常简单的接口，仅包含 ModelAndView handleRequest(request, response) 方法。
+可以通过实现这个接口来创建自己的控制器（也可以称之为处理器），但是更推荐继承Spring提供的一系列控制器， 比如AbstractController、AbstractCommandController 和SimpleFormController。
+注意，需要选择正确的基类：如果没有表单，就不需要一个FormController。 这是和Struts的一个主要区别。
+
+
+Spring Web MVC允许使用任何对象作为命令对象（或表单对象）- 不必实现某个特定于框架的接口或从某个基类继承。 
+Spring的数据绑定相当灵活，例如，它认为类型不匹配这样的错误应该是应用级的验证错误，而不是系统错误。 
+所以你不需要为了保证表单内容的正确提交，而重复定义一个和业务对象有相同属性的表单对象来处理简单的无 类型字符串或者对字符串进行转换。
+这也是和Struts相比的另一个重要区别，Struts是围绕 Action和ActionForm等基类构建的。
+
+
+Spring的视图解析相当灵活。一个控制器甚至可以直接向response输出一个视图 （此时控制器返回ModelAndView的值必须是null）。
+在一般的情况下，一个ModelAndView 实例包含一个视图名字和一个类型为Map的model， 一个model是一些以bean的名字为key，
+以bean对象（可以是命令或form，也可以是其他的JavaBean） 为value的键值对。对视图名称的解析处理也是高度可配置的，可以通过bean的名字、
+属性文件或者自定义的 ViewResolver实现来进行解析。实际上基于 Map的model（也就是MVC中的M）是高度抽象的，适用于各种表现层技术。 
+也就是说，任何表现层都可以直接和Spring集成，无论是JSP、Velocity还是其它表现层技术。 
+Map model可以被转换成合适的格式，比如JSP request attribute或者Velocity template model。
+
+
+
+Spring Web MVC框架的特点
+
+1、清晰的角色划分：控制器（controller）、验证器（validator）、 命令对象（command object）、表单对象（form object）、模型对象（model object）、 Servlet分发器（DispatcherServlet）、 处理器映射（handler mapping）、视图解析器（view resolver）等等。 每一个角色都可以由一个专门的对象来实现。
+
+2、强大而直接的配置方式：将框架类和应用程序类都能作为JavaBean配置，支持跨多个context的引用，例如，在web控制器中对业务对象和验证器（validator）的引用。
+
+3、可适配、非侵入：可以根据不同的应用场景，选择合适的控制器子类 （simple型、command型、form型、wizard型、multi-action型或者自定义），而不是从单一控制器 （比如Action/ActionForm）继承。
+
+4、可重用的业务代码：可以使用现有的业务对象作为命令或表单对象，而不需要去扩展某个特定框架的基类。
+
+5、可定制的绑定（binding） 和验证（validation）：比如将类型不匹配作为应用级的验证错误， 这可以保存错误的值。再比如本地化的日期和数字绑定等等。在其他某些框架中，你只能使用字符串表单对象， 需要手动解析它并转换到业务对象。
+
+6、可定制的handler mapping和view resolution：Spring提供从最简单的URL映射， 到复杂的、专用的定制策略。与某些web MVC框架强制开发人员使用单一特定技术相比，Spring显得更加灵活。
+
+7、灵活的model转换：在Springweb框架中，使用基于Map的 键/值对来达到轻易地与各种视图技术的集成。
+
+8、可定制的本地化和主题（theme）解析：支持在JSP中可选择地使用Spring标签库、支持JSTL、支持Velocity（不需要额外的中间层）等等。
+
+9、简单而强大的JSP标签库（Spring Tag Library）：支持包括诸如数据绑定和主题（theme） 之类的许多功能。它提供在标记方面的最大灵活性。如欲了解详情，请参阅附录附录 D, spring.tld
+
+10、JSP表单标签库：在Spring2.0中引入的表单标签库，使得在JSP中编写 表单更加容易。如欲了解标签库详情，请参阅附录附录 E, spring-form.tld
+
+11、Spring Bean的生命周期可以被限制在当前的HTTP Request或者HTTP Session。 准确的说，这并非Spring MVC框架本身特性，而应归属于Sping MVC使用的WebApplicationContext容器。 该功能在第 3.4.4 节 “其他作用域”有详细描述。
+
+
+
+----WebApplicationContext
+WebApplicationContext 仅仅是一个拥有web应用必要功能的普通 ApplicationContext。
+它与一个标准的 ApplicationContext的不同之处在于，它能够解析theme （参考第 13.7 节 “使用主题”），并且它知道自己与哪个servlet相关联 （通过ServletContext）。
+WebApplicationContext 被绑定在ServletContext上，需要时，可以使用 RequestContextUtils提供的静态方法找到WebApplicationContext。
+
+----DispatcherServlet
+DispatcherServlet处理请求的全过程：
+
+找到WebApplicationContext并将其绑定到请求的一个属性上， 以便控制器和处理链上的其它处理器能使用WebApplicationContext。 默认的属性名为DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE。
+
+将本地化解析器（localResolver）绑定到请求上，这样使得处理链上的处理器在处理请求（准备数据、显示视图等等） 时能进行本地化处理。若不使用本地化解析器，也不会有任何副作用，因此如果不需要本地化解析，忽略它即可。
+
+将主题解析器绑定到请求上，这样视图可以决定使用哪个主题。如果你不需要主题，可以忽略它，不会有任何影响。
+
+如果上传文件解析器被指定，Spring会检查每个接收到的请求是否存在上传文件，如果存在， 这个请求将被封装成MultipartHttpServletRequest以便被处理链中的其它处理器使用 （关于文件上传的更多内容请参考第 13.8.2 节 “使用MultipartResolver”）。
+
+找到合适的处理器，执行和这个处理器相关的执行链（预处理器，后置处理器，控制器），以便为视图准备模型数据（用于渲染）。
+
+如果模型数据被返回，就使用配置在WebApplicationContext中的视图解析器显示视图， 否则视图不会被显示。有多种原因可以导致返回的数据模型为空，比如预处理器或后处理器可能截取了请求，这可能是出于安全原因， 也可能是请求已经被处理，没有必要再处理一次。
+
+
+
+13.3. 控制器
+Spring MVC实现的基础 就是这三个概念：Mdel、View（ModelAndView）以及 Controller。
