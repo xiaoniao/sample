@@ -1,0 +1,99 @@
+http://blog.didispace.com/xjf-spring-security-1/
+
+SecurityContextHolder
+    用于存储安全上下文（security context）的信息。当前操作的用户是谁，该用户是否已经被认证，他拥有哪些角色权限…这些都被保存在SecurityContextHolder中
+
+
+UserDetails
+    Spring对身份信息封装的一个接口
+
+Principal
+    https://www.ibm.com/developerworks/cn/java/j-javaauth/
+
+Authentication
+    getAuthorities 权限信息列表
+    getCredentials 密码信息
+    getDetails     登录用户信息
+    getPrincipal   身份信息，大部分情况下返回的是UserDetails接口的实现类
+
+AuthenticationManager
+    身份管理器
+
+
+1、用户名和密码被过滤器获取到，封装成 Authentication(通常是 UsernamePasswordAuthenticationToken)
+2、AuthenticationManager(身份管理器) 负责验证这个Authentication
+3、认证成功后，AuthenticationManager身份管理器返回一个被填充满了信息的（包括上面提到的权限信息，身份信息，细节信息，但密码通常会被移除）Authentication实例
+4、SecurityContextHolder安全上下文容器将第3步填充了信息的Authentication，通过SecurityContextHolder.getContext().setAuthentication(…)方法，设置到其中
+
+public class AuthenticationExample {
+    private static AuthenticationManager am = new SampleAuthenticationManager();
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        while(true) {
+            System.out.println("Please enter your username:");
+            String name = in.readLine();
+            System.out.println("Please enter your password:");
+            String password = in.readLine();
+            try {
+                // 封装请求用户
+                Authentication request = new UsernamePasswordAuthenticationToken(name, password);
+                // 验证用户
+                Authentication result = am.authenticate(request);
+                // 设置登录成功用户信息
+                SecurityContextHolder.getContext().setAuthentication(result);
+                break;
+            } catch(AuthenticationException e) {
+                System.out.println("Authentication failed: " + e.getMessage());
+            }
+        }
+        System.out.println("Successfully authenticated. Security context contains: " + SecurityContextHolder.getContext().getAuthentication());
+    }
+}
+
+class SampleAuthenticationManager implements AuthenticationManager {
+    static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
+
+    static {
+        AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public Authentication authenticate(Authentication auth) throws AuthenticationException {
+        // 认证用户成功
+        if (auth.getName().equals(auth.getCredentials())) {
+            return new UsernamePasswordAuthenticationToken(auth.getName(),auth.getCredentials(), AUTHORITIES);
+        }
+        throw new BadCredentialsException("Bad Credentials");
+    }
+}
+
+--- AuthenticationManager
+
+
+
+
+
+--- 过滤器
+
+DefaultSecurityFilterChain
+
+一、
+    '/css/**' '/js/**' '/images/**' '/webjars/**' '/**/favicon.ico' '/error'
+        NO_FILTER
+
+二、
+    '/**' 
+        org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter
+        org.springframework.security.web.context.SecurityContextPersistenceFilter
+        org.springframework.security.web.header.HeaderWriterFilter
+        org.springframework.security.web.authentication.logout.LogoutFilter
+        org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+        org.springframework.security.web.savedrequest.RequestCacheAwareFilter
+        org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
+        org.springframework.security.web.authentication.AnonymousAuthenticationFilter
+        org.springframework.security.web.session.SessionManagementFilter
+        org.springframework.security.web.access.ExceptionTranslationFilter
+        org.springframework.security.web.access.intercept.FilterSecurityInterceptor
+
+
