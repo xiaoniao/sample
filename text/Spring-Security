@@ -97,3 +97,50 @@ DefaultSecurityFilterChain
         org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 
 
+# 模拟实现 Servlet 的 FilterChain
+SecurityFilterChain
+    DefaultSecurityFilterChain 保存有Serucity框架拥有的 Filter list 在什么地方实例化的？
+
+# 入口 Filter
+DelegatingFilterProxy
+
+# 
+FilterChainProxy
+
+    private List<Filter> getFilters(HttpServletRequest request) {
+		for (SecurityFilterChain chain : filterChains) {
+			if (chain.matches(request)) {
+				return chain.getFilters();
+			}
+		}
+		return null;
+	}
+
+    用 VirtualFilterChain 实现 Filter Chain 模式 （Spring Security自己造了一个Filter的轮子）
+
+
+    最后执行的一个Filter是FilterSecurityInterceptor，它有可能执行
+
+    FilterInvocation fi = new FilterInvocation(request, response, chain);
+		invoke(fi);
+
+
+        AbstractSecurityInterceptor
+
+            // Attempt authorization
+            try {
+                this.accessDecisionManager.decide(authenticated, object, attributes);
+            }
+            catch (AccessDeniedException accessDeniedException) {
+                publishEvent(new AuthorizationFailureEvent(object, attributes, authenticated, accessDeniedException));
+                throw accessDeniedException;
+            }
+
+        使用时间发送登录成功失败通知
+
+
+
+
+
+
+
