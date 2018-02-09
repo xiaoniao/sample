@@ -21,4 +21,8 @@ public class MessageSender {
     public void sendFanoutExchange(String msg) {
         amqpTemplate.convertAndSend("spring-boot-fanout-exchange", "", msg);
     }
+
+    public void sendTopicExchange(String msg) {
+        amqpTemplate.convertAndSend("logs-exchange", "error.msg-inbox", msg);
+    }
 }

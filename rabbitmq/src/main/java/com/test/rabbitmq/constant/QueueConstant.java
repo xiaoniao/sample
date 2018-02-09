@@ -12,4 +12,9 @@ public class QueueConstant {
     public static final String CACHE_QUEUE = "cache";
 
     public static final String INTEGRAL_QUEUE = "integral";
+
+    public static final String MSG_INBOX_QUEUE = "msg_inbox";
+
+    public static final String MSG_ERROR_INBOX_QUEUE = "msg_error_inbox";
+
 }

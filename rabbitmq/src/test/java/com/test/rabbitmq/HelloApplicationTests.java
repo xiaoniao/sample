@@ -26,4 +26,9 @@ public class HelloApplicationTests {
     public void testFanoutExchange() {
         messageSender.sendFanoutExchange("小明");
     }
+
+    @Test
+    public void testTopicExchange() {
+        messageSender.sendTopicExchange("小明");
+    }
 }

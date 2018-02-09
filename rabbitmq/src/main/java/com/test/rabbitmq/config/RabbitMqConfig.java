@@ -5,6 +5,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,9 +36,26 @@ public class RabbitMqConfig {
         return new Queue(QueueConstant.UPLOAD_IMAGE_QUEUE);
     }
 
+
+    @Bean
+    public Queue msgErrorInboxQueue() {
+        return new Queue(QueueConstant.MSG_ERROR_INBOX_QUEUE);
+    }
+
+    @Bean
+    public Queue msgInboxQueue() {
+        return new Queue(QueueConstant.MSG_INBOX_QUEUE);
+    }
+
     @Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange("spring-boot-fanout-exchange");
+    }
+
+
+    @Bean
+    public TopicExchange topicExchange() {
+        return new TopicExchange("logs-exchange");
     }
 
     @Bean
@@ -56,5 +74,17 @@ public class RabbitMqConfig {
     public Binding bindingUploadImageQueue(@Qualifier("uploadImageQueue") Queue queue, FanoutExchange exchange) {
         System.out.println("绑定:" + queue.getName());
         return BindingBuilder.bind(queue).to(exchange);
+    }
+
+    @Bean
+    public Binding bindingMsgErrorInboxQueue(@Qualifier("msgErrorInboxQueue") Queue queue, TopicExchange exchange) {
+        System.out.println("绑定:" + queue.getName());
+        return BindingBuilder.bind(queue).to(exchange).with("error.msg-inbox");
+    }
+
+    @Bean
+    public Binding bindingMsgInboxQueue(@Qualifier("msgInboxQueue") Queue queue, TopicExchange exchange) {
+        System.out.println("绑定:" + queue.getName());
+        return BindingBuilder.bind(queue).to(exchange).with("*.msg-inbox");
     }
 }
