@@ -93,10 +93,17 @@ RabbitMQ常用命令：http://blog.csdn.net/u013256816/article/details/53524814
         header:
             匹配AMQP消息的header而非路由键。和direct交换器相比性能差很多，因此不太实用。
 
+    基于消息的路由键和交换器类型，服务器会决定将消息投递到哪个队列去。
+
 四、多租户模式（虚拟主机和隔离）
 
     虚拟主机(vhost)和用户和权限管理
 
+    vhost，每一个RabbitMQ服务器都能创建虚拟消息服务器，我们称之为虚拟主机(vhost)，每一个vhost本质是一个mini版的RabbitMQ服务器，拥有自己的队列、交换器和绑定，也拥有自己的权限。
+
+    运行一个Rabbit，按需启动或关闭vhost
+
+    vhost 是 AMQP 概念的基础，必须在连接时进行制定。默认vohost是 "/"。
 
 五、持久化
 
@@ -106,7 +113,61 @@ RabbitMQ常用命令：http://blog.csdn.net/u013256816/article/details/53524814
 
     发送方确认模式 和事务相仿，你需要告诉Rabbit将信道设置成confirm模式，而且你只能通过重新创建信道来关闭改设置。
 
+
+六、
+    1、发布者：
+        1）. 连接到RabbitMQ
+        2）. 获取信道
+        3）. 声明交换器
+        4）. 创建消息
+        5）. 发布消息
+        6）. 关闭信道
+        7）. 关闭连接
     
+    2、消费者：
+        1）. 连接到RabbitMQ
+        2）. 获取信道
+        3）. 声明交换器
+        4）. 声明队列
+        5）. 把队列和交换器绑定起来
+        6）. 消费消息
+        7）. 关闭信道
+        8）. 关闭连接
+
+        队列和交换器生产者消费者都可以创建，这里是作者自己的实现。
+
+    3、使用发送方确认模式来确认投递
+    
+        因为事务会影响性能，因此推荐使用 publisher confirm 作为消息投递保障的首选方案。
+
+
+        当信道设置成confirm模式时，发布的每一条消息都会获得唯一的ID。由于一条信道只能被单个线程使用，因为可以确保信道上发布的消息都是连续的。
+        因此，RabbitMQ做了一个简单的假设：任意信道上发布的第一条消息将获得ID1，并且信道上接下来的每一条消息的ID都将步进1。也就是说信道上发布的第二条消息将拥有ID2。
+        第三条消息将拥有ID3，对信道来说，消息ID是唯一的。所以一旦信道关闭后，你将无法追踪发布在该信道上未完成的发送方确认消息状态。
+        这意味着RabbitMQ不必告诉你刚发布的消息ID；你在应用程序内部通过一个计数器来自己追踪。
+
+        TODO
+
+运行和管理RabbitMQ
+
+    管理用户：
+        rabbitmqctl list_users
+        rabbitmqctl add_user username password
+        rabbitmqctl delete_user username
+        rabbitmqctl change_password username password
+
+    权限系统：
+        度、写、配置
+
+        TODO
+
+
+日志
+    TODO
+
+
+
+
 
 
 

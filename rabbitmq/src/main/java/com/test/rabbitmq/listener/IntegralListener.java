@@ -1,6 +1,7 @@
 package com.test.rabbitmq.listener;
 
 import com.test.rabbitmq.constant.QueueConstant;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ public class IntegralListener {
 
     @RabbitHandler
     public void process(String msg) throws Exception {
+
         System.out.println("积分奖励" + msg);
     }
 }

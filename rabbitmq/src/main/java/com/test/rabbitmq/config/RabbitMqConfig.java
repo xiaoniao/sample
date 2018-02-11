@@ -6,6 +6,9 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +18,19 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class RabbitMqConfig {
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setConfirmCallback((CorrelationData correlationData, boolean ack, String cause) -> {
+            if (ack) {
+                System.out.println("消息id为: " + correlationData + "的消息，已经被ack成功");
+            } else {
+                System.out.println("消息id为: " + correlationData + "的消息，消息back，失败原因是：" + cause);
+            }
+        });
+        return rabbitTemplate;
+    }
 
     @Bean
     public Queue helloQueue() {

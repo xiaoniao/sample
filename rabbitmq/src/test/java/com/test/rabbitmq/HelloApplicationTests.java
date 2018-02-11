@@ -1,6 +1,8 @@
 package com.test.rabbitmq;
 
+import com.test.rabbitmq.listener.StudentListener;
 import com.test.rabbitmq.sender.MessageSender;
+import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class HelloApplicationTests {
 
     @Autowired
+    private StudentListener studentListener;
+
+    @Autowired
     private MessageSender messageSender;
 
     @Test
     public void testSend() {
-        messageSender.send("小明");
+        for (int i = 0; i< 10; i++) {
+            new Thread(() -> messageSender.send("小明")).start();
+        }
     }
 
     @Test
