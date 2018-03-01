@@ -1,0 +1,26 @@
+Disconf
+
+
+<bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean" destroy-method="destroy">
+    <property name="scanPackage" value="com.example.disconf.demo"/>
+</bean>
+<bean id="disconfMgrBean2" class="com.baidu.disconf.client.DisconfMgrBeanSecond" init-method="init" destroy-method="destroy">
+
+</bean>
+
+<-- 支持扫描多个包 -->
+<bean id="disconfMgrBean" class="com.baidu.disconf.client.DisconfMgrBean"
+      destroy-method="destroy">
+    <property name="scanPackage" value="com.example.disconf.demo,com.example.disconf.demo2"/>
+</bean>
+
+<context:component-scan base-package="com.example"/>
+
+<-- 支持 cglib aop -->
+<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+
+启动类
+com.baidu.disconf.client.DisconfMgrBean
+com.baidu.disconf.client.DisconfMgrBeanSecond
+
