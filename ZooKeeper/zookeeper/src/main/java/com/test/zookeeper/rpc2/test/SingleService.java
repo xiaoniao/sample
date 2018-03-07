@@ -10,4 +10,6 @@ public interface SingleService {
     String hello(String name);
 
     Result getResult(String name);
+
+    Result getResult(PersonReq personReq);
 }

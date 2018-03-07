@@ -19,6 +19,11 @@ public class ClientSample {
             Result result1 = singleService.getResult("pic");
             System.out.println(result1.getName());
 
+            PersonReq personReq = new PersonReq();
+            personReq.setName("nana");
+            Result result2 = singleService.getResult(personReq);
+            System.out.println(result2.getName());
+
         } catch (Exception e) {
             e.printStackTrace();
         }

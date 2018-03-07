@@ -25,4 +25,11 @@ public class SingleServiceImpl implements SingleService {
         result.setName(name);
         return result;
     }
+
+    @Override
+    public Result getResult(PersonReq personReq) {
+        Result result = new Result();
+        result.setName(personReq.getName());
+        return result;
+    }
 }
