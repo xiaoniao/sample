@@ -1,9 +1,13 @@
 package com.test.zookeeper.rpc2;
 
+import com.test.zookeeper.rpc2.exception.RpcException;
+import com.test.zookeeper.rpc2.request.RpcRequest;
+import com.test.zookeeper.rpc2.response.RpcResponse;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Proxy;
 import java.net.Socket;
+import java.util.UUID;
 
 /**
  * Java 动态代理
@@ -39,17 +43,24 @@ public class ProxyClient {
                 ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream input = new ObjectInputStream(socket.getInputStream())) {
 
-                output.writeUTF(interfaceClass.getName());
-                output.writeUTF(method.getName());
-                output.writeObject(method.getParameterTypes());
-                output.writeObject(arguments);
+                RpcRequest request = new RpcRequest();
+                request.setRequestId(UUID.randomUUID().toString());
+                request.setInterfaceName(interfaceClass.getName());
+                request.setMethodName(method.getName());
+                request.setParameterTypes(method.getParameterTypes());
+                request.setParameters(arguments);
+                output.writeObject(request);
 
-                Object result = input.readObject();
-                if (result instanceof Throwable) {
-                    System.out.println("异常");
-                    throw (Throwable) result;
+
+                RpcResponse result = (RpcResponse) input.readObject();
+                if (result == null) {
+                    throw new RpcException();
                 }
-                return result;
+                if (result.getError() != null) {
+                    System.out.println("异常");
+                    throw result.getError();
+                }
+                return result.getResult();
             }
         });
     }

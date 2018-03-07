@@ -1,6 +1,8 @@
 package com.test.zookeeper.rpc2;
 
 import com.test.zookeeper.rpc2.anno.SingleRpc;
+import com.test.zookeeper.rpc2.request.RpcRequest;
+import com.test.zookeeper.rpc2.response.RpcResponse;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -35,44 +37,21 @@ public class SingleServer implements InitializingBean, Lifecycle, ApplicationCon
     private Executor executorService = Executors.newFixedThreadPool(10);
 
     private void publishedService() throws Exception {
-        System.out.println("publishedService");
         server = new ServerSocket(port);
 
         for (; ; ) {
             try {
                 final Socket socket = server.accept();
-                System.out.println("socket : " + socket.hashCode());
                 executorService.execute(() -> {
                     try {
                         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
                         ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
 
-                        System.out.println("Server : A");
                         try {
-                            String interfaceName = input.readUTF();
-                            String methodName = input.readUTF();
-                            Class<?>[] parameterTypes = (Class<?>[]) input.readObject();
-                            Object[] arguments = (Object[]) input.readObject();
-                            System.out.println("Server interfaceName : " + interfaceName + " methodName :" + methodName);
-                            if (parameterTypes != null) {
-                                for (Class<?> clz : parameterTypes) {
-                                    System.out.println("Server parameterType : " + clz);
-                                }
-                            }
-                            if (arguments != null) {
-                                for (Object obj : arguments) {
-                                    System.out.println("Server argument : " + obj);
-                                }
-                            }
+                            RpcRequest rpcRequest = (RpcRequest) input.readObject();
                             try {
-                                Object service = handlerMap.get(interfaceName);
-                                Method method = service.getClass().getMethod(methodName, parameterTypes);
-                                Object result = method.invoke(service, arguments);
-                                System.out.println("Server result : " + result);
-                                output.writeObject(result);
-                            } catch (Throwable t) {
-                                t.printStackTrace();
-                                output.writeObject(t);
+                                RpcResponse rpcResponse = doHandle(rpcRequest);
+                                output.writeObject(rpcResponse);
                             } finally {
                                 input.close();
                             }
@@ -87,6 +66,19 @@ public class SingleServer implements InitializingBean, Lifecycle, ApplicationCon
                 e.printStackTrace();
             }
         }
+    }
+
+    private RpcResponse doHandle(RpcRequest request) {
+        RpcResponse response = new RpcResponse();
+        response.setRequestId(request.getRequestId());
+        try {
+            Object service = handlerMap.get(request.getInterfaceName());
+            Method method = service.getClass().getMethod(request.getMethodName(), request.getParameterTypes());
+            response.setResult(method.invoke(service, request.getParameters()));
+        } catch (Exception e) {
+            response.setError(e);
+        }
+        return response;
     }
 
     /***************** InitializingBean *******************/
