@@ -53,7 +53,7 @@ public class SingleServer implements InitializingBean, Lifecycle, ApplicationCon
                             String methodName = input.readUTF();
                             Class<?>[] parameterTypes = (Class<?>[]) input.readObject();
                             Object[] arguments = (Object[]) input.readObject();
-                            System.out.println("Server interfaceName : " + interfaceName);
+                            System.out.println("Server interfaceName : " + interfaceName + " methodName :" + methodName);
                             if (parameterTypes != null) {
                                 for (Class<?> clz : parameterTypes) {
                                     System.out.println("Server parameterType : " + clz);
