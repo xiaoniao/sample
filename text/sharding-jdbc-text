@@ -73,4 +73,50 @@ join 级联表
 
 
 
+------------------------------------------------
+SELECT * FROM demo_ds_0.t_order_0;
+SELECT * FROM demo_ds_0.t_order_1;
+SELECT * FROM demo_ds_0.t_order_item_0;
+SELECT * FROM demo_ds_0.t_order_item_1;
+
+SELECT * FROM demo_ds_1.t_order_0;
+SELECT * FROM demo_ds_1.t_order_1;
+SELECT * FROM demo_ds_1.t_order_item_0;
+SELECT * FROM demo_ds_1.t_order_item_1;
+------------------------------------------------
+
+ds_0 [userId 偶数]
+
+    order_0 [orderId 偶数]
+    order_1 [orderId 奇数]
+    t_order_item_0 [orderId 偶数]
+    t_order_item_1 [orderId 奇数]
+
+ds_1 [userId 奇数]
+    
+    order_0 [orderId 偶数] 
+    order_1 [orderId 奇数]
+    t_order_item_0 [orderId 偶数]
+    t_order_item_1 orderId 奇数
+------------------------------------------------
+
+
+分片键，分片规则需要使用分布式生成 id。
+
+
+------------------------------------------------
+原单一垂直shard会被细分为一到多个以一个主表为中心关联或间接关联多个次表的shard
+------------------------------------------------
+
+
+
+关于主从数据库
+缓存层，在前端访问和数据库之间，添加缓存，优先从缓存读取，减弱数据库的并发压力，Slave 只作为数据备份，不分担访问流量；
+------------------------------------------------
+
+
+
+
+
+
 

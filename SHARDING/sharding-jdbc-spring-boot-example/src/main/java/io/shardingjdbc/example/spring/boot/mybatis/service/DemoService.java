@@ -29,7 +29,9 @@ import java.util.List;
 
 @Service
 public class DemoService {
-    
+
+    private static final String STATUS = "INSERT_TEST";
+
     @Resource
     private OrderRepository orderRepository;
     
@@ -43,37 +45,45 @@ public class DemoService {
         orderItemRepository.truncateTable();
 
 
+        List<Long> orderIds = new ArrayList<>();
         System.out.println("1.Insert--------------");
-        List<Long> orderIds = new ArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
-            Order order = new Order();
-            order.setUserId(51);
-            order.setStatus("INSERT_TEST");
-            orderRepository.insert(order);
-            long orderId = order.getOrderId();
-            orderIds.add(orderId);
-            
-            OrderItem item = new OrderItem();
-            item.setOrderId(orderId);
-            item.setUserId(51);
-            item.setStatus("INSERT_TEST");
-            orderItemRepository.insert(item);
 
-            System.out.println("userId:" + 51 + " orderId:" + orderId);
+        for (int userId = 0; userId < 100; userId++) {
+            for (int orderCount = 0; orderCount < 10; orderCount++) {
+                orderIds.add(insert(userId));
+            }
         }
 
         System.out.println("2.selectAll--------------");
-        System.out.println(orderItemRepository.selectAll());
-
-        System.out.println("3.Delete--------------");
-        for (Long each : orderIds) {
-            orderRepository.delete(each);
-            orderItemRepository.delete(each);
-        }
-
-        System.out.println("4.selectAll--------------");
-        System.out.println(orderItemRepository.selectAll());
-        orderItemRepository.dropTable();
-        orderRepository.dropTable();
+        System.out.println(orderItemRepository.selectAll().size());
+//
+//        System.out.println("3.Delete--------------");
+//        for (Long each : orderIds) {
+//            orderRepository.delete(each);
+//            orderItemRepository.delete(each);
+//        }
+//
+//        System.out.println("4.selectAll--------------");
+//        System.out.println(orderItemRepository.selectAll());
+//        orderItemRepository.dropTable();
+//        orderRepository.dropTable();
     }
+
+    private long insert(Integer userId) {
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setStatus(STATUS);
+        orderRepository.insert(order);
+        long orderId = order.getOrderId();
+
+        OrderItem item = new OrderItem();
+        item.setOrderId(orderId);
+        item.setUserId(userId);
+        item.setStatus(STATUS);
+        orderItemRepository.insert(item);
+
+        // System.out.println("userId: " + userId + " orderId:" + orderId);
+        return orderId;
+    }
+
 }
