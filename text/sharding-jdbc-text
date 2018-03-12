@@ -1,0 +1,76 @@
+Sharding-JDBC定位为轻量级java框架，使用客户端直连数据库，以jar包形式提供服务，未使用中间层，无需额外部署，无其他依赖，DBA也无需改变原有的运维方式。采用”半理解”理念的SQL解析引擎，以达到性能与兼容性的最大平衡。
+
+
+配置：
+    支持Java编码和YAML的配置方式
+    支持自定义Spring命名空间与Spring boot starter
+    灵活多样的inline表达式
+
+    1.JAVA配置
+    2.YAML配置
+    3.Spring命名空间配置
+    4.Spring Boot配置
+        分库分表配置
+        读写分离
+
+
+读写分离
+    概念
+        为了缓解数据库压力，将写入和读取操作分离为不同数据源，写库称为主库，读库称为从库，一主库可配置多从库。 【写：主；读：从】
+    支持项
+        同一线程且同一数据库连接内，如有写入操作，以后的读操作均从主库读取，用于保证数据一致性。
+
+    
+    逻辑表 实际表
+        select * from t_order where user_id = ? and order_id = ?;
+        select * from db0.t_order_0 where user_id = ? and order_id = ?;  更改sql来指派访问某个库某个表
+
+    策略配置
+        数据源分片策略[DatabaseShardingStrategy]
+        表分片策略[TableShardingStrategy]
+
+        默认表策略和自定义表策略
+        shardingRuleConfig.getTableRuleConfigs().add(orderItemTableRuleConfig);
+        shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new ComplexShardingStrategyConfiguration("user_id", "xxx.ModuloDatabaseShardingAlgorithm"));
+        shardingRuleConfig.setDefaultTableShardingStrategyConfig(new ComplexShardingStrategyConfiguration("order_id", "xxx.ModuloTableShardingAlgorithm"));
+
+
+分片键
+    分片键是分片策略的第一个参数。分片键表示的是SQL语句中WHERE中的条件列。分片键可以配置多个。
+
+    Sharding-JDBC提供了5种分片策略
+      1.StandardShardingStrategy
+      2.ComplexShardingStrategy
+      3.InlineShardingStrategy
+      4.HintShardingStrategy
+      5.NoneShardingStrategy
+
+    1.标准分片策略。
+    提供对SQL语句中的 =, IN和 BETWEEN AND 的分片操作支持。
+    StandardShardingStrategy只支持单分片键，提供 PreciseShardingAlgorithm 和 RangeShardingAlgorithm 两个分片算法。
+    PreciseShardingAlgorithm 是必选的，用于处理 = 和 IN 的分片。
+    RangeShardingAlgorithm 是可选的，用于处理 BETWEEN AND分片，如果不配置 RangeShardingAlgorithm，SQL中的 BETWEEN AND 将按照全库路由处理。
+    
+    2.复合分片策略。
+    提供对SQL语句中的 =, IN 和 BETWEEN AND 的分片操作支持。 
+    ComplexShardingStrategy支持多分片键，由于多分片键之间的关系复杂，因此Sharding-JDBC并未做过多的封装，而是直接将分片键值组合以及分片操作符交于算法接口，完全由应用开发者实现，提供最大的灵活度。
+    
+    3.Inline表达式分片策略。
+    使用 Groovy 的 Inline 表达式，提供对SQL语句中的 = 和 IN 的分片操作支持。
+    InlineShardingStrategy只支持单分片键，对于简单的分片算法，可以通过简单的配置使用，从而避免繁琐的Java代码开发，如: tuser${user_id % 8} 表示t_user表按照user_id按8取模分成8个表，表名称为t_user_0到t_user_7。
+    
+    4.通过Hint而非SQL解析的方式分片的策略。
+    
+    5.不分片的策略。
+        
+
+join 级联表
+    他们之间的分区键要完全相同。
+
+    例如：SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.user_id=? AND o.order_id=?
+         其中t_order在FROM的最左侧，Sharding-JDBC将会以它作为整个绑定表的主表。所有路由计算将会只使用主表的策略，那么t_order_item表的分片计算将会使用t_order的条件
+        （否则会查询不到数据？）
+
+
+
+
