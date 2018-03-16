@@ -1,0 +1,59 @@
+项目结构
+app
+    biz
+        facade-impl
+            com.jcgroup.learning.biz.model
+            com.jcgroup.learning.biz.service.impl
+            com.jcgroup.learning.biz.service.impl.aspect
+
+        manager
+            com.jcgroup.learning.biz.shared
+            com.jcgroup.learning.biz.shared.impl
+            com.jcgroup.learning.biz.shared.model
+
+        service
+            com.jcgroup.learning.core.service
+            com.jcgroup.learning.core.service.impl
+            com.jcgroup.learning.core.service.cache
+            com.jcgroup.learning.core.service.exception
+            com.jcgroup.learning.core.service.model
+
+        task
+            com.jcgroup.learning.biz.task
+
+    common
+        dal
+            com.jcgroup.learning.common.dal.config
+            com.jcgroup.learning.common.dal.dao
+            com.jcgroup.learning.common.dal.dataobject
+            com.jcgroup.learning.common.dal.mapper
+
+        service-facade
+            com.jcgroup.learning.common.service.facade
+            com.jcgroup.learning.common.service.model.res
+            com.jcgroup.learning.common.service.model.req
+
+        service-integration
+            com.jcgroup.learning.common.service.integration.aspect
+            com.jcgroup.learning.common.service.integration.exception
+            com.jcgroup.learning.common.service.integration.impl
+
+        util
+            com.jcgroup.learning.common.util
+
+    test
+    web
+        service
+            com.jcgroup.learning
+
+
+依赖关系
+    web-service
+        manager
+            service
+                dal
+                    util
+            service-integration
+
+    facade-impl
+        manager
