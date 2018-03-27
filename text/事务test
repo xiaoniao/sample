@@ -1,0 +1,118 @@
+
+--- 只查询
+
+setUp
+
+2018-03-20 14:02:12,709 DEBUG [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Returning cached instance of singleton bean 'transactionManager'
+2018-03-20 14:02:12,713 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Creating new transaction with name 
+2018-03-20 14:02:14,064 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Acquired Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] for JDBC transaction
+2018-03-20 14:02:14,068 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Switching JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] to manual commit
+2018-03-20 14:02:14,077 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Bound value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key []
+
+2018-03-20 14:02:14,077 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Initializing transaction synchronization
+2018-03-20 14:02:14,077 TRACE [org.springframework.transaction.interceptor.TransactionInterceptor] - Getting transaction for [com.jcgroup.ylc.operate.core.service.manager.impl.ActivityServiceImpl.listActivityType]
+
+2018-03-20 14:02:14,093 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-03-20 14:02:14,104 DEBUG [org.mybatis.spring.SqlSessionUtils] - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@537a8915]
+2018-03-20 14:02:14,105 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Bound value [org.mybatis.spring.SqlSessionHolder@410f1452] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] to thread [main]
+2018-03-20 14:02:14,113 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:02:14,114 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:02:14,114 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] will be managed by Spring
+2018-03-20 14:02:14,118 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+
+2018-03-20 14:02:14,119 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.listAll] - ==>  Preparing: SELECT /*MS-OP-ACTIVITY-TYPE-LISTALL*/ ID,ACTIVITY_TYPE,CREATE_TIME,UPDATE_TIME FROM OP_ACTIVITY_TYPE ORDER BY CREATE_TIME 
+2018-03-20 14:02:14,142 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.listAll] - ==> Parameters: 
+2018-03-20 14:02:14,174 TRACE [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.listAll] - <==    Columns: ID, ACTIVITY_TYPE, CREATE_TIME, UPDATE_TIME
+2018-03-20 14:02:14,175 TRACE [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.listAll] - <==        Row: 1, 邀请活动, 2018-03-01 20:40:58.0, 2018-03-01 20:40:58.0
+2018-03-20 14:02:14,180 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.listAll] - <==      Total: 1
+
+2018-03-20 14:02:14,181 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.mybatis.spring.SqlSessionHolder@410f1452] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] bound to thread [main]
+2018-03-20 14:02:14,181 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.mybatis.spring.SqlSessionHolder@410f1452] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] bound to thread [main]
+2018-03-20 14:02:14,181 DEBUG [org.mybatis.spring.SqlSessionUtils] - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@537a8915]
+
+2018-03-20 14:02:14,182 TRACE [org.springframework.beans.CachedIntrospectionResults] - Getting BeanInfo for class [com.jcgroup.ylc.operate.facade.service.vo.ActivityTypeVO]
+2018-03-20 14:02:14,183 TRACE [org.springframework.beans.CachedIntrospectionResults] - Caching PropertyDescriptors for class [com.jcgroup.ylc.operate.facade.service.vo.ActivityTypeVO]
+2018-03-20 14:02:14,183 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'activityType' of type [java.lang.String]
+2018-03-20 14:02:14,183 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'class' of type [java.lang.Class]
+2018-03-20 14:02:14,183 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'createTime' of type [java.util.Date]
+2018-03-20 14:02:14,184 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'id' of type [java.lang.Integer]
+2018-03-20 14:02:14,184 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'updateTime' of type [java.util.Date]
+2018-03-20 14:02:14,184 TRACE [org.springframework.beans.CachedIntrospectionResults] - Getting BeanInfo for class [com.jcgroup.ylc.operate.common.dal.dataobject.ActivityTypeDO]
+2018-03-20 14:02:14,186 TRACE [org.springframework.beans.CachedIntrospectionResults] - Caching PropertyDescriptors for class [com.jcgroup.ylc.operate.common.dal.dataobject.ActivityTypeDO]
+2018-03-20 14:02:14,186 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'activityType' of type [java.lang.String]
+2018-03-20 14:02:14,186 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'class' of type [java.lang.Class]
+2018-03-20 14:02:14,187 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'createTime' of type [java.util.Date]
+2018-03-20 14:02:14,187 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'id' of type [java.lang.Integer]
+2018-03-20 14:02:14,187 TRACE [org.springframework.beans.CachedIntrospectionResults] - Found bean property 'updateTime' of type [java.util.Date]
+
+2018-03-20 14:02:14,187 TRACE [org.springframework.transaction.interceptor.TransactionInterceptor] - Completing transaction for [com.jcgroup.ylc.operate.core.service.manager.impl.ActivityServiceImpl.listActivityType]
+
+2018-03-20 14:02:14,187 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering beforeCommit synchronization
+2018-03-20 14:02:14,187 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@537a8915]
+2018-03-20 14:02:14,187 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering beforeCompletion synchronization
+2018-03-20 14:02:14,187 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@537a8915]
+2018-03-20 14:02:14,187 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Removed value [org.mybatis.spring.SqlSessionHolder@410f1452] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] from thread [main]
+2018-03-20 14:02:14,187 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@537a8915]
+2018-03-20 14:02:14,188 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+
+2018-03-20 14:02:14,188 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Initiating transaction commit
+2018-03-20 14:02:14,188 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Committing JDBC transaction on Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df]
+2018-03-20 14:02:14,201 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering afterCommit synchronization
+2018-03-20 14:02:14,201 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering afterCompletion synchronization
+2018-03-20 14:02:14,201 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Clearing transaction synchronization
+
+2018-03-20 14:02:14,201 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Removed value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:02:14,502 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Releasing JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] after transaction
+2018-03-20 14:02:14,502 DEBUG [org.springframework.jdbc.datasource.DataSourceUtils] - Returning JDBC Connection to DataSource
+
+-- 编辑
+
+setUp
+
+2018-03-20 14:19:46,904 DEBUG [org.springframework.beans.factory.support.DefaultListableBeanFactory] - Returning cached instance of singleton bean 'transactionManager'
+2018-03-20 14:19:46,906 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Creating new transaction with name 
+2018-03-20 14:19:50,903 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Acquired Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] for JDBC transaction
+2018-03-20 14:19:50,906 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Switching JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] to manual commit
+2018-03-20 14:19:50,955 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Bound value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:50,955 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Initializing transaction synchronization
+2018-03-20 14:19:50,955 TRACE [org.springframework.transaction.interceptor.TransactionInterceptor] - Getting transaction for [com.jcgroup.ylc.operate.core.service.manager.impl.ActivityServiceImpl.listActivityType]
+2018-03-20 14:19:50,970 DEBUG [org.mybatis.spring.SqlSessionUtils] - Creating a new SqlSession
+2018-03-20 14:19:50,981 DEBUG [org.mybatis.spring.SqlSessionUtils] - Registering transaction synchronization for SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426a4301]
+2018-03-20 14:19:50,982 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Bound value [org.mybatis.spring.SqlSessionHolder@31aa9b01] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] to thread [main]
+2018-03-20 14:19:50,988 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:50,989 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:50,989 DEBUG [org.mybatis.spring.transaction.SpringManagedTransaction] - JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] will be managed by Spring
+2018-03-20 14:19:50,992 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:50,992 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.update] - ==>  Preparing: UPDATE /*MS-OP-ACTIVITY-TYPE-UPDATE*/ OP_ACTIVITY_TYPE SET ACTIVITY_TYPE = ? ,UPDATE_TIME = NOW() WHERE ID = ? 
+2018-03-20 14:19:51,026 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.update] - ==> Parameters: 邀请活动(String), 1(Integer)
+2018-03-20 14:19:51,309 DEBUG [com.jcgroup.ylc.operate.common.dal.mapper.ActivityTypeDOMapper.update] - <==    Updates: 1
+2018-03-20 14:19:51,309 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.mybatis.spring.SqlSessionHolder@31aa9b01] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] bound to thread [main]
+2018-03-20 14:19:51,309 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.mybatis.spring.SqlSessionHolder@31aa9b01] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] bound to thread [main]
+2018-03-20 14:19:51,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Releasing transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426a4301]
+2018-03-20 14:19:51,309 TRACE [org.springframework.transaction.interceptor.TransactionInterceptor] - Completing transaction for [com.jcgroup.ylc.operate.core.service.manager.impl.ActivityServiceImpl.listActivityType]
+2018-03-20 14:19:51,309 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering beforeCommit synchronization
+2018-03-20 14:19:51,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization committing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426a4301]
+2018-03-20 14:19:51,309 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering beforeCompletion synchronization
+2018-03-20 14:19:51,309 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization deregistering SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426a4301]
+2018-03-20 14:19:51,310 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Removed value [org.mybatis.spring.SqlSessionHolder@31aa9b01] for key [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory@383caf89] from thread [main]
+2018-03-20 14:19:51,310 DEBUG [org.mybatis.spring.SqlSessionUtils] - Transaction synchronization closing SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@426a4301]
+2018-03-20 14:19:51,310 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Retrieved value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:51,310 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Initiating transaction commit
+2018-03-20 14:19:51,310 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Committing JDBC transaction on Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df]
+2018-03-20 14:19:51,355 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering afterCommit synchronization
+2018-03-20 14:19:51,355 TRACE [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Triggering afterCompletion synchronization
+2018-03-20 14:19:51,355 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Clearing transaction synchronization
+2018-03-20 14:19:51,355 TRACE [org.springframework.transaction.support.TransactionSynchronizationManager] - Removed value [org.springframework.jdbc.datasource.ConnectionHolder@47f5ab58] for key [{
+2018-03-20 14:19:51,408 DEBUG [org.springframework.jdbc.datasource.DataSourceTransactionManager] - Releasing JDBC Connection [com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl@786cc1df] after transaction
+2018-03-20 14:19:51,408 DEBUG [org.springframework.jdbc.datasource.DataSourceUtils] - Returning JDBC Connection to DataSource
+
+
+
+-- 
+编辑的时候走行级锁
+
+
+
+
+http://wulc.me/2016/08/16/MySQL%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6/
+http://www.cnblogs.com/acm-bingzi/p/mysqlExplain.html#

@@ -1,0 +1,41 @@
+怎么实现RPC框架
+
+
+1、ZooKeeper（分布式协调）
+2、Socket连接
+3、序列化
+4、ZooKeeper 保存ip和方法信息
+5、启动时，搜集需要暴露的方法获取方法信息，然后注册到ZooKeeper中
+
+
+
+客户端 调用方法 动过动态代码，启动Socket连接，根据调用方法信息 从ZooKeeper中获取一个可以执行的机器IP， 服务端收到Socket连接之后获取要调用方法的信息，通过反射调用方法，然后序列化返回数据，Socket断开，RPC调用结束
+
+
+
+
+
+1、
+通过SocketServer，接受客户端的socket请求，从socket中获得类名、方法名、参数类型、参数对象，通过反射执行方法并把结果返回给客户端。
+
+（传输依赖的是jdk自带的序列化）
+
+2、
+封装请求和响应
+
+3、
+NIO ProtocolBuffer Netty CGLIB
+
+4、
+Zookeeper
+
+
+
+
+
+
+
+
+
+
+

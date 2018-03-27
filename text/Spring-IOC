@@ -1,0 +1,24 @@
+其实Spring IOC最重要的就三个功能
+
+    一、找到bean
+    二、载入并注册bean
+    三、注入bean
+
+    1 找到bean
+    找到bean在什么地方，是对BeanDefinition的资源定位，是由ResourceLoader通过统一的Resource接口来完成，这个接口对各中形式的Resource都提供了统一接口，
+    比如Xml，比如annotation。而这些都是由ResourceLoader来完成的
+
+    2 载入并注册bean
+    找到bean后，将bean注册到我们的IOC容器中。Spring是通过一些ApplicationContext来完成的，
+    比如FileSystemXmlApplicationContext, ClassPathXmlApplicationContext以及我们最常见的XmlWebApplicationContext，读取之后将bean注册到IOC容器中，
+    简单来说，就是把读取的bean都放到一个map中。
+
+    3 注入bean
+    当我们要用bean时，由IOC容器自动的注入进去。
+
+    拟这个过程，从bean的发现开始，直到注入bean，使用jdk反射的相关知识，在60分钟内撸出一个简单版的Spring架构，并完成一个完整的调用过程。值得收藏，慢慢实现。
+
+
+
+
+

@@ -1,0 +1,7 @@
+io/shardingjdbc/example/spring/boot/mybatis/repository/OrderRepository.class
+io/shardingjdbc/example/spring/boot/mybatis/entity/Order.class
+io/shardingjdbc/example/spring/boot/mybatis/SpringBootDataMybatisMain.class
+io/shardingjdbc/example/spring/boot/mybatis/entity/OrderItem.class
+io/shardingjdbc/example/spring/boot/mybatis/config/ShardingConfig.class
+io/shardingjdbc/example/spring/boot/mybatis/service/DemoService.class
+io/shardingjdbc/example/spring/boot/mybatis/repository/OrderItemRepository.class

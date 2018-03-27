@@ -1,0 +1,7 @@
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/config/ShardingConfig.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/service/DemoService.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/repository/OrderRepository.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/repository/OrderItemRepository.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/entity/OrderItem.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/entity/Order.java
+/Users/xiezx/Github/sample/SHARDING/sharding-jdbc-spring-boot-example/src/main/java/io/shardingjdbc/example/spring/boot/mybatis/SpringBootDataMybatisMain.java

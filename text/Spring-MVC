@@ -122,4 +122,28 @@ RequestFacade
 
 
 
+org.springframework.web.servlet.mvc
 
+public interface Controller {
+
+	ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+}
+
+
+
+
+
+--------
+
+Spring MVC 是怎么启动的
+ContextLoaderListener
+ServletContextListener
+
+AbstractHandlerMethodMapping
+    initHandlerMethods
+    查找controller注解 Scan beans in the ApplicationContext, detect and register handler methods.
+    
+
+AbstractHandlerMethodMapping
+    afterPropertiesSet
+        initHandlerMethods
