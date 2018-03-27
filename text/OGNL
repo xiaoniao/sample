@@ -1,0 +1,108 @@
+语法
+
+
+
+表达式
+
+    常量
+
+
+    属性
+
+
+    索引
+
+
+调用方法
+
+
+
+变量
+
+
+
+括号表达式
+
+
+
+链式子表达式
+
+
+
+实例化集合
+
+    集合
+
+    数组
+
+    map
+
+
+集合数据转换
+
+    objects.{ #this instanceof String ? #this : #this.toString()}
+
+    The above would produce a new list of elements from the objects list as string values.
+
+
+筛选集合
+
+    
+    选择第一个匹配的
+
+
+    选择最后一个匹配的
+
+
+
+调用构造方法
+
+
+
+调用静态方法
+
+
+获得静态属性
+
+
+
+表达式计算
+
+
+
+伪Lambda表达式
+
+
+
+集合伪属性
+
+
+
+与java不同的运算符
+
+
+
+设值和获取值
+
+
+
+
+如何转换类型的
+
+    Booleans
+    Numbers
+    Integers
+    Collections
+
+
+
+OGNL 语言参考手册
+
+    操作符
+
+
+
+
+
+
+
