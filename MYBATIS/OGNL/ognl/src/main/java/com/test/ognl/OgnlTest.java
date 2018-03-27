@@ -61,5 +61,31 @@ public class OgnlTest {
 
         Ognl.setValue("setUserName", ognlContext, root, "上海");
         System.out.println(Ognl.getValue("userName", ognlContext, root));
+
+
+
+        // 集合
+        Map<String, List<User>> map = new HashMap<>();
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setUserName("userName" + i);
+            users.add(user);
+        }
+        map.put("list", users);
+        System.out.println(Ognl.getValue("list.{#this.userName}", ognlContext, map));
+        System.out.println(Ognl.getValue("list.{userName + '-' + icon}", ognlContext, map));
+        System.out.println(Ognl.getValue("list.{? userName.contains(\"8\")}", ognlContext, map)); // 所有
+        System.out.println(Ognl.getValue("list.{^ userName.contains(\"8\")}", ognlContext, map)); // 第一个
+        System.out.println(Ognl.getValue("list.{$ userName.contains(\"8\")}", ognlContext, map)); // 最后一个
+
+        // 构造
+        System.out.println(Ognl.getValue("{'a', 'b'}", ognlContext, map));
+        System.out.println(Ognl.getValue("#{'key':'value'}", ognlContext, map));
+        User user = (User) Ognl.getValue("new com.test.ognl.User()", ognlContext, map);
+        user.setUserName("ss");
+        System.out.println(user);
+
+
     }
 }
