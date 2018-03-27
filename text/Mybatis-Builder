@@ -1,0 +1,10 @@
+BaseBuilder
+    1、Configuration、TypeAliasRegistry、TypeHandlerRegistry
+    2、提供公共方法
+
+
+
+MapperBuilderAssistant
+
+
+XMLMapperBuilder
