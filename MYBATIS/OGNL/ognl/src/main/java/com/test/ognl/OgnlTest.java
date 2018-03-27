@@ -19,7 +19,7 @@ public class OgnlTest {
     public static void main(String[] args) throws OgnlException {
         User root = new User();
         root.setUserName("hello");
-        root.setIcon("");
+        root.setIcon(" ");
         Address a = new Address();
         a.setLocation("hz");
         root.setAddress(a);
@@ -42,8 +42,8 @@ public class OgnlTest {
         Object isLocationNull = Ognl.getValue("address.location != null", ognlContext, root);
         System.out.println(isLocationNull);
 
-        Object isIconNull = Ognl.getValue("icon != null and icon == ''", ognlContext, root);
-        System.out.println(isIconNull);
+        Object isIconNull = Ognl.getValue("icon != null and icon.equals(\" \")", ognlContext, root);
+        System.out.println("isIconNull : " + isIconNull);
 
         List<User> userList = new ArrayList<>();
         userList.add(root);
