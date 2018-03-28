@@ -27,6 +27,6 @@ public class SpringBootDataMybatisMain {
 
     public static void main(final String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(SpringBootDataMybatisMain.class, args);
-        applicationContext.getBean(DemoService.class).demo();
+        //applicationContext.getBean(DemoService.class).demo();
     }
 }

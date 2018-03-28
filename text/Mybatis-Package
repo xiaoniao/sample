@@ -1,0 +1,159 @@
+org.apache.ibatis
+org.apache.ibatis.annotations
+
+org.apache.ibatis.binding   绑定参数到sql
+    MapperMethod
+    MapperMethod.MethodSignature
+    MapperMethod.ParamMap
+    MapperMethod.SqlCommand
+
+    MapperProxy 动态代理
+    MapperProxyFactory 生成动态代理
+    MapperRegistry 注册Mapper class
+
+
+org.apache.ibatis.reflection
+org.apache.ibatis.reflection.factory
+org.apache.ibatis.reflection.invoker
+org.apache.ibatis.reflection.property
+org.apache.ibatis.reflection.wrapper
+
+
+org.apache.ibatis.builder
+org.apache.ibatis.builder.annotation
+org.apache.ibatis.builder.xml
+
+org.apache.ibatis.cache
+    Cache
+
+    CacheKey
+    NullCacheKey
+    TransactionalCacheManager
+
+org.apache.ibatis.cache.decorators
+    BlockingCache
+    FifoCache
+    LoggingCache
+    LruCache
+    ScheduledCache
+    SerializedCache
+    SerializedCache.CustomObjectInputStream
+    SoftCache
+    SynchronizedCache
+    TransactionalCache
+    WeakCache
+
+org.apache.ibatis.cache.impl
+    PerpetualCache
+
+org.apache.ibatis.datasource
+org.apache.ibatis.datasource.jndi
+org.apache.ibatis.datasource.pooled
+org.apache.ibatis.datasource.unpooled
+
+
+
+org.apache.ibatis.cursor
+org.apache.ibatis.cursor.defaults
+
+
+
+org.apache.ibatis.exceptions
+org.apache.ibatis.executor
+org.apache.ibatis.executor.keygen
+org.apache.ibatis.executor.loader
+org.apache.ibatis.executor.loader.cglib
+org.apache.ibatis.executor.loader.javassist
+org.apache.ibatis.executor.parameter
+org.apache.ibatis.executor.result
+org.apache.ibatis.executor.resultset
+org.apache.ibatis.executor.statement
+
+org.apache.ibatis.io
+    ClassLoaderWrapper
+    DefaultVFS
+    ExternalResources
+    JBoss6VFS
+    ResolverUtil
+    ResolverUtil.AnnotatedWith
+    ResolverUtil.IsA
+    Resources
+    VFS
+    SpringBootVFS -- Spring Boot
+
+
+
+org.apache.ibatis.jdbc 执行sql
+    AbstractSQL
+    ScriptRunner
+    SelectBuilder
+    SQL
+    SqlBuilder
+    SqlRunner
+
+org.apache.ibatis.lang
+
+org.apache.ibatis.mapping 保存解析结果
+    BoundSql
+    CacheBuilder
+    DefaultDatabaseIdProvider
+    Discriminator
+    Discriminator.Builder
+    Environment
+    Environment.Builder
+    MappedStatement
+    MappedStatement.Builder
+    ParameterMap
+    ParameterMap.Builder
+    ParameterMapping
+    ParameterMapping.Builder
+    ResultMap
+    ResultMap.Builder
+    ResultMapping
+    ResultMapping.Builder
+    VendorDatabaseIdProvider
+    
+org.apache.ibatis.parsing
+    GenericTokenParser
+    PropertyParser
+    XNode
+    XPathParser
+
+org.apache.ibatis.plugin
+
+org.apache.ibatis.scripting 动态脚本
+    LanguageDriverRegistry
+
+org.apache.ibatis.scripting.defaults
+    DefaultParameterHandler
+    RawLanguageDriver
+    RawSqlSource
+
+org.apache.ibatis.scripting.xmltags
+    ChooseSqlNode
+    DynamicContext
+    DynamicSqlSource
+    ExpressionEvaluator
+    ForEachSqlNode
+    IfSqlNode
+    MixedSqlNode
+    OgnlCache
+    OgnlClassResolver
+    SetSqlNode
+    StaticTextSqlNode
+    TextSqlNode
+    TrimSqlNode
+    VarDeclSqlNode
+    WhereSqlNode
+    XMLLanguageDriver
+    XMLScriptBuilder
+
+org.apache.ibatis.session
+org.apache.ibatis.session.defaults
+
+org.apache.ibatis.transaction
+org.apache.ibatis.transaction.jdbc
+org.apache.ibatis.transaction.managed
+
+org.apache.ibatis.type
+    ***TypeHandler

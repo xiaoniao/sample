@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jcgroup.ylc.operate.common.dal.mapper.ActivityDOMapper">
+    <!-- 自动生成,请修改 OP_ACTIVITY.xml -->
+    <resultMap id="BaseResultMap"  type="com.jcgroup.ylc.operate.common.dal.dataobject.ActivityDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="ACTIVITY_CONTENT" property="activityContent" jdbcType="VARCHAR" javaType="String"/>
+        <result column="ACTIVITY_IMAGE_URL" property="activityImageUrl" jdbcType="VARCHAR" javaType="String"/>
+        <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" javaType="String"/>
+        <result column="MANAGER_USER" property="managerUser" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STATUS" property="status" jdbcType="BIT" javaType="Boolean"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="ACTIVITY_TYPE_ID" property="activityTypeId" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,ACTIVITY_CONTENT,ACTIVITY_IMAGE_URL,LINK_URL,MANAGER_USER,STATUS,CREATE_TIME,UPDATE_TIME,ACTIVITY_TYPE_ID
+    </sql>
+
+
+    <!--插入表:OP_ACTIVITY-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO OP_ACTIVITY(
+
+        ACTIVITY_CONTENT
+        ,LINK_URL
+        ,ACTIVITY_IMAGE_URL
+        ,MANAGER_USER
+        ,STATUS
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        ,ACTIVITY_TYPE_ID
+        )VALUES(
+
+        #{activityContent,jdbcType=VARCHAR}
+        ,#{linkUrl,jdbcType=VARCHAR}
+        ,#{activityImageUrl,jdbcType=VARCHAR}
+        ,#{managerUser,jdbcType=VARCHAR}
+        ,#{status,jdbcType=BIT}
+        ,NOW()
+        ,NOW()
+        ,#{activityTypeId,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <!--更新表:OP_ACTIVITY-->
+    <update id="update" >
+        UPDATE /*MS-OP-ACTIVITY-UPDATE*/ OP_ACTIVITY
+        SET
+        ACTIVITY_CONTENT = #{activityContent,jdbcType=VARCHAR}
+        ,LINK_URL        = #{linkUrl,jdbcType=VARCHAR}
+        ,ACTIVITY_IMAGE_URL = #{activityImageUrl,jdbcType=VARCHAR}
+        ,MANAGER_USER    = #{managerUser,jdbcType=VARCHAR}
+        ,STATUS          = #{status,jdbcType=BIT}
+        ,UPDATE_TIME     = NOW()
+        ,ACTIVITY_TYPE_ID = #{activityTypeId,jdbcType=INTEGER}
+        WHERE
+        ID              = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据主键删除数据:OP_ACTIVITY-->
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-OP-ACTIVITY-DELETEBYPRIMARY*/ FROM OP_ACTIVITY
+        WHERE
+        ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--根据主键获取数据:OP_ACTIVITY-->
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-OP-ACTIVITY-GETBYPRIMARY*/  <include refid="Base_Column_List" /> FROM OP_ACTIVITY
+        WHERE
+        ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--根据主键获取数据:OP_ACTIVITY-->
+    <select id="listActivityByStatus" resultMap="BaseResultMap">
+        SELECT /*MS-OP-ACTIVITY-LISTACTIVITYBYSTATUS*/  <include refid="Base_Column_List" /> FROM OP_ACTIVITY
+        <where>
+            <if test="_parameter != null">
+                STATUS = #{status,jdbcType=BIT}
+            </if>
+        </where>
+        ORDER BY CREATE_TIME DESC
+    </select>
+
+    <!--根据主键获取数据:OP_ACTIVITY-->
+    <select id="listIdByActivityTypeId" resultType="Integer">
+        SELECT /*MS-OP-ACTIVITY-LISTIDBYACTIVITYTYPEID*/  id FROM OP_ACTIVITY
+        WHERE
+        ACTIVITY_TYPE_ID = #{activityTypeId,jdbcType=BIT}
+    </select>
+
+    <!--根据主键获取数据:OP_ACTIVITY-->
+    <select id="listByIds" resultMap="BaseResultMap">
+        SELECT /*MS-OP-ACTIVITY-LISTBYIDS*/  <include refid="Base_Column_List" /> FROM OP_ACTIVITY
+        WHERE
+        ID IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=INTEGER}
+        </foreach>
+    </select>
+</mapper>

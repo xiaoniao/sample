@@ -1,0 +1,72 @@
+1、需要了解这几项技术
+    XML
+    DOM
+    SAX
+
+
+
+1.Introduction to JAXP 
+2.Simple API for XML
+3.Document Object Model
+4.Extensible Stylesheet Language Transformations
+5.Streaming API for XML
+6.Trail iconJAXP 1.5 and New Properties
+7.Trail iconProcessing Limits
+
+
+1.Introduction to JAXP
+    Overview of the Packages
+    Simple API for XML APIs
+    Document Object Model APIs
+    Extensible Stylesheet Language Transformations APIs
+    Streaming API for XML APIs
+    Finding the JAXP Sample Programs
+    Where Do You Go From Here?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+缩写
+Java API for XML Processing (JAXP) 
+Simple API for XML Parsing (SAX)
+Document Object Model (DOM)
+Extensible Stylesheet Language Transformations (XSLT) 
+Streaming API for XML (StAX)
+
+
+https://docs.oracle.com/javase/tutorial/jaxp/intro/index.html
+
+https://docs.oracle.com/javase/tutorial/jaxp/sax/info.html
+
+https://docs.oracle.com/javase/tutorial/jaxp/dom/validating.html
+
+https://docs.oracle.com/javase/tutorial/jaxp/xslt/xpath.html
+
+https://docs.oracle.com/javase/tutorial/jaxp/stax/example.html#bnbfn
+
+https://docs.oracle.com/javase/tutorial/jaxp/properties/references.html
+
+https://docs.oracle.com/javase/tutorial/jaxp/limits/using.html
+
+
+
+
+

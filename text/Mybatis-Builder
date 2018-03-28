@@ -1,93 +1,80 @@
-BaseBuilder
-    1、Configuration、TypeAliasRegistry、TypeHandlerRegistry
-    2、提供公共方法
 
 
+org.apache.ibatis.builder
 
-MapperBuilderAssistant
+    *BaseBuilder
+        1、Configuration、TypeAliasRegistry、TypeHandlerRegistry
+        2、提供公共方法
 
+    *CacheRefResolver
+        1、根据namespace获取缓存
 
+    *MapperBuilderAssistant
+        1、Builder 公共方法
 
-XMLConfigBuilder
-    解析 mybatis-config.xml  mybatis 系统配置
-
-
-XMLMapperBuilder
-    解析
-    <mapper namespace="com.jcgroup.ylc.operate.common.dal.mapper.ActivityDOMapper">
-        <resultMap id="BaseResultMap"  type="com.jcgroup.ylc.operate.common.dal.dataobject.ActivityDO">
-                <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-                <result column="ACTIVITY_CONTENT" property="activityContent" jdbcType="VARCHAR" javaType="String"/>
-        </resultMap>
-
-        <sql id="Base_Column_List">
-            ID,ACTIVITY_CONTENT,ACTIVITY_IMAGE_URL,LINK_URL,MANAGER_USER,STATUS,CREATE_TIME,UPDATE_TIME,ACTIVITY_TYPE_ID
-        </sql>
-
-        <insert id="insert" >
-                    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-                SELECT
-                LAST_INSERT_ID()
-            </selectKey>
-        INSERT INTO OP_ACTIVITY(
+    *ParameterExpression
+        1、内联参数表达式分析器
+        2、 
+            inline-parameter : (propertyName | expression) oldJdbcType attributes
             
-            ACTIVITY_CONTENT
-            ,LINK_URL
-            ,ACTIVITY_IMAGE_URL
-            ,MANAGER_USER
-            ,STATUS
-            ,CREATE_TIME
-            ,UPDATE_TIME
-            ,ACTIVITY_TYPE_ID
-        )VALUES(
+            propertyName =  /expression language's property navigation path/
+            expression   =  '(' /expression language's expression/ ')'
+            oldJdbcType  =  ':' /any valid jdbc type/
+            attributes   =  (',' attribute)*
+            attribute    =  name '=' value
+
+            例如：activityContent,jdbcType=VARCHAR
+                K : property V : activityContent
+                K : jdbcType V : VARCHAR
+                
             
-            #{activityContent,jdbcType=VARCHAR}
-            ,#{linkUrl,jdbcType=VARCHAR}
-            ,#{activityImageUrl,jdbcType=VARCHAR}
-            ,#{managerUser,jdbcType=VARCHAR}
-            ,#{status,jdbcType=BIT}
-            ,NOW()
-            ,NOW()
-            ,#{activityTypeId,jdbcType=INTEGER}
-        )
-        </insert>
+    *ResultMapResolver
+        1、生成 ResultMap
 
-        <!--更新表:OP_ACTIVITY-->
-        <update id="update" >
-                UPDATE /*MS-OP-ACTIVITY-UPDATE*/ OP_ACTIVITY
-        SET
-                ACTIVITY_CONTENT = #{activityContent,jdbcType=VARCHAR}
-                ,LINK_URL        = #{linkUrl,jdbcType=VARCHAR}
-                ,ACTIVITY_IMAGE_URL = #{activityImageUrl,jdbcType=VARCHAR}
-                ,MANAGER_USER    = #{managerUser,jdbcType=VARCHAR}
-                ,STATUS          = #{status,jdbcType=BIT}
-                ,UPDATE_TIME     = NOW()
-                ,ACTIVITY_TYPE_ID = #{activityTypeId,jdbcType=INTEGER}
-        WHERE
-            ID              = #{id,jdbcType=INTEGER}
-        </update>
-    </mapper>
+    *SqlSourceBuilder
+        1、生成 SqlSource
+
+    *StaticSqlSource
+        1、SQL = SELECT id FROM OP_ACTIVITY WHERE ACTIVITY_TYPE_ID = ?
 
 
-XMLIncludeTransformer
-    解析
-    <select id="getByPrimary" resultMap="BaseResultMap">
-            SELECT <include refid="Base_Column_List" /> FROM OP_ACTIVITY
-    WHERE
-        ID = #{id,jdbcType=INTEGER}
-    </select>
+org.apache.ibatis.builder.xml
 
+    *XMLConfigBuilder
+        解析 mybatis-config.xm
 
-XMLStatementBuilder
-    解析
-     select inset update delete 语句
+    *XMLMapperBuilder
+        解析 <mapper>和子标签
 
+    *XMLIncludeTransformer
+        解析 <include> 标签，例如：SELECT <include refid="Base_Column_List" /> FROM OP_ACTIVITY
+
+    *XMLStatementBuilder
+        解析 select inset update delete 语句
+
+    *XMLMapperEntityResolver
+        使用本地dtd文件进行文档验证，默认是从网络下载dtd文件进行验证。
      
 
 
+-----
+启动
+@Primary
+@Bean(name = "sqlSessionFactory")
+public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+    SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+    factoryBean.setDataSource(dataSource);
+    String path = "classpath*:com.mapper/*.xml";
+    factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(path));
+    return factoryBean.getObject();
+}
 
 
+@MapperScan(basePackages = {"com.mapper"})
+ClassPathMapperScanner
 
+
+------------------------------------------------------------------------------------
 ResultMap
     ResultMapping
     Discriminator
