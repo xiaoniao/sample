@@ -1,0 +1,115 @@
+XML
+Extensible Markup Language
+
+
+XML, XSL, XPath, XML Schema, DTD, PI, XSLT, XSP, JAXP, SAX, DOM,
+
+
+格式、约束、解析、约束、转换。
+
+
+可扩展，可自定义标签。不同于HTML.
+
+
+
+1.结构良好，标签必须有匹配的结束标签。
+2.可以有效也可以无效的，符合DTD或者Schema约束
+
+
+名词概念
+PI (processing instruction) 处理指令 例如 <? target instructions?>
+DTD (Document Type Definition) 文档类型定义
+namespace
+XSL (Extensible Stylesheet Language) 可扩展样式表语言 
+XSLT (Extensible Stylesheet Language Transformation) 可扩展样式表语言转换 根据xsl 转换一种xml格式到另一种xml格式 例如：<? xml-stylesheet href="hello.xsl" type="text/xsl"?>
+XPath (XML Path Language) 定位特定条目
+XML Schema 替代DTD http://www.w3school.com.cn/schema/schema_howto.asp
+XQL 数据库查询语言
+
+
+使用（解析文档，操作文档中的数据）
+
+SAX (Simple Api For XML) 是一个API提供了规范，不是一种解析器。
+    解析器有 Xerces XML4J
+
+    提供了一个用来解析XML数据的基于事件的框架，它使扫描整个文档，并将数据拆解成几个有用部分的一种处理过程。在该过程的每一步中，都定义了可能发生的时间
+    提供了错误处理警告。
+
+DOM (Document Object Model)
+
+
+JAXP
+
+
+---
+格式
+
+
+CDATA 原封不动返回给程序，不解析这段数据
+
+
+
+
+---
+解析
+
+
+
+
+---
+约束
+
+DTD 约束XML格式
+http://www.w3school.com.cn/dtd/dtd_intro.asp
+
+
+Schema
+http://www.w3school.com.cn/schema/index.asp
+
+
+
+
+---
+什么是转换XML
+格式化处理，数据转换。数据提取。
+XSL
+XSLT
+XPath
+    http://www.w3school.com.cn/xpath/xpath_syntax.asp
+
+
+--
+DOM
+
+
+解析器，处理器
+
+在SAX中有关解析器的焦点是处理过程中的生命周期问题，因为所有的回调方法提供了被解析数据的挂钩hook函数，
+而在DOM中，焦点在于解析过程的输出结果。只有当整个文档解析完成并加入到输出数结构中时，数据才处于可用状态。
+
+Node
+Document
+Element
+
+DOM节点类型
+
+    Document 包含了根元素和XML文档的DTD，也包含了不再XML元素层次中的一些其他的特殊信息。
+
+    Element
+
+    文本节点
+
+
+DOM解析器产生的SAX一场
+
+
+
+-------------------------------------------------------------------------------------
+
+JAXP
+在SAX或者DOM的解析器之上为我们提供了一个抽象层。
+
+
+
+
+

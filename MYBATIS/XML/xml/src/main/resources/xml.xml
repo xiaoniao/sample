@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?hello ss="dd" ?>
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mapper.dtd" >-->
+<mapper namespace="com.jcgroup.ylc.operate.common.dal.mapper.ActivityDOMapper">
+  before
+  <sql id="Base_Column_List" xmlns:myNamespaces="http://google.com">
+    ID,ACTIVITY_CONTENT,ACTIVITY_IMAGE_URL,LINK_URL,MANAGER_USER,STATUS,CREATE_TIME,UPDATE_TIME,ACTIVITY_TYPE_ID
+  </sql>
+  after this is mapper
+  <update id="update" ></update>
+</mapper>
