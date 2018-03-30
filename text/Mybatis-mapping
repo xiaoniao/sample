@@ -1,0 +1,66 @@
+Interfaces
+DatabaseIdProvider
+SqlSource
+
+-Classes
+
+CacheBuilder
+
+Discriminator
+Discriminator.Builder
+    鉴别器 : 使用结果值来决定使用哪个 resultMap
+    <discriminator javaType="int" column="draft">
+      <case value="1" resultType="DraftPost"/>
+    </discriminator>
+
+Environment
+Environment.Builder
+    解析配置环境标签
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="..." value="..."/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+✨
+MappedStatement
+MappedStatement.Builder
+    对应  select insert update delete
+
+ParameterMap
+ParameterMap.Builder
+    已废弃,请求参数保存在BoundSql中
+
+✨
+ParameterMapping
+ParameterMapping.Builder
+    映射请求参数 一个参数一个
+
+ResultMap
+ResultMap.Builder
+    <resultMap id="userResultMap" type="User">
+        <id property="id" column="user_id" />
+        <result property="username" column="user_name"/>
+        <result property="password" column="hashed_password"/>
+    </resultMap>
+
+✨
+ResultMapping
+ResultMapping.Builder
+    映射返回结果 一个字段一个
+
+✨
+BoundSql
+    请求参数会保存在这里
+
+VendorDatabaseIdProvider
+DefaultDatabaseIdProvider
+    标识数据库
