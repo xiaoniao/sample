@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mybatisTest.mapper.ActivityMapper">
+
+    <resultMap id="BaseResultMap"  type="com.example.mybatisTest.model.Activity">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="ACTIVITY_CONTENT" property="activityContent" jdbcType="VARCHAR" javaType="String"/>
+        <result column="ACTIVITY_IMAGE_URL" property="activityImageUrl" jdbcType="VARCHAR" javaType="String"/>
+        <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" javaType="String"/>
+        <result column="MANAGER_USER" property="managerUser" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STATUS" property="status" jdbcType="BIT" javaType="Integer"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="ACTIVITY_TYPE_ID" property="activityTypeId" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,ACTIVITY_CONTENT,ACTIVITY_IMAGE_URL,LINK_URL,MANAGER_USER,STATUS,CREATE_TIME,UPDATE_TIME,ACTIVITY_TYPE_ID
+    </sql>
+
+    <select id="getByStatus" resultMap="BaseResultMap">
+        SELECT  <include refid="Base_Column_List" /> FROM OP_ACTIVITY
+        WHERE
+          STATUS = #{status,jdbcType=INTEGER}
+    </select>
+</mapper>

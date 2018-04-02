@@ -1,4 +1,4 @@
-package com.example.mybatisTest;
+package com.example.mybatisTest.source;
 
 import org.apache.ibatis.parsing.XNode;
 import org.apache.ibatis.parsing.XPathParser;
