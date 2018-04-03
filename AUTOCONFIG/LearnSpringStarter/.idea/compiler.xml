@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lzz-spring-boot-starter" />
+        <module name="payment" />
+        <module name="payment-spring-boot-starter-application" />
+        <module name="third.library" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hornetq-sample-app" target="1.8" />
+      <module name="hornetq-spring-boot-autoconfigure" target="1.8" />
+      <module name="hornetq-spring-boot-starter" target="1.5" />
+      <module name="lzz-spring-boot-starter" target="1.8" />
+      <module name="payment" target="1.8" />
+      <module name="payment-spring-boot-starter-application" target="1.8" />
+      <module name="spring-boot-master-auto-configuration" target="1.5" />
+      <module name="starterDemo" target="1.8" />
+      <module name="third.library" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
