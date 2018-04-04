@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn;
+package com.example.springannotaionlearn.configurationAndBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

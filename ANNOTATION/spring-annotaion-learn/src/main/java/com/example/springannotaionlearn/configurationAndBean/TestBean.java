@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn;
+package com.example.springannotaionlearn.configurationAndBean;
 
 /**
  * Created by liuzz on 2018/04/03

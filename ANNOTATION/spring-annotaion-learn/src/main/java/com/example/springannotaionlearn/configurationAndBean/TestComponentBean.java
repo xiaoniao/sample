@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn;
+package com.example.springannotaionlearn.configurationAndBean;
 
 import org.springframework.stereotype.Component;
 
