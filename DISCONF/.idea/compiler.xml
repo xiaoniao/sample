@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="disconf-client" />
+        <module name="disconf-core" />
+        <module name="disconf-spring-boot-core" />
+        <module name="disconf-spring-boot-web" />
+        <module name="disconf-standalone-demo" />
+        <module name="disconf-standalone-dubbo-demo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="disconf-base" target="1.6" />
+      <module name="disconf-client" target="1.6" />
+      <module name="disconf-core" target="1.6" />
+      <module name="disconf-demos-java" target="1.5" />
+      <module name="disconf-spring-boot-core" target="1.6" />
+      <module name="disconf-spring-boot-demo" target="1.6" />
+      <module name="disconf-spring-boot-web" target="1.6" />
+      <module name="disconf-standalone-demo" target="1.5" />
+      <module name="disconf-standalone-dubbo-demo" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -3,7 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/disconf.iml" filepath="$PROJECT_DIR$/.idea/modules/disconf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf/disconf-base.iml" filepath="$PROJECT_DIR$/project/disconf/disconf-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/disconf-build.iml" filepath="$PROJECT_DIR$/.idea/modules/disconf-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf/disconf-client/disconf-client.iml" filepath="$PROJECT_DIR$/project/disconf/disconf-client/disconf-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf/disconf-core/disconf-core.iml" filepath="$PROJECT_DIR$/project/disconf/disconf-core/disconf-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-demos-java.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-demos-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-core/disconf-spring-boot-core.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-core/disconf-spring-boot-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-demo.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-web/disconf-spring-boot-web.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-spring-boot-demo/disconf-spring-boot-web/disconf-spring-boot-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-standalone-demo/disconf-standalone-demo.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-standalone-demo/disconf-standalone-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project/disconf-demos-java/disconf-standalone-dubbo-demo/disconf-standalone-dubbo-demo.iml" filepath="$PROJECT_DIR$/project/disconf-demos-java/disconf-standalone-dubbo-demo/disconf-standalone-dubbo-demo.iml" />
     </modules>
   </component>
 </project>

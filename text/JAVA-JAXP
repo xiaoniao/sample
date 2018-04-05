@@ -67,6 +67,36 @@ https://docs.oracle.com/javase/tutorial/jaxp/properties/references.html
 https://docs.oracle.com/javase/tutorial/jaxp/limits/using.html
 
 
+DOM
+
+DOM是树结构
+有两种node element node 和 text node。
+可以创建node，删除node，改变node的内容，和遍历node树。
+
+
+什么时候使用dom？
+dom是用来表示文档，例如文章和书籍，从1.4.2版本开始 增加了支持XML Schema。
+
+如果文档结构简单，并且XML Schema不是很重要，那么推荐使用JDOM，dom4j 这种面向对象的方案。
+
+
+
+
+
+SAX
+
+事件驱动，串行访问机制。 除了 Streaming API for XML（StAX） 之外，是最快最小内存消耗的方案。
+
+SAX 被设计成忽略状态，处理一个元素不依赖于上一个元素。
+StAX 则相反
+
+使用相对麻烦，不能回溯之前的元素。
+
+相同的错误处理
+处理验证错误
+转换现有数据
+
+
 
 
 
