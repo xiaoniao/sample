@@ -1,4 +1,4 @@
-package com.example.zookeeperLearn.origin;
+package com.example.zookeeperLearn.zookeeper;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

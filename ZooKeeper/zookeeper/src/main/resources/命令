@@ -1,0 +1,15 @@
+一、
+./bin/zkServer.sh start
+./bin/zkServer.sh stop
+
+
+二、
+
+brew install telnet
+
+telnet 127.0.0.1 2181
+
+stat
+
+dump
+
