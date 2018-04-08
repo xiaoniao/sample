@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn.importAndimportSource.bean;
+package com.example.springannotaionlearn.importAndimportSource.model;
 
 /**
  * Created by liuzz on 2018/04/04

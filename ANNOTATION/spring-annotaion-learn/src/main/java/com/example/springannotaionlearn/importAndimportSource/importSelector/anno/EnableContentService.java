@@ -1,6 +1,5 @@
 package com.example.springannotaionlearn.importAndimportSource.importSelector.anno;
 
-import com.example.springannotaionlearn.importAndimportSource.importSelector.beanDefine.ContentImportBeanDefinitionRegistrar;
 import com.example.springannotaionlearn.importAndimportSource.importSelector.selector.ContentImportSelector;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

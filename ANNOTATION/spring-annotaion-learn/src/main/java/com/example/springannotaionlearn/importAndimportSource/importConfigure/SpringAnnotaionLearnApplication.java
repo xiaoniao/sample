@@ -1,8 +1,8 @@
-package com.example.springannotaionlearn.importAndimportSource.import2;
+package com.example.springannotaionlearn.importAndimportSource.importConfigure;
 
-import com.example.springannotaionlearn.importAndimportSource.bean.CDPlayer;
-import com.example.springannotaionlearn.importAndimportSource.bean.SgtPeppers;
-import com.example.springannotaionlearn.importAndimportSource.bean.XmlBean;
+import com.example.springannotaionlearn.importAndimportSource.model.CDPlayer;
+import com.example.springannotaionlearn.importAndimportSource.model.SgtPeppers;
+import com.example.springannotaionlearn.importAndimportSource.model.XmlBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

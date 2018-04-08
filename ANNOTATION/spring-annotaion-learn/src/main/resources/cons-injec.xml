@@ -4,6 +4,6 @@
   xmlns:c="http://www.springframework.org/schema/c"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="xmlBean" class="com.example.springannotaionlearn.importAndimportSource.bean.XmlBean" >
+  <bean id="xmlBean" class="com.example.springannotaionlearn.importAndimportSource.model.XmlBean" >
   </bean>
 </beans>

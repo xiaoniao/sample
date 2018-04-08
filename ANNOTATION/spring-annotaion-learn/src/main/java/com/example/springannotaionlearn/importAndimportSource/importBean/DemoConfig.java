@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn.importAndimportSource.import1;
+package com.example.springannotaionlearn.importAndimportSource.importBean;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

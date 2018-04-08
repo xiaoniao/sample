@@ -1,7 +1,7 @@
-package com.example.springannotaionlearn.importAndimportSource.import2;
+package com.example.springannotaionlearn.importAndimportSource.importConfigure;
 
-import com.example.springannotaionlearn.importAndimportSource.bean.CompactDisc;
-import com.example.springannotaionlearn.importAndimportSource.bean.SgtPeppers;
+import com.example.springannotaionlearn.importAndimportSource.model.CompactDisc;
+import com.example.springannotaionlearn.importAndimportSource.model.SgtPeppers;
 import org.springframework.context.annotation.Bean;
 
 /**

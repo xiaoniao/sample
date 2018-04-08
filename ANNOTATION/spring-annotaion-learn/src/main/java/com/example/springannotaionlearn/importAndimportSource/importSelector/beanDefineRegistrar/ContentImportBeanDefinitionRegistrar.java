@@ -1,4 +1,4 @@
-package com.example.springannotaionlearn.importAndimportSource.importSelector.beanDefine;
+package com.example.springannotaionlearn.importAndimportSource.importSelector.beanDefineRegistrar;
 
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
