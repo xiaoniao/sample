@@ -59,4 +59,5 @@ public class MybatisTestApplication implements CommandLineRunner {
 
         };
     }
+
 }
