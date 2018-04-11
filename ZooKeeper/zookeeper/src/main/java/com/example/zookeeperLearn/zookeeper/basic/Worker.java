@@ -80,5 +80,4 @@ public class Worker implements Watcher {
             }, status);
         }
     }
-
 }

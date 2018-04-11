@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.Random;
 import org.apache.zookeeper.AsyncCallback;
 import org.apache.zookeeper.AsyncCallback.DataCallback;
+import org.apache.zookeeper.AsyncCallback.StatCallback;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.KeeperException.Code;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
+import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,6 +101,8 @@ public class Master implements Watcher {
 
             if (isLeader) {
                 bootstrap();
+            } else {
+                watchMaster();
             }
         }
     };
@@ -146,4 +151,19 @@ public class Master implements Watcher {
             }
         }, null);
     }
+
+    private void watchMaster() {
+        log.info("{}监听 /master 状态", PREFIX);
+        zooKeeper.exists(masterNodeName, event -> {
+
+            // 只会收到一次通知
+            EventType eventType = event.getType();
+
+
+            log.info("{}{}", PREFIX, eventType);
+        }, (rc, path, ctx, stat) -> {
+            log.info("{} ====== {}", PREFIX, rc);
+        }, null);
+    }
+
 }

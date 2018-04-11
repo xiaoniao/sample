@@ -15,24 +15,28 @@ public class Demo {
         master.startZooKeeper();
         master.runForMaster();
 
-        sleep(2000);
-        TimeUnit.SECONDS.sleep(2);
-        master.startZooKeeper();
-        sleep(2000);
+        Master master2 = new Master("127.0.0.1:2194", 15000);
+        master2.startZooKeeper();
+        master2.runForMaster();
 
-        Worker worker = new Worker("127.0.0.1:2194", 15000);
-        worker.startZooKeeper();
-        worker.register();
-        sleep(1000);
-        worker.setStatus("hello");
-
-        Client client = new Client("127.0.0.1:2194", 15000);
-        client.startZooKeeper();
-        client.queueCommand("ls");
-
-        AdminClient adminClient = new AdminClient("127.0.0.1:2194", 15000);
-        adminClient.startZooKeeper();
-        adminClient.listState();
+//        sleep(2000);
+//        TimeUnit.SECONDS.sleep(2);
+//        master.startZooKeeper();
+//        sleep(2000);
+//
+//        Worker worker = new Worker("127.0.0.1:2194", 15000);
+//        worker.startZooKeeper();
+//        worker.register();
+//        sleep(1000);
+//        worker.setStatus("hello");
+//
+//        Client client = new Client("127.0.0.1:2194", 15000);
+//        client.startZooKeeper();
+//        client.queueCommand("ls");
+//
+//        AdminClient adminClient = new AdminClient("127.0.0.1:2194", 15000);
+//        adminClient.startZooKeeper();
+//        adminClient.listState();
         sleep(200000);
     }
 

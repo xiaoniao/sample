@@ -1,6 +1,7 @@
 一、
 ./bin/zkServer.sh start
 ./bin/zkServer.sh stop
+./bin/zkCli.sh -server 127.0.0.1:2194
 
 
 二、
@@ -12,4 +13,15 @@ telnet 127.0.0.1 2181
 stat
 
 dump
+
+三、
+
+ls /
+get /zk_test
+set /zk_test junk
+delete /zk_test
+
+
+
+
 
