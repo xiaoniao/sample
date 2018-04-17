@@ -1,0 +1,31 @@
+PropertySourcesPlaceholderConfigurer
+
+PropertySource
+
+
+
+
+----
+
+非WEB项目
+
+StandardEnvironment 
+
+{activeProfiles=[], defaultProfiles=[default], propertySources=[ConfigurationPropertySourcesPropertySource {name='configurationProperties'}, MapPropertySource {name='systemProperties'}, OriginAwareSystemEnvironmentPropertySource {name='systemEnvironment'}, RandomValuePropertySource {name='random'}, OriginTrackedMapPropertySource {name='applicationConfig: [classpath:/application.properties]'}]}
+
+
+WEB项目
+
+StandardServletEnvironment
+
+{activeProfiles=[], defaultProfiles=[default], propertySources=[ConfigurationPropertySourcesPropertySource {name='configurationProperties'}, StubPropertySource {name='servletConfigInitParams'}, StubPropertySource {name='servletContextInitParams'}, MapPropertySource {name='systemProperties'}, OriginAwareSystemEnvironmentPropertySource {name='systemEnvironment'}, RandomValuePropertySource {name='random'}, OriginTrackedMapPropertySource {name='applicationConfig: [classpath:/application.properties]'}]}
+
+
+----
+
+PropertySourcesPropertyResolver
+
+
+----
+
+PropertyPlaceholderHelper

@@ -17,6 +17,7 @@ import com.baidu.disconf.core.common.zookeeper.inner.ResilientActiveKeyValueStor
 /**
  * ZK统一管理器
  *
+ * Mgr Manager
  * @author liaoqiqi
  * @version 2014-7-7
  */

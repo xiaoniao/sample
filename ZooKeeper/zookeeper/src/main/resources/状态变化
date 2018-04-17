@@ -21,5 +21,29 @@ notification
 
 
 
+四、
+
+如何设置监视点
+
+ZooKeeper的API中的所有读操作：getData、getChildren和exists，
+均可以选择在读取的znode节点上设置监视点。使用监视点机制，我们
+需要实现Watcher接口类，实现其中的process方法
+
+
+WatchedEvent数据结构包括以下信息：
+·ZooKeeper会话状态（KeeperState）：Disconnected、
+SyncConnected、AuthFailed、ConnectedReadOnly、SaslAuthenticated和
+Expired。
+·事件类型（EventType）：NodeCreated、NodeDeleted、
+NodeDataChanged、NodeChildrenChanged和None。
+·如果事件类型不是None时，返回一个znode路径。
+
+
+
+·管理权变化。
+·主节点等待从节点列表的变化。
+·主节点等待新任务进行分配。
+·从节点等待分配新任务。
+·客户端等待任务的执行结果。
 
 

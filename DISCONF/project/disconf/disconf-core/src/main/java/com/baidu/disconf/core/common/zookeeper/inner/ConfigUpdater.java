@@ -15,6 +15,7 @@ public class ConfigUpdater {
     public static final String PATH = "/config";
 
     private ResilientActiveKeyValueStore store;
+
     private Random random = new Random();
 
     public ConfigUpdater(String hosts) throws IOException, InterruptedException {

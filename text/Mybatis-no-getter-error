@@ -1,0 +1,12 @@
+OgnlRuntime
+    public static Object getProperty(OgnlContext context, Object source, Object name) throws OgnlException
+
+DynamicContext
+
+OGNL @Param
+
+没有@Param 则从对象中找属性值
+
+
+
+分析结果 dal工具有bug，对于基本类型且只有一个没有添加@Param注解

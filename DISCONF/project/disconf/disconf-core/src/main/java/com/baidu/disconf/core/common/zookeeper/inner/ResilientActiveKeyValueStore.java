@@ -16,6 +16,10 @@ import org.slf4j.LoggerFactory;
 /**
  * ZK读写
  *
+ * Resilient 弹回的，有弹力的
+ * Active 活跃
+ * KeyValueStore
+ *
  * @author liaoqiqi
  * @version 2014-7-7
  */
