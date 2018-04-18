@@ -7,4 +7,19 @@ https://fangjian0423.github.io/2016/11/13/springboot-enable-annotation/
 http://blog.leanote.com/post/sheng91666@163.com/spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%B1%87%E6%80%BB
 
 
+
+
+------------------------------------------------------------------------------------------------
+https://my.oschina.net/u/2278977/blog/807958
+
+如果使用application.properties进行多个环境的配置,原理跟使用多个yml配置文件一致,也是通过application-
+{profile}.properties来控制加载哪个环境的配置,将于环境无关的属性,放置到application.properties文件里面,
+通过spring.profiles.active=profiles的值,加载不同环境的配置,如果不指定,则默认加载application.properties
+的配置,不会加载带有profile的配置
+
+java -jar xxxxx.jar --spring.profiles.active=prod
+------------------------------------------------------------------------------------------------
+
+
+
 ****************************************************************************

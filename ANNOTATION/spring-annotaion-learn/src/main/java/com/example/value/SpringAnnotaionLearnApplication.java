@@ -21,6 +21,15 @@ public class SpringAnnotaionLearnApplication implements CommandLineRunner {
     @Value("${price}")
     private double price;
 
+    @Value("${profile}")
+    private String profile;
+
+    @Value("${common.name}")
+    private String commonName;
+
+    @Value("${common.name2}")
+    private String commonName2;
+
     @Autowired
     private Environment environment;
 
@@ -28,9 +37,12 @@ public class SpringAnnotaionLearnApplication implements CommandLineRunner {
         SpringApplication.run(SpringAnnotaionLearnApplication.class, args);
     }
 
-
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("profile : " + profile);
+        System.out.println("common.name : " + commonName);
+        System.out.println("common.name2 : " + commonName2);
+
         System.out.println(love);
         System.out.println(environment.resolvePlaceholders("${love}"));
         System.out.println(environment.resolveRequiredPlaceholders("${love}"));
