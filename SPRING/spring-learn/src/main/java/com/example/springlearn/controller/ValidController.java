@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Valid adj. 有效的；有根据的；合法的；正当的
- * Validated adj. 经过验证的 v. 确认（validate的过去式及过去分词形式）；使生效
+ * Valid adj. 有效的；有根据的；合法的；正当的 Validated adj. 经过验证的 v. 确认（validate的过去式及过去分词形式）；使生效
+ *
+ * @Valid
+ * @Validated 不能在方法上用
  *
  * Created by liuzz on 2018/04/19
  */
 @RestController
 @RequestMapping("/goods")
 public class ValidController {
+
+    /********************************* Valid **************************************/
 
     @RequestMapping("/list1")
     public List<Goods> list1(@Valid @RequestBody Goods goods) {
@@ -32,6 +36,8 @@ public class ValidController {
         }
         return new ArrayList<>();
     }
+
+    /********************************* Validated **************************************/
 
     @RequestMapping("/list3")
     public List<Goods> list3(@Validated @RequestBody Goods goods) {
