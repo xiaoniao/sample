@@ -1,5 +1,6 @@
-package com.example.springlearn;
+package com.example.springlearn.conversion;
 
+import com.example.springlearn.SpringLearnApplication;
 import java.util.Properties;
 import org.junit.Test;
 import org.junit.runner.RunWith;

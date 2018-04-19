@@ -1,5 +1,7 @@
-package com.example.springlearn;
+package com.example.springlearn.conversion;
 
+import com.example.springlearn.ProductVO;
+import com.example.springlearn.SpringLearnApplication;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import org.junit.Test;
