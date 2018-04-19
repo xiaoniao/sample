@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.StandardEnvironment;
 
 
 @SpringBootApplication
@@ -37,8 +39,18 @@ public class SpringAnnotaionLearnApplication implements CommandLineRunner {
         SpringApplication.run(SpringAnnotaionLearnApplication.class, args);
     }
 
+    @Bean
+    public StandardEnvironment standardEnvironment(StandardEnvironment standardEnvironment) {
+        System.out.println("********************************************************************");
+        System.out.println(standardEnvironment);
+        standardEnvironment.getConversionService().addConverter(new DiyGenericConverter());
+        return standardEnvironment;
+    }
+
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("*****************************run***************************************");
+        System.out.println(environment);
         System.out.println("profile : " + profile);
         System.out.println("common.name : " + commonName);
         System.out.println("common.name2 : " + commonName2);
@@ -54,10 +66,7 @@ public class SpringAnnotaionLearnApplication implements CommandLineRunner {
         List<String> list = environment.getProperty("list", List.class);
         System.out.println(list);
 
-        /*Goods goods = environment.getProperty("goods", Goods.class);
-        System.out.println(goods);*/
-
-        // Circular placeholder reference 'placeholder' in property definitions
-        // System.out.println(environment.resolvePlaceholders("${placeholder}"));
+        Goods goods = environment.getProperty("goods", Goods.class);
+        System.out.println(goods);
     }
 }
