@@ -5,19 +5,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.support.ConfigurableConversionService;
 import org.springframework.core.convert.support.GenericConversionService;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.lang.Nullable;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by liuzz on 2018/04/18
+ *
+ *
+ * Converter 全部保存在 GenericConversionService.Converters 类中。
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SpringLearnApplication.class)
 public class GenericConversionServiceTest {
 
     @Test
-    public void test() {
+    public void testBasicUse() {
         GenericConversionService genericConversionService = new GenericConversionService();
         genericConversionService.addConverter(new Converter<String, Integer>() {
             @Nullable
@@ -47,5 +53,14 @@ public class GenericConversionServiceTest {
             String result = genericConversionService.convert("1024", String.class);
             System.out.println(result);
         }
+    }
+
+    @Test
+    public void testConvert() {
+        StandardEnvironment standardEnvironment = new StandardEnvironment();
+
+        ConfigurableConversionService configurableConversionService = standardEnvironment.getConversionService();
+
+        assert configurableConversionService != null;
     }
 }
