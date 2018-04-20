@@ -1,0 +1,19 @@
+Post vt. 张贴；公布；邮递；布置
+Processor n. [计] 处理器；处理程序；加工者
+Instantiation n. 实例化；[计] 例示
+Aware adj. 意识到的；知道的；有…方面知识的；懂世故的
+Destruction n. 破坏，毁灭；摧毁
+Smart adj. 聪明的；巧妙的；敏捷的；厉害的；潇洒的；剧烈的；时髦的
+
+
+
+BeanPostProcessor
+  -InstantiationAwareBeanPostProcessor
+    -SmartInstantiationAwareBeanPostProcessor
+  -DestructionAwareBeanPostProcessor
+
+BeanFactoryPostProcessor
+
+
+====
+ConfigurableBeanFactory#addBeanPostProcessor
