@@ -1,0 +1,10 @@
+为注解的属性提供别名
+
+
+使用场景
+    1.Explicit aliases within an annotation
+    2.Explicit alias for attribute in meta-annotation
+    3.Implicit aliases within an annotation
+
+
+使用要求

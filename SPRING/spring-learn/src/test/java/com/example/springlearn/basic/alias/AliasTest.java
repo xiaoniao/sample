@@ -1,6 +1,7 @@
 package com.example.springlearn.basic.alias;
 
 import com.example.springlearn.SpringLearnApplication;
+import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,14 @@ public class AliasTest {
 
     @Autowired()
     @Qualifier("aliasService11111")
-    private AliasService aliasService;
+    private AliasService aliasService1;
+
+    @Resource(name = "aliasService22222")
+    private AliasService aliasService2;
 
     @Test
     public void test() {
-        aliasService.showName();
+        aliasService1.showName();
+        aliasService2.showName();
     }
 }
