@@ -1,0 +1,18 @@
+
+
+
+Aware:
+
+    Aware
+        ApplicationContextAware
+            - void setApplicationContext(ApplicationContext applicationContext) throws BeansException;
+
+    回调、通知
+
+
+
+
+
+
+
+
