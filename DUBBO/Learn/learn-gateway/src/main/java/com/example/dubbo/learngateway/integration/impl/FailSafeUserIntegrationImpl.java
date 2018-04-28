@@ -14,7 +14,6 @@ public class FailSafeUserIntegrationImpl implements UserIntegration {
 
     @Reference(version = "1.0.0",
             application = "${dubbo.application.id}",
-            url = "dubbo://localhost:12345",
             cluster = "failsafe")
     private UserFacade userFacade;
 

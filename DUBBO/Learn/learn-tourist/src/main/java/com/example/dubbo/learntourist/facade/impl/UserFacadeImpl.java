@@ -16,7 +16,7 @@ import org.springframework.core.env.AbstractEnvironment;
 )
 public class UserFacadeImpl implements UserFacade {
 
-    @Value("${number}")
+    @Value("${machine-number}")
     private String number;
 
     @Autowired
