@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.beans.SimpleTypeConverter</OriginalElement>
+  <nodes>
+    <node x="35.0" y="315.0">java.beans.PropertyEditor</node>
+    <node x="129.75" y="160.0">org.springframework.beans.TypeConverterSupport</node>
+    <node x="0.0" y="80.0">org.springframework.beans.PropertyEditorRegistrySupport</node>
+    <node x="0.0" y="475.0">org.springframework.beans.propertyeditors.StringArrayPropertyEditor</node>
+    <node x="260.0" y="80.0">org.springframework.beans.TypeConverter</node>
+    <node x="25.0" y="0.0">org.springframework.beans.PropertyEditorRegistry</node>
+    <node x="10.0" y="395.0">java.beans.PropertyEditorSupport</node>
+    <node x="-59.0" y="539.0">org.springframework.core.convert.ConversionService</node>
+    <node x="255.0" y="315.0">org.springframework.beans.TypeConverterDelegate</node>
+    <node x="134.75" y="240.0">org.springframework.beans.SimpleTypeConverter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.beans.TypeConverterSupport" target="org.springframework.beans.TypeConverter">
+      <point x="47.75" y="-15.0" />
+      <point x="273.0" y="135.0" />
+      <point x="330.5" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.TypeConverterSupport" target="org.springframework.beans.PropertyEditorRegistrySupport">
+      <point x="-47.75" y="-15.0" />
+      <point x="177.5" y="135.0" />
+      <point x="120.0" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.SimpleTypeConverter" target="org.springframework.beans.TypeConverterSupport">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.propertyeditors.StringArrayPropertyEditor" target="java.beans.PropertyEditorSupport">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="java.beans.PropertyEditorSupport" target="java.beans.PropertyEditor">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.springframework.beans.PropertyEditorRegistrySupport" target="org.springframework.beans.PropertyEditorRegistry">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="224.5" y="292.5" />
+  <SelectedNodes>
+    <node>org.springframework.core.convert.ConversionService</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
