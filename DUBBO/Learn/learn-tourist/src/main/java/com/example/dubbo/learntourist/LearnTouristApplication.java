@@ -7,6 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 官方GITHUB : https://github.com/apache/incubator-dubbo-spring-boot-project
+ *
+ */
 @SpringBootApplication
 public class LearnTouristApplication implements CommandLineRunner {
 
