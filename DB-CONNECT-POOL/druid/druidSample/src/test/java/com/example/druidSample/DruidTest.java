@@ -26,7 +26,7 @@ public class DruidTest {
     private DataSource dataSource;
 
     /**
-     * 获取多个连接，超出 max_active 后会阻塞，而并不是报错
+     * 获取多个连接，超出 max_active 后会阻塞等待，而并不是报错
      */
     @Test
     public void testGetConnection() throws SQLException {
@@ -44,7 +44,7 @@ public class DruidTest {
         for (int i = 0; i < 1000; i++) {
             try (
                     Connection connection = dataSource.getConnection();
-                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM t_order_0");
+                    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM fud_fund_product limit 1");
                     ResultSet resultSet = preparedStatement.executeQuery();
             ) {
                 while (resultSet.next()) {
