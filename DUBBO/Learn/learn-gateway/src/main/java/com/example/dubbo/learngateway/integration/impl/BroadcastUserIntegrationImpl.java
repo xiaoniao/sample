@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("broadcastUserIntegration")
 public class BroadcastUserIntegrationImpl implements UserIntegration {
 
-    @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            cluster = "broadcast")
+    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "broadcast", retries = 1, timeout = 5000, loadbalance = "roundrobin")
     private UserFacade userFacade;
 
     @Override

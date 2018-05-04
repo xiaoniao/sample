@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("availableUserIntegration")
 public class AvailableUserIntegrationImpl implements UserIntegration {
 
-    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "available")
+    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "available", retries = 1, timeout = 5000, loadbalance = "roundrobin")
     private UserFacade userFacade;
 
     @Override

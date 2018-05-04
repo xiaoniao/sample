@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("failSafeUserIntegration")
 public class FailSafeUserIntegrationImpl implements UserIntegration {
 
-    @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            cluster = "failsafe")
+    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "failsafe", retries = 1, timeout = 5000)
     private UserFacade userFacade;
 
     @Override

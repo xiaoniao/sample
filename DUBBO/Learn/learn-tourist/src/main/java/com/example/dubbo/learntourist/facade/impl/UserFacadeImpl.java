@@ -24,6 +24,14 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public String getUserName(String userId, String tag) {
+        if (number.equals("2")) {
+            System.out.println("sleep 10 秒");
+            try {
+                Thread.sleep(10000000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println(System.currentTimeMillis() + " : " + number + " - " + tag);
         return "hello dubbo users";
     }

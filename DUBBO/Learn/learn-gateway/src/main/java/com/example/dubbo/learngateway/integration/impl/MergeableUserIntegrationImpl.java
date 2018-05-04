@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("mergeableUserIntegration")
 public class MergeableUserIntegrationImpl implements UserIntegration {
 
-    @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            cluster = "mergeable")
+    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "mergeable", retries = 1, timeout = 5000)
     private UserFacade userFacade;
 
     @Override

@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("forkingUserIntegration")
 public class ForkingUserIntegrationImpl implements UserIntegration {
 
-    @Reference(version = "1.0.0",
-            application = "${dubbo.application.id}",
-            cluster = "forking")
+    @Reference(version = "1.0.0", application = "${dubbo.application.id}", cluster = "forking", retries = 1, timeout = 5000)
     private UserFacade userFacade;
 
     @Override
