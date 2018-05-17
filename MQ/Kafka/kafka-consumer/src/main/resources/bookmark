@@ -1,0 +1,10 @@
+
+auto.offset.reset
+    1. earliest: automatically reset the offset to the earliest offset  // 新起组名从头消费数据,
+    2. latest: automatically reset the offset to the latest offset
+    3. none: throw exception to the consumer if no previous offset is found for the consumer's group
+    4. anything else: throw exception to the consumer.
+
+
+
+同一个组 起两个服务 一个服务kill掉 会出现重复处理数据
