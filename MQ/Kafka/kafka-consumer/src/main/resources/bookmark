@@ -8,3 +8,14 @@ auto.offset.reset
 
 
 同一个组 起两个服务 一个服务kill掉 会出现重复处理数据
+
+
+
+
+
+
+RocketMQ与kafka对比（18项差异）http://jm.taobao.org/2016/03/24/rmq-vs-kafka/
+Kafka、RabbitMQ、RocketMQ消息中间件的对比 —— 消息发送性能 http://jm.taobao.org/2016/04/01/kafka-vs-rabbitmq-vs-rocketmq-message-send-performance/
+Kafka vs RocketMQ—— Topic数量对单机性能的影响 http://jm.taobao.org/2016/04/07/kafka-vs-rocketmq-topic-amout/
+Kafka vs RocketMQ——多Topic对性能稳定性的影响 http://jm.taobao.org/2016/04/20/kafka-vs-rocketmq-3/
+Kafka vs RocketMQ——单机系统可靠性 http://jm.taobao.org/2016/04/28/kafka-vs-rocktemq-4/
