@@ -115,7 +115,7 @@ a
 
 
 
-打印偏移量
+打印偏移量  偏移量记录的时消费组的消费位移
 
 
 sh /Applications/kafka_2.11-1.1.0/bin/kafka-run-class.sh kafka.tools.DumpLogSegments --files /private/tmp/kafka-logs/__consumer_offsets-0/00000000000000000000.log  --print-data-log
@@ -131,12 +131,27 @@ sh /Applications/kafka_2.11-1.1.0/bin/kafka-console-consumer.sh --bootstrap-serv
 
 
 
-==== 集群
+==== 使用集群中的坑
 
 1、server.properties 设置集群副本数量
 2、指定多ip:port
 
 ====
+
+
+
+坑
+
+1、集群不是自动变更记录到其他机器上的，需要指定副本数量。 两种指定副本的方式 1、默认的server.property中可以配置 2、代码中也可以指定。  切记指定副本
+
+
+2、分区， 发送消息不是发送到所有分区，而是其中一个。 注意分区。
+
+
+和常规的集群自认为的方式不一样，都需要使用者自己配置。。。。
+
+
+
 
 
 
