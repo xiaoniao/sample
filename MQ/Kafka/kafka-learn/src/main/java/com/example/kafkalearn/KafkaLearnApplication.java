@@ -29,5 +29,7 @@ public class KafkaLearnApplication implements CommandLineRunner {
         // plainJavaSample.testAutoCommit();
         // configJavaSample.testSimple();
         bootJavaSample.sendMsg();
+        // bootJavaSample.sendMsgWithPartition();
+        // bootJavaSample.sendMsgWithOutPartition();
     }
 }
