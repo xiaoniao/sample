@@ -23,4 +23,22 @@ public class RestTestController {
     private void listen(ConsumerRecord<?, ?> cr) throws Exception {
         log.info("{}, {}", cr.toString(), count++);
     }
+
+    /**
+     * ConsumerRecord(topic = topic-timestamp-create-time, partition = 0, offset = 0, CreateTime = 1526868542300,
+     * serialized key size = -1, serialized value size = 3, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = 111)
+     */
+    @KafkaListener(topics = "${topic.timestamp.createtime}")
+    private void listen1(ConsumerRecord<?, ?> cr) throws Exception {
+        log.info("{}, {}", cr.toString(), count++);
+    }
+
+    /**
+     * ConsumerRecord(topic = topic-timestamp-log-append-time, partition = 1, offset = 0, LogAppendTime = 1526868505678,
+     * serialized key size = -1, serialized value size = 3, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = sss), 2
+     */
+    @KafkaListener(topics = "${topic.timestamp.logappendtime}")
+    private void listen2(ConsumerRecord<?, ?> cr) throws Exception {
+        log.info("{}, {}", cr.toString(), count++);
+    }
 }
