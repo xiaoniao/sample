@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/kafka-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/kafka-producer/pom.xml" />
         <option value="$PROJECT_DIR$/kafka-learn/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-api/pom.xml" />
       </list>
     </option>
   </component>

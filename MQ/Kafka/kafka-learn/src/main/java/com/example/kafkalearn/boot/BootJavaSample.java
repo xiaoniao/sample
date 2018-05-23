@@ -39,7 +39,7 @@ public class BootJavaSample {
 
     @KafkaListener(topics = "myTopic")
     private void listen(ConsumerRecord<?, ?> cr) throws Exception {
-        logger.info("【myTopic】{}, {}", cr.toString(), count++);
+        logger.info("【myTopic】{}, {} ThreadName: {}", cr.toString(), count++, Thread.currentThread().getName());
         latch.countDown();
     }
 
@@ -74,13 +74,13 @@ public class BootJavaSample {
      */
     @KafkaListener(topicPartitions = {@TopicPartition(topic = "liuzz-article", partitions = {"1"})})
     private void articleListener(ConsumerRecord<?, ?> cr) throws Exception {
-        logger.info("articleListener【liuzz-article】{}", cr.toString());
+        logger.info("articleListener【liuzz-article】{} ThreadName: {}", cr.toString(), Thread.currentThread().getName());
         latch2.countDown();
     }
 
     @KafkaListener(topics = "liuzz-article")
     private void articleListener2(ConsumerRecord<?, ?> cr) throws Exception {
-        logger.info("articleListener2【liuzz-article】{}", cr.toString());
+        logger.info("articleListener2【liuzz-article】{} ThreadName: {}", cr.toString(), Thread.currentThread().getName());
         latch2.countDown();
     }
 }

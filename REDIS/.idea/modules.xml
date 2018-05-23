@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/REDIS.iml" filepath="$PROJECT_DIR$/.idea/REDIS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jedis-sample/jedis-sample.iml" filepath="$PROJECT_DIR$/jedis-sample/jedis-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/redis/redis.iml" filepath="$PROJECT_DIR$/redis/redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-data-redis-sample/spring-data-redis-sample.iml" filepath="$PROJECT_DIR$/spring-data-redis-sample/spring-data-redis-sample.iml" />
+    </modules>
+  </component>
+</project>
