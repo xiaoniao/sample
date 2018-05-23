@@ -1,0 +1,29 @@
+1.1.0版本
+
+默认 delete.topic.enable=true
+
+删除主题 ./bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic kafka-action
+
+会重命名冰稍后定时删除 Log for partition kafka-action-0 is renamed to /tmp/kafka-logs-2/kafka-action-0.95c704d5841840d59d3f86abd7052f43-delete and is scheduled for deletion (kafka.log.LogManager)
+
+
+如果设置成 delete.topic.enable=false 主题则删除不了
+
+
+.......
+另外
+admin/delete_topic 这个目录一直是空的
+
+
+
+
+
+
+
+
+
+主题才分 leader follwer  ， 机器不分？？
+
+
+分区分配策略？
+副本分配策略？

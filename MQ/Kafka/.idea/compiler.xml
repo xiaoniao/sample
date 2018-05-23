@@ -13,8 +13,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="kafka-consumer" target="1.8" />
-      <module name="kafka-learn" target="1.8" />
-      <module name="kafka-producer" target="1.8" />
+      <module name="kafka-learn" target="1.5" />
+      <module name="kafka-producer" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

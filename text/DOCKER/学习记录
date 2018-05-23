@@ -1,0 +1,59 @@
+
+
+docker info 
+
+docker version
+
+
+docker run ubuntu echo "Hello world"  || docker run ubuntu:latest echo "Hello world"
+
+
+docker run -i -t --name mytest ubuntu:latest /bin/bash
+
+-i 交互模式
+-t 分配伪终端
+
+
+docker start 83151de14ed4991dcf808748b23ff0faa9e4de449ec3168f20752b7c35fb518d
+
+docker stop 83151de14ed4991dcf808748b23ff0faa9e4de449ec3168f20752b7c35fb518d
+
+docker restart 83151de14ed4991dcf808748b23ff0faa9e4de449ec3168f20752b7c35fb518d
+
+docker ps
+
+docker ps -a
+docker ps -l
+
+
+
+docker pull ubuntu
+
+docker images
+
+删除容器
+docker rm 83151de14ed4
+
+删除镜像
+docker rmi 452a96d81c30
+
+
+
+docker attach
+
+docker inspect
+
+
+docker history 452a96d81c30 镜像历史记录
+
+docker events
+
+docker logs 834851cd096c 容器进程中的日志记录
+
+
+----
+
+docker pull ubuntu
+docker pull django
+docker pull haproxy
+docker pull redis

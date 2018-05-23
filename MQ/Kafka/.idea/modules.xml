@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Kafka.iml" filepath="$PROJECT_DIR$/.idea/Kafka.iml" />
       <module fileurl="file://$PROJECT_DIR$/kafka-consumer/kafka-consumer.iml" filepath="$PROJECT_DIR$/kafka-consumer/kafka-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-consumer/kafka-consumer.iml" filepath="$PROJECT_DIR$/kafka-consumer/kafka-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/kafka-learn/kafka-learn.iml" filepath="$PROJECT_DIR$/kafka-learn/kafka-learn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-learn/kafka-learn.iml" filepath="$PROJECT_DIR$/kafka-learn/kafka-learn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-producer/kafka-producer.iml" filepath="$PROJECT_DIR$/kafka-producer/kafka-producer.iml" />
       <module fileurl="file://$PROJECT_DIR$/kafka-producer/kafka-producer.iml" filepath="$PROJECT_DIR$/kafka-producer/kafka-producer.iml" />
     </modules>
   </component>
