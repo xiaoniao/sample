@@ -20,8 +20,10 @@ public class KafkaProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+	    // 模拟高并发操作
 	    for (int i = 0; i < 1000000; i++) {
             kafkaTemplate.send("aaaa", "data" + i);
         }
+        System.out.println("一百万消息发送完毕");
     }
 }

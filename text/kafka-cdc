@@ -1,0 +1,59 @@
+
+
+kafka-connect
+
+Debezium ： 一个开源的分布式CDC(更改数据捕获)系统，支持对接各种数据源，将上游已持久化的数据变更捕获后写入消息队列。
+
+
+
+
+1. Start Zookeeper
+
+docker run -it --rm --name zookeeper -p 2181:2181 -p 2888:2888 -p 3888:3888 debezium/zookeeper:0.7
+
+
+2. Start Kafka
+
+docker run -it --rm --name kafka -p 9092:9092 --link zookeeper:zookeeper debezium/kafka:0.7
+
+
+3. Start a MySQL database
+
+docker run -it --rm --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=debezium -e MYSQL_USER=mysqluser -e MYSQL_PASSWORD=mysqlpw debezium/example-mysql:0.7
+
+
+4. Start a MySQL command line client
+
+docker run -it --rm --name mysqlterm --link mysql --rm mysql:5.7 sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+
+    mysql> use inventory;
+    mysql> show tables;
+    mysql> SELECT * FROM customers;
+
+
+5. Start Kafka Connect
+
+docker run -it --rm --name connect -p 8083:8083 -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets --link zookeeper:zookeeper --link kafka:kafka --link mysql:mysql debezium/connect:0.7
+
+    curl -H "Accept:application/json" localhost:8083/
+
+    curl -H "Accept:application/json" localhost:8083/connectors/
+
+    curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" localhost:8083/connectors/ -d '{ "name": "inventory-connector", "config": { "connector.class": "io.debezium.connector.mysql.MySqlConnector", "tasks.max": "1", "database.hostname": "mysql", "database.port": "3306", "database.user": "debezium", "database.password": "dbz", "database.server.id": "184054", "database.server.name": "dbserver1", "database.whitelist": "inventory", "database.history.kafka.bootstrap.servers": "kafka:9092", "database.history.kafka.topic": "dbhistory.inventory" } }'
+
+    curl -i -X GET -H "Accept:application/json" localhost:8083/connectors/inventory-connector
+
+
+5. Viewing the change events
+
+docker run -it --name watcher --rm --link zookeeper:zookeeper debezium/kafka:0.7 watch-topic -a -k dbserver1.inventory.customers
+
+
+
+    mysql> SELECT * FROM customers;
+
+6. Clean up
+
+docker stop mysqlterm watcher connect mysql kafka zookeeper
+
+docker ps -a

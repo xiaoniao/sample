@@ -19,9 +19,13 @@ public class RestTestController {
 
     private int count;
 
+    /**
+     * 处理高并发下的用户请求
+     */
     @KafkaListener(topics = "${topic}")
     private void listen(ConsumerRecord<?, ?> cr) throws Exception {
         log.info("{}, {}", cr.toString(), count++);
+        Thread.sleep(1000);
     }
 
     /**
