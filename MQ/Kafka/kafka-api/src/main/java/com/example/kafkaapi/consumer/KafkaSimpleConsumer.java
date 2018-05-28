@@ -54,7 +54,7 @@ public class KafkaSimpleConsumer {
     private static final int MAX_ERROR_SIZE = 3;
 
     public static void main(String[] args) {
-        PartitionMetadata partitionMetadata = KafkaSimpleConsumer.fetchPartitionMetadata(Arrays.asList(BROKER_LIST.split(",")), "liuzz-article", 1);
+        PartitionMetadata partitionMetadata = KafkaSimpleConsumer.fetchPartitionMetadata(Arrays.asList(BROKER_LIST.split(",")), "stock-quotation-with-key", 1);
 
         System.out.println(partitionMetadata.toString());
     }

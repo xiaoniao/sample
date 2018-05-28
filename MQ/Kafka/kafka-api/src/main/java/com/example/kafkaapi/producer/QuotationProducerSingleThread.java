@@ -1,5 +1,6 @@
 package com.example.kafkaapi.producer;
 
+import com.example.kafkaapi.producer.model.StockQuotationInfo;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
@@ -12,8 +13,8 @@ import java.util.concurrent.*;
 /**
  * Created by liuzz on 2018/05/22
  */
-public class QuotationProducer {
-    private Logger log = LoggerFactory.getLogger(QuotationProducer.class);
+public class QuotationProducerSingleThread {
+    private Logger log = LoggerFactory.getLogger(QuotationProducerSingleThread.class);
 
     private static final int MSG_SIZE = 100;
 
@@ -51,26 +52,7 @@ public class QuotationProducer {
     }
 
     public static void main(String[] args) {
-        // singleThread();
-        manyThread();
-    }
-
-    /**
-     * 多线程(数据量大同时对顺序没有要求)
-     */
-    private static void manyThread() {
-        Executor executor = Executors.newFixedThreadPool(5);
-
-        for (int i = 0; i < MSG_SIZE; i++) {
-            StockQuotationInfo stockQuotationInfo = new StockQuotationInfo();
-
-            Long timestamp = stockQuotationInfo.getTradeTime();
-            String key = stockQuotationInfo.getStockCode();
-            String value = stockQuotationInfo.toString();
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC, null, timestamp, key, value);
-            executor.execute(new KafkaProducerThread(kafkaProducer, producerRecord));
-        }
-        // kafkaProducer.close();
+         singleThread();
     }
 
     /**
@@ -81,13 +63,12 @@ public class QuotationProducer {
 
             StockQuotationInfo stockQuotationInfo = new StockQuotationInfo();
 
-            String topic = TOPIC;
             Integer partition = null;
             Long timestamp = stockQuotationInfo.getTradeTime();
             String key = stockQuotationInfo.getStockCode();
             String value = stockQuotationInfo.toString();
 
-            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, partition, timestamp, key, value);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(TOPIC, partition, timestamp, key, value);
 
 
             /**

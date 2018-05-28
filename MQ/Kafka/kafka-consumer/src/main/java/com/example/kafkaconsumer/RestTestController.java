@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by liuzz on 2018/05/17
  */
@@ -44,5 +48,12 @@ public class RestTestController {
     @KafkaListener(topics = "${topic.timestamp.logappendtime}")
     private void listen2(ConsumerRecord<?, ?> cr) throws Exception {
         log.info("{}, {}", cr.toString(), count++);
+    }
+
+    Set<String> sets = new HashSet<>();
+
+    @KafkaListener(topics = "topic-multi-thread")
+    private void listen3(ConsumerRecord<String, String> cr) {
+        sets.add(cr.key());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kafkaapi.producer;
+package com.example.kafkaapi.producer.model;
 
 /**
  * Created by liuzz on 2018/05/22
