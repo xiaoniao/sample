@@ -22,29 +22,35 @@ import java.util.concurrent.TimeoutException;
 public class TopicKeyTest {
     private static Logger log = LoggerFactory.getLogger(TopicKeyTest.class);
 
-    private static final int MSG_LENGTH = 100;
+    private static final int MSG_LENGTH = 10;
 
     private static KafkaProducer<String, String> kafkaProducer;
 
     public static void main(String[] args) {
 
         List<ProducerRecord<String, String>> list = new ArrayList<>();
+//        for (int i = 0; i < MSG_LENGTH; i++) {
+//            list.add(new ProducerRecord<>("topic-without-key", null, null, String.valueOf(i)));
+//        }
+//        send(list);
+//        list.clear();
+//
+//
+//        for (int i = 0; i < MSG_LENGTH; i++) {
+//            list.add(new ProducerRecord<>("topic-with-integer-key", null, String.valueOf(i), String.valueOf(i)));
+//        }
+//        send(list);
+//        list.clear();
+//
+//
+//        for (int i = 0; i < MSG_LENGTH; i++) {
+//            list.add(new ProducerRecord<>("topic-with-integer-same-key", null, "10", String.valueOf(i)));
+//        }
+//        send(list);
+//        list.clear();
+
         for (int i = 0; i < MSG_LENGTH; i++) {
-            list.add(new ProducerRecord<>("topic-without-key", null, null, String.valueOf(i)));
-        }
-        send(list);
-        list.clear();
-
-
-        for (int i = 0; i < MSG_LENGTH; i++) {
-            list.add(new ProducerRecord<>("topic-with-integer-key", null, String.valueOf(i), String.valueOf(i)));
-        }
-        send(list);
-        list.clear();
-
-
-        for (int i = 0; i < MSG_LENGTH; i++) {
-            list.add(new ProducerRecord<>("topic-with-integer-same-key", null, "10", String.valueOf(i)));
+            list.add(new ProducerRecord<>("topic-with-send-not-exist-partition", 0, String.valueOf(i), String.valueOf(i)));
         }
         send(list);
         list.clear();

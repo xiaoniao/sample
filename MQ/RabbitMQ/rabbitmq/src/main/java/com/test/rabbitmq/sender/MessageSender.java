@@ -1,6 +1,6 @@
 package com.test.rabbitmq.sender;
 
-import com.test.rabbitmq.constant.QueueConstant;
+import com.test.rabbitmq.constant.QueueNameConstant;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ public class MessageSender {
     private AmqpTemplate amqpTemplate;
 
     public void send(String msg) {
-        amqpTemplate.convertAndSend(QueueConstant.STUDENT_QUEUE, msg);
+        amqpTemplate.convertAndSend(QueueNameConstant.STUDENT_QUEUE, msg);
     }
 
     public void sendFanoutExchange(String msg) {

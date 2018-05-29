@@ -1,8 +1,7 @@
 package com.test.rabbitmq;
 
-import com.test.rabbitmq.listener.StudentListener;
+import com.test.rabbitmq.listener.StudentRabbitListener;
 import com.test.rabbitmq.sender.MessageSender;
-import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class HelloApplicationTests {
 
     @Autowired
-    private StudentListener studentListener;
+    private StudentRabbitListener studentListener;
 
     @Autowired
     private MessageSender messageSender;

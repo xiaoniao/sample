@@ -6,17 +6,14 @@ import org.apache.kafka.common.Cluster;
 import java.util.Map;
 
 /**
+ * 自定义分区策略
+ *
  * Created by liuzz on 2018/05/28
  */
 public class MyPartitioner implements Partitioner {
 
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-
-
-
-
-
         return 0;
     }
 

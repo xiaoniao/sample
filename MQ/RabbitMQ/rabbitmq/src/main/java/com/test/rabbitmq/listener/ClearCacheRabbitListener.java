@@ -1,6 +1,6 @@
 package com.test.rabbitmq.listener;
 
-import com.test.rabbitmq.constant.QueueConstant;
+import com.test.rabbitmq.constant.QueueNameConstant;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
  * Created by liuzz on 2018/02/07
  */
 @Component
-@RabbitListener(queues = QueueConstant.MSG_ERROR_INBOX_QUEUE)
-public class LogErrorListener {
+@RabbitListener(queues = QueueNameConstant.CACHE_QUEUE)
+public class ClearCacheRabbitListener {
 
     @RabbitHandler
     public void process(String msg) throws Exception {
-        System.out.println("错误日志" + msg);
+        System.out.println("清除缓存" + msg);
     }
 }

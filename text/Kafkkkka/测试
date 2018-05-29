@@ -1,23 +1,38 @@
 
 
-发送的消息保存在哪个分区？
+1、发送的消息保存在哪个分区？
+
+无key           轮询分区
+有key           hash取余
+有自定义分区策略
 
 
+2、一台机器挂掉，发送的消息保存在哪个分区？
+
+分区不变
+机器重启后会再次从master拉取最新数据
 
 
-一台机器挂掉，发送的消息保存在哪个分区？
+3、总共4台 停掉3台，分区和副本怎么分配？
+
+分区按现有的进行分配
+副本在重启后会重新同步
 
 
+4、一台机器挂掉，再新起来一台机器，分区和副本怎么分配？
 
 
-一台机器挂掉，分区和副本怎么分配？
+5、往不存在的分区发送消息会怎么样？
 
+不在的分区
+Invalid partition given with record: 9 is not in the range [0...3).
 
+把分区挂掉
+程序陷入死循环
+DEBUG org.apache.kafka.clients.Metadata - Updated cluster metadata version 92 to Cluster(id = CI9buAnjSFa3J6LuyWaMUw, nodes = [localhost:9092 (id: 0 rack: null)], partitions = [Partition(topic = topic-with-send-not-exist-partition, partition = 2, leader = 0, replicas = [0,3,1], isr = [0], offlineReplicas = [3,1]), Partition(topic = topic-with-send-not-exist-partition, partition = 0, leader = none, replicas = [2,1,3], isr = [], offlineReplicas = [2,1,3]), Partition(topic = topic-with-send-not-exist-partition, partition = 1, leader = 0, replicas = [3,2,0], isr = [0], offlineReplicas = [3,2])])
+NetworkClient maybeUpdate
 
-
-一台机器挂掉，再新起来一台机器，分区和副本怎么分配？
-
-
+Caused by: org.apache.kafka.common.errors.TimeoutException: Expiring 1 record(s) for topic-with-send-not-exist-partition-0: 30090 ms has passed since batch creation plus linger time
 
 消息有序，消息重复
 https://kaimingwan.com/post/framworks/kafka/kafkahe-rocketmqde-yi-dian-dui-bi-zong-jie

@@ -3,7 +3,7 @@ package com.test.rabbitmq.constant;
 /**
  * Created by liuzz on 2018/02/07
  */
-public class QueueConstant {
+public class QueueNameConstant {
 
     public static final String STUDENT_QUEUE = "student";
 
