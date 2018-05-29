@@ -1,0 +1,89 @@
+
+CREATE TABLE `tp_study` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `NAME` varchar(40) DEFAULT NULL COMMENT '学习计划名称',
+  `status` char(1) DEFAULT '0' COMMENT '状态,-1 删除, 0_下架, 1_已发布,2_已结束,3_已删除,4_待发布'
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=utf8 COMMENT='任务表'
+
+
+CREATE TABLE `tp_stage` (
+  `ID` int(65) NOT NULL AUTO_INCREMENT,
+  `LAST_UPDATED` datetime DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `STAGE_NAME` varchar(30) DEFAULT NULL COMMENT '阶段名称',
+  `STAGE_DESC` varchar(100) DEFAULT NULL COMMENT '阶段简介',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=698 DEFAULT CHARSET=utf8 COMMENT='任务阶段表'
+
+
+CREATE TABLE `tp_study_stage` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
+  `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后一次修改时间',
+  `STUDY_NO` varchar(20) DEFAULT NULL COMMENT '学习编号',
+  `STAGE_ID` int(20) DEFAULT NULL COMMENT '阶段id',
+  `SORT_NUM` int(5) DEFAULT NULL COMMENT '阶段序号',
+  PRIMARY KEY (`ID`),
+  KEY `idx_stageID_studyno` (`STAGE_ID`,`STUDY_NO`,`SORT_NUM`),
+  KEY `idx_studyno` (`STUDY_NO`)
+) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8 COMMENT='学习阶段关系表'
+
+
+CREATE TABLE `tp_stage_knowledge` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
+  `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后一次修改时间',
+  `KNOWLEDGE_NO` varchar(20) DEFAULT NULL COMMENT '知识点编号',
+  `STAGE_ID` int(20) DEFAULT NULL COMMENT '阶段id',
+  `SORT_NUM` int(5) DEFAULT NULL COMMENT '知识点排序序号',
+  `GROWTH_VALUE` int(10) DEFAULT NULL COMMENT '学习该知识点能获得的成长值',
+  `PERIODS` int(5) DEFAULT NULL COMMENT '学时',
+  `LABEL_NAME` varchar(50) DEFAULT NULL COMMENT '标签名称',
+  `STUDY_TYPE` char(1) DEFAULT NULL COMMENT '学习方式,1_线上,2_线下',
+  `GROWTH_TYPE` char(1) DEFAULT NULL COMMENT '成长值类型,A_A类成长值,B_B类成长值',
+  `RESOURCE_TYPE` char(1) DEFAULT NULL COMMENT '资源类型,0_资源点,1_考试',
+  `IMG_URL` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `idx_stageId` (`STAGE_ID`,`SORT_NUM`)
+) ENGINE=InnoDB AUTO_INCREMENT=15397 DEFAULT CHARSET=utf8 COMMENT='阶段资源关系表'
+
+
+
+CREATE TABLE `tp_study_process` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
+  `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后一次修改时间',
+  `STUDY_NO` varchar(20) DEFAULT NULL COMMENT '学习计划编号',
+  `STUDY_TYPE` char(1) DEFAULT NULL,
+  `FINISH_PERCENT` int(5) DEFAULT NULL COMMENT '完成百分比%',
+  `STUDENT_NO` varchar(20) DEFAULT NULL COMMENT '学员编号',
+  `HAVE_ACCESS_GROWTH_A` int(5) DEFAULT NULL COMMENT '已获取A类成长值',
+  `HAVE_ACCESS_GROWTH_B` int(5) DEFAULT NULL COMMENT '已获取B类成长值',
+  `GROUP_ID` int(20) DEFAULT NULL COMMENT '小组ID',
+  `STATUS` char(1) DEFAULT NULL COMMENT '学习状态,0_未开始,1_学习中,2_已完成,3_已过期',
+  `study_start_time` varchar(20) DEFAULT NULL,
+  `study_end_time` varchar(20) DEFAULT NULL,
+  `study_finish_time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `studyno` (`STUDY_NO`)
+) ENGINE=InnoDB AUTO_INCREMENT=204605 DEFAULT CHARSET=utf8 COMMENT='学员学习表'
+
+
+
+CREATE TABLE `tp_knowledge_process` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
+  `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后一次修改时间',
+  `KNOWLEDGE_NO` varchar(20) DEFAULT NULL COMMENT '知识点编号',
+  `STUDY_NO` varchar(20) DEFAULT NULL COMMENT '学习编号',
+  `STUDY_TYPE` char(1) DEFAULT NULL COMMENT '计划类型,1_知识,2_学习',
+  `STUDENT_NO` varchar(20) DEFAULT NULL COMMENT '学员编号',
+  `FINISH_PERCENT` int(5) DEFAULT NULL COMMENT '完成百分比%',
+  `STATUS` char(1) DEFAULT '0' COMMENT '知识点状态,0_未开始,1_学习中,2_已完成未领取,3_已领取',
+  PRIMARY KEY (`ID`),
+  KEY `student_study_index` (`STUDENT_NO`,`KNOWLEDGE_NO`,`STUDY_NO`),
+  KEY `student_knowledge_index` (`STUDENT_NO`,`KNOWLEDGE_NO`),
+  KEY `knowledge_status_index` (`KNOWLEDGE_NO`,`STATUS`)
+) ENGINE=InnoDB AUTO_INCREMENT=14486524 DEFAULT CHARSET=utf8 COMMENT='学员资源学习进度表'
+
