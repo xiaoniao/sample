@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.shardingtable.dal.mapper.StudyAssignmentDOMapper">
+    <!-- 自动生成,请修改 TP_STUDY_ASSIGNMENT.xml -->
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyAssignmentDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STUDENT_NO" property="studentNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,STUDY_NO,STUDENT_NO,STATUS
+    </sql>
+
+
+    <!--插入表:TP_STUDY_ASSIGNMENT-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TP_STUDY_ASSIGNMENT(
+            ID
+            ,STUDY_NO
+            ,STUDENT_NO
+            ,STATUS
+        )VALUES(
+             #{id,jdbcType=INTEGER}
+            , #{studyNo,jdbcType=VARCHAR}
+            , #{studentNo,jdbcType=VARCHAR}
+            , #{status,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <!--根据主键获取数据:TP_STUDY-->
+    <select id="getByStudentNoAndStudyNo" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-ASSIGNMENT-GETBYSTUDENTNOANDSTUDYNO*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_ASSIGNMENT
+        WHERE
+        STUDY_NO = #{studyNo,jdbcType=VARCHAR}
+        AND STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据主键获取数据:TP_STUDY-->
+    <select id="listByStudent" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-ASSIGNMENT-LISTBYSTUDENT*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_ASSIGNMENT
+        WHERE
+            STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

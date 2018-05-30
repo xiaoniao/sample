@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.shardingtable.dal.mapper.KnowledgeDOMapper">
+    <!-- 自动生成,请修改 TP_KNOWLEDGE.xml -->
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.KnowledgeDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_NAME" property="knowledgeName" jdbcType="VARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_IMG" property="knowledgeImg" jdbcType="LONGVARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_STATUS" property="knowledgeStatus" jdbcType="CHAR" javaType="String"/>
+        <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,KNOWLEDGE_NO,KNOWLEDGE_NAME,KNOWLEDGE_IMG,KNOWLEDGE_STATUS,DATE_CREATED,LAST_UPDATED
+    </sql>
+
+
+    <!--插入表:TP_KNOWLEDGE-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TP_KNOWLEDGE(
+            ID
+            ,KNOWLEDGE_NO
+            ,KNOWLEDGE_NAME
+            ,KNOWLEDGE_IMG
+            ,KNOWLEDGE_STATUS
+            ,DATE_CREATED
+            ,LAST_UPDATED
+        )VALUES(
+             #{id,jdbcType=INTEGER}
+            , #{knowledgeNo,jdbcType=VARCHAR}
+            , #{knowledgeName,jdbcType=VARCHAR}
+            , #{knowledgeImg,jdbcType=LONGVARCHAR}
+            , #{knowledgeStatus,jdbcType=CHAR}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--更新表:TP_KNOWLEDGE-->
+    <update id="update" >
+        UPDATE /*MS-TP-KNOWLEDGE-UPDATE*/ TP_KNOWLEDGE
+        SET
+            KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
+            ,KNOWLEDGE_NAME  = #{knowledgeName,jdbcType=VARCHAR}
+            ,KNOWLEDGE_IMG   = #{knowledgeImg,jdbcType=LONGVARCHAR}
+            ,KNOWLEDGE_STATUS = #{knowledgeStatus,jdbcType=CHAR}
+            ,LAST_UPDATED    = now()
+        WHERE
+            ID              = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据主键删除数据:TP_KNOWLEDGE-->
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-TP-KNOWLEDGE-DELETEBYPRIMARY*/ FROM
+            TP_KNOWLEDGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--根据主键获取数据:TP_KNOWLEDGE-->
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--根据主键获取数据:TP_KNOWLEDGE-->
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-LISTALL*/  <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+    </select>
+</mapper>

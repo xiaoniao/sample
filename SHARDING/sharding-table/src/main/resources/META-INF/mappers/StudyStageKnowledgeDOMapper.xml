@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.shardingtable.dal.mapper.StudyStageKnowledgeDOMapper">
+    <!-- 自动生成,请修改 TP_STUDY_STAGE_KNOWLEDGE.xml -->
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyStageKnowledgeDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="STAGE_ID" property="stageId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,STAGE_ID,KNOWLEDGE_NO,DATE_CREATED,LAST_UPDATED
+    </sql>
+
+
+    <!--插入表:TP_STUDY_STAGE_KNOWLEDGE-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TP_STUDY_STAGE_KNOWLEDGE(
+            ID
+            ,STAGE_ID
+            ,KNOWLEDGE_NO
+            ,DATE_CREATED
+            ,LAST_UPDATED
+        )VALUES(
+             #{id,jdbcType=INTEGER}
+            , #{stageId,jdbcType=INTEGER}
+            , #{knowledgeNo,jdbcType=VARCHAR}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--更新表:TP_STUDY_STAGE_KNOWLEDGE-->
+    <update id="update" >
+        UPDATE /*MS-TP-STUDY-STAGE-KNOWLEDGE-UPDATE*/ TP_STUDY_STAGE_KNOWLEDGE
+        SET
+            STAGE_ID        = #{stageId,jdbcType=INTEGER}
+            ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
+            ,LAST_UPDATED    = now()
+        WHERE
+            ID              = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据主键删除数据:TP_STUDY_STAGE_KNOWLEDGE-->
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-TP-STUDY-STAGE-KNOWLEDGE-DELETEBYPRIMARY*/ FROM
+            TP_STUDY_STAGE_KNOWLEDGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--根据主键获取数据:TP_STUDY_STAGE_KNOWLEDGE-->
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-STAGE-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_STAGE_KNOWLEDGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>

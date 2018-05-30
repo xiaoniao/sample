@@ -1,0 +1,80 @@
+分库分表从哪里入手？？？
+
+
+
+
+对所有表分表
+
+
+查看表的主键和其他表的关联关系
+tp_study                  STUDY_NO
+tp_stage                  ID
+tp_study_stage            STUDY_NO STAGE_ID
+tp_stage_knowledge        STAGE_ID KNOWLEDGE_NO
+tp_knowledge              KNOWLEDGE_NO
+
+tp_study_process          STUDENT_NO STUDY_NO 
+tp_knowledge_process      STUDENT_NO STUDY_NO KNOWLEDGE_NO
+
+
+
+
+分表规则，根据规则 路由到某一个具体的表 （路由策略）
+
+表容量
+
+对应sql语句
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+对部分表分表
+
+
+
+

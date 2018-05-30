@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.shardingtable.dal.mapper.StudentDOMapper">
+    <!-- 自动生成,请修改 TP_STUDENT.xml -->
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudentDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="STUDENT_NO" property="studentNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STATUS" property="status" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,STUDENT_NO,NAME,STATUS,DATE_CREATED,LAST_UPDATED
+    </sql>
+
+
+    <!--插入表:TP_STUDENT-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TP_STUDENT(
+            ID
+            ,STUDENT_NO
+            ,NAME
+            ,STATUS
+            ,DATE_CREATED
+            ,LAST_UPDATED
+        )VALUES(
+             #{id,jdbcType=INTEGER}
+            , #{studentNo,jdbcType=VARCHAR}
+            , #{name,jdbcType=VARCHAR}
+            , #{status,jdbcType=TINYINT}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--更新表:TP_STUDENT-->
+    <update id="update" >
+        UPDATE /*MS-TP-STUDENT-UPDATE*/ TP_STUDENT
+        SET
+            ,NAME            = #{name,jdbcType=VARCHAR}
+            ,STATUS          = #{status,jdbcType=TINYINT}
+            ,LAST_UPDATED    = now()
+        WHERE
+            ID              = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据主键删除数据:TP_STUDENT-->
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-TP-STUDENT-DELETEBYPRIMARY*/ FROM
+            TP_STUDENT
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--根据主键获取数据:TP_STUDENT-->
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDENT-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDENT
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--根据主键获取数据:TP_STUDENT-->
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDENT-LISTALL*/  <include refid="Base_Column_List" />
+        FROM TP_STUDENT
+    </select>
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.shardingtable.dal.mapper.StudyStageDOMapper">
+    <!-- 自动生成,请修改 TP_STUDY_STAGE.xml -->
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyStageDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STAGE_ID" property="stageId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="SORT_NUM" property="sortNum" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,STUDY_NO,STAGE_ID,SORT_NUM,DATE_CREATED,LAST_UPDATED
+    </sql>
+
+
+    <!--插入表:TP_STUDY_STAGE-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TP_STUDY_STAGE(
+            ID
+            ,STUDY_NO
+            ,STAGE_ID
+            ,SORT_NUM
+            ,DATE_CREATED
+            ,LAST_UPDATED
+        )VALUES(
+             #{id,jdbcType=INTEGER}
+            , #{studyNo,jdbcType=VARCHAR}
+            , #{stageId,jdbcType=INTEGER}
+            , #{sortNum,jdbcType=INTEGER}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <!--更新表:TP_STUDY_STAGE-->
+    <update id="update" >
+        UPDATE /*MS-TP-STUDY-STAGE-UPDATE*/ TP_STUDY_STAGE
+        SET
+            STUDY_NO        = #{studyNo,jdbcType=VARCHAR}
+            ,STAGE_ID        = #{stageId,jdbcType=INTEGER}
+            ,SORT_NUM        = #{sortNum,jdbcType=INTEGER}
+            ,LAST_UPDATED    = now()
+        WHERE
+            ID              = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据主键删除数据:TP_STUDY_STAGE-->
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-TP-STUDY-STAGE-DELETEBYPRIMARY*/ FROM
+            TP_STUDY_STAGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--根据主键获取数据:TP_STUDY_STAGE-->
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-STAGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_STAGE
+        WHERE
+            ID = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>
