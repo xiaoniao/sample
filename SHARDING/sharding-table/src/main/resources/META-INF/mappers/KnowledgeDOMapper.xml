@@ -4,7 +4,7 @@
     <!-- 自动生成,请修改 TP_KNOWLEDGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.KnowledgeDO">
         <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="KNOWLEDGE_NAME" property="knowledgeName" jdbcType="VARCHAR" javaType="String"/>
         <result column="KNOWLEDGE_IMG" property="knowledgeImg" jdbcType="LONGVARCHAR" javaType="String"/>
         <result column="KNOWLEDGE_STATUS" property="knowledgeStatus" jdbcType="CHAR" javaType="String"/>
@@ -26,7 +26,6 @@
         </selectKey>
         INSERT INTO TP_KNOWLEDGE(
             ID
-            ,KNOWLEDGE_NO
             ,KNOWLEDGE_NAME
             ,KNOWLEDGE_IMG
             ,KNOWLEDGE_STATUS
@@ -34,7 +33,6 @@
             ,LAST_UPDATED
         )VALUES(
              #{id,jdbcType=INTEGER}
-            , #{knowledgeNo,jdbcType=VARCHAR}
             , #{knowledgeName,jdbcType=VARCHAR}
             , #{knowledgeImg,jdbcType=LONGVARCHAR}
             , #{knowledgeStatus,jdbcType=CHAR}
@@ -47,7 +45,7 @@
     <update id="update" >
         UPDATE /*MS-TP-KNOWLEDGE-UPDATE*/ TP_KNOWLEDGE
         SET
-            KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
+            KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
             ,KNOWLEDGE_NAME  = #{knowledgeName,jdbcType=VARCHAR}
             ,KNOWLEDGE_IMG   = #{knowledgeImg,jdbcType=LONGVARCHAR}
             ,KNOWLEDGE_STATUS = #{knowledgeStatus,jdbcType=CHAR}

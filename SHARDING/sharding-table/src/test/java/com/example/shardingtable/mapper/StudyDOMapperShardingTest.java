@@ -4,6 +4,7 @@ import com.example.shardingtable.ShardingTableApplication;
 import com.example.shardingtable.dal.dataobject.*;
 import com.example.shardingtable.dal.mapper.*;
 import com.example.shardingtable.utils.CodeUtil;
+import io.shardingjdbc.core.keygen.DefaultKeyGenerator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,11 +60,11 @@ public class StudyDOMapperShardingTest {
 //        studyDOList = studyDOMapper.listAll();
 //    }
 
-    public String getRandomKnowledgeNo() {
-        Random random = new Random();
-        int randomNum = random.nextInt(1000);
-        return knowledgeDOList.get(randomNum).getKnowledgeNo();
-    }
+//    public String getRandomKnowledgeNo() {
+//        Random random = new Random();
+//        int randomNum = random.nextInt(1000);
+//        return knowledgeDOList.get(randomNum).getKnowledgeNo();
+//    }
 
     @Test
     public void testAddStudent() {
@@ -80,49 +81,51 @@ public class StudyDOMapperShardingTest {
     public void testAddKnowledge() {
         for (int i = 0; i < 1000; i++) {
             KnowledgeDO knowledgeDO = new KnowledgeDO();
-            knowledgeDO.setKnowledgeNo(CodeUtil.getCodeByHead("KNO"));
             Long result = knowledgeDOMapper.insert(knowledgeDO);
-            if (result == null) {
-                System.out.println("null");
-            }
-            if (result != null && result != 1) {
-                System.out.println(result);
-            }
-            // assetResult(result);
+            assetResult(result);
         }
     }
 
     @Test
-    public void testAddStudy() {
-        for (int i = 0; i < 1000; i++) {
-            StudyDO studyDO = new StudyDO();
-            studyDO.setStudyNo(CodeUtil.getCodeByHead("STY"));
-            studyDO.setName("study-" + i);
-            Long result = studyDOMapper.insert(studyDO);
-            assetResult(result);
-
-            for (int j = 0; j < 3; j++) {
-                StageDO stageDO = new StageDO();
-                stageDO.setStageName("stage-" + j);
-                result = stageDOMapper.insert(stageDO);
-                assetResult(result);
-
-                StudyStageDO studyStageDO = new StudyStageDO();
-                studyStageDO.setStageId(stageDO.getId());
-                studyStageDO.setStudyNo(studyDO.getStudyNo());
-                result = studyStageDOMapper.insert(studyStageDO);
-                assetResult(result);
-
-                for (int k = 0; k < 3; k++) {
-                    StudyStageKnowledgeDO studyStageKnowledgeDO = new StudyStageKnowledgeDO();
-                    studyStageKnowledgeDO.setStageId(stageDO.getId());
-                    studyStageKnowledgeDO.setKnowledgeNo(getRandomKnowledgeNo());
-                    result = studyStageKnowledgeDOMapper.insert(studyStageKnowledgeDO);
-                    assetResult(result);
-                }
-            }
+    public void testDefaultKeyGenerator() {
+        DefaultKeyGenerator defaultKeyGenerator = new DefaultKeyGenerator();
+        for (int i = 0; i < 100; i++) {
+            System.out.println(defaultKeyGenerator.generateKey());
         }
     }
+
+
+//    @Test
+//    public void testAddStudy() {
+//        for (int i = 0; i < 1000; i++) {
+//            StudyDO studyDO = new StudyDO();
+//            studyDO.setStudyNo(CodeUtil.getCodeByHead("STY"));
+//            studyDO.setName("study-" + i);
+//            Long result = studyDOMapper.insert(studyDO);
+//            assetResult(result);
+//
+//            for (int j = 0; j < 3; j++) {
+//                StageDO stageDO = new StageDO();
+//                stageDO.setStageName("stage-" + j);
+//                result = stageDOMapper.insert(stageDO);
+//                assetResult(result);
+//
+//                StudyStageDO studyStageDO = new StudyStageDO();
+//                studyStageDO.setStageId(stageDO.getId());
+//                studyStageDO.setStudyNo(studyDO.getStudyNo());
+//                result = studyStageDOMapper.insert(studyStageDO);
+//                assetResult(result);
+//
+//                for (int k = 0; k < 3; k++) {
+//                    StudyStageKnowledgeDO studyStageKnowledgeDO = new StudyStageKnowledgeDO();
+//                    studyStageKnowledgeDO.setStageId(stageDO.getId());
+//                    studyStageKnowledgeDO.setKnowledgeNo(getRandomKnowledgeNo());
+//                    result = studyStageKnowledgeDOMapper.insert(studyStageKnowledgeDO);
+//                    assetResult(result);
+//                }
+//            }
+//        }
+//    }
 
     @Test
     public void testAssignStudent() {

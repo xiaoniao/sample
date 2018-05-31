@@ -1,0 +1,26 @@
+一、分片策略 多种分片方式
+
+Strategy Configuration Algorithm
+
+ShardingStrategy
+    ComplexShardingStrategy
+        ComplexShardingStrategyConfiguration
+            ComplexKeysShardingAlgorithm            复合分片算法（用于处理使用多键作为分片键进行分片的场景）
+
+    StandardShardingStrategy
+        StandardShardingStrategyConfiguration
+            PreciseShardingAlgorithm                精确分片算法（用于处理使用单一键作为分片键的=与IN进行分片的场景）
+            RangeShardingAlgorithm[可选]             范围分片算法（用于处理使用单一键作为分片键的BETWEEN AND进行分片的场景）
+
+    InlineShardingStrategy
+        InlineShardingStrategyConfiguration
+            algorithmExpression
+
+    HintShardingStrategy
+        HintShardingStrategyConfiguration
+            HintShardingAlgorithm                   Hint分片算法（用于处理使用Hint行分片的场景）
+
+    NoneShardingStrategy                            不分片
+
+
+

@@ -14,7 +14,7 @@ public class KnowledgeDO{
     /**
      * knowledgeNo 知识点编号.
      */
-    private String knowledgeNo;
+    private Long knowledgeNo;
     /**
      * knowledgeName 知识名称.
      */
@@ -36,115 +36,60 @@ public class KnowledgeDO{
      */
     private Date lastUpdated;
 
-    /**
-     * Set id 主键.
-     */
-    public void setId(Integer id){
-        this.id = id;
-    }
 
-    /**
-     * Get id 主键.
-     *
-     * @return the string
-     */
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    /**
-     * Set knowledgeNo 知识点编号.
-     */
-    public void setKnowledgeNo(String knowledgeNo){
-        this.knowledgeNo = knowledgeNo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    /**
-     * Get knowledgeNo 知识点编号.
-     *
-     * @return the string
-     */
-    public String getKnowledgeNo(){
+    public Long getKnowledgeNo() {
         return knowledgeNo;
     }
 
-    /**
-     * Set knowledgeName 知识名称.
-     */
-    public void setKnowledgeName(String knowledgeName){
-        this.knowledgeName = knowledgeName;
+    public void setKnowledgeNo(Long knowledgeNo) {
+        this.knowledgeNo = knowledgeNo;
     }
 
-    /**
-     * Get knowledgeName 知识名称.
-     *
-     * @return the string
-     */
-    public String getKnowledgeName(){
+    public String getKnowledgeName() {
         return knowledgeName;
     }
 
-    /**
-     * Set knowledgeImg 知识点图片地址.
-     */
-    public void setKnowledgeImg(String knowledgeImg){
-        this.knowledgeImg = knowledgeImg;
+    public void setKnowledgeName(String knowledgeName) {
+        this.knowledgeName = knowledgeName;
     }
 
-    /**
-     * Get knowledgeImg 知识点图片地址.
-     *
-     * @return the string
-     */
-    public String getKnowledgeImg(){
+    public String getKnowledgeImg() {
         return knowledgeImg;
     }
 
-    /**
-     * Set knowledgeStatus 状态，1_归档，2_过期，3_发布中，4_隐藏，5_删除.
-     */
-    public void setKnowledgeStatus(String knowledgeStatus){
-        this.knowledgeStatus = knowledgeStatus;
+    public void setKnowledgeImg(String knowledgeImg) {
+        this.knowledgeImg = knowledgeImg;
     }
 
-    /**
-     * Get knowledgeStatus 状态，1_归档，2_过期，3_发布中，4_隐藏，5_删除.
-     *
-     * @return the string
-     */
-    public String getKnowledgeStatus(){
+    public String getKnowledgeStatus() {
         return knowledgeStatus;
     }
 
-    /**
-     * Set dateCreated 创建时间.
-     */
-    public void setDateCreated(Date dateCreated){
-        this.dateCreated = dateCreated;
+    public void setKnowledgeStatus(String knowledgeStatus) {
+        this.knowledgeStatus = knowledgeStatus;
     }
 
-    /**
-     * Get dateCreated 创建时间.
-     *
-     * @return the string
-     */
-    public Date getDateCreated(){
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    /**
-     * Set lastUpdated 最后修改时间.
-     */
-    public void setLastUpdated(Date lastUpdated){
-        this.lastUpdated = lastUpdated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    /**
-     * Get lastUpdated 最后修改时间.
-     *
-     * @return the string
-     */
-    public Date getLastUpdated(){
+    public Date getLastUpdated() {
         return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

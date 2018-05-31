@@ -1,0 +1,22 @@
+ShardingStrategy
+    ComplexShardingStrategy
+        ComplexShardingStrategyConfiguration
+            ComplexKeysShardingAlgorithm
+
+    StandardShardingStrategy
+        StandardShardingStrategyConfiguration
+            PreciseShardingAlgorithm
+            RangeShardingAlgorithm[可选]
+
+    InlineShardingStrategy
+        InlineShardingStrategyConfiguration
+            algorithmExpression
+
+    HintShardingStrategy
+        HintShardingStrategyConfiguration
+            HintShardingAlgorithm
+
+    NoneShardingStrategy
+
+
+
