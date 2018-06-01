@@ -28,12 +28,12 @@ public interface StudyAssignmentDOMapper{
      * @param studentNo studentNo
      * @return StudyAssignmentDO
      */
-    StudyAssignmentDO getByStudentNoAndStudyNo(@Param("studyNo")String studyNo,@Param("studentNo")String studentNo);
+    StudyAssignmentDO getByStudentNoAndStudyNo(@Param("studyNo")Long studyNo,@Param("studentNo")Long studentNo);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY_ASSIGNMENT WHERE STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
      * @param studentNo studentNo
      * @return List<StudyAssignmentDO>
      */
-    List<StudyAssignmentDO> listByStudent(String studentNo);
+    List<StudyAssignmentDO> listByStudent(Long studentNo);
 }

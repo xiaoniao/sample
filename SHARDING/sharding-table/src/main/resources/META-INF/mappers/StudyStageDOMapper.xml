@@ -3,9 +3,9 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudyStageDOMapper">
     <!-- 自动生成,请修改 TP_STUDY_STAGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyStageDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
-        <result column="STAGE_ID" property="stageId" jdbcType="INTEGER" javaType="Integer"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="STAGE_ID" property="stageId" jdbcType="BIGINT" javaType="LONG"/>
         <result column="SORT_NUM" property="sortNum" jdbcType="INTEGER" javaType="Integer"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -19,21 +19,15 @@
 
     <!--插入表:TP_STUDY_STAGE-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDY_STAGE(
-            ID
-            ,STUDY_NO
+            STUDY_NO
             ,STAGE_ID
             ,SORT_NUM
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{studyNo,jdbcType=VARCHAR}
-            , #{stageId,jdbcType=INTEGER}
+            #{studyNo,jdbcType=BIGINT}
+            , #{stageId,jdbcType=BIGINT}
             , #{sortNum,jdbcType=INTEGER}
             , now()
             , now()
@@ -44,12 +38,12 @@
     <update id="update" >
         UPDATE /*MS-TP-STUDY-STAGE-UPDATE*/ TP_STUDY_STAGE
         SET
-            STUDY_NO        = #{studyNo,jdbcType=VARCHAR}
-            ,STAGE_ID        = #{stageId,jdbcType=INTEGER}
+            STUDY_NO        = #{studyNo,jdbcType=BIGINT}
+            ,STAGE_ID        = #{stageId,jdbcType=BIGINT}
             ,SORT_NUM        = #{sortNum,jdbcType=INTEGER}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STUDY_STAGE-->
@@ -57,7 +51,7 @@
         DELETE /*MS-TP-STUDY-STAGE-DELETEBYPRIMARY*/ FROM
             TP_STUDY_STAGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STUDY_STAGE-->
@@ -65,6 +59,6 @@
         SELECT /*MS-TP-STUDY-STAGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STUDY_STAGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

@@ -3,8 +3,7 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudentDOMapper">
     <!-- 自动生成,请修改 TP_STUDENT.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudentDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STUDENT_NO" property="studentNo" jdbcType="VARCHAR" javaType="String"/>
+        <id column="STUDENT_NO" property="studentNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String"/>
         <result column="STATUS" property="status" jdbcType="TINYINT" javaType="Integer"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -13,27 +12,19 @@
 
 
     <sql id="Base_Column_List">
-        ID,STUDENT_NO,NAME,STATUS,DATE_CREATED,LAST_UPDATED
+        STUDENT_NO,NAME,STATUS,DATE_CREATED,LAST_UPDATED
     </sql>
 
 
     <!--插入表:TP_STUDENT-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDENT(
-            ID
-            ,STUDENT_NO
-            ,NAME
+            NAME
             ,STATUS
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{studentNo,jdbcType=VARCHAR}
-            , #{name,jdbcType=VARCHAR}
+            #{name,jdbcType=VARCHAR}
             , #{status,jdbcType=TINYINT}
             , now()
             , now()
@@ -48,7 +39,7 @@
             ,STATUS          = #{status,jdbcType=TINYINT}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        STUDENT_NO           = #{studentNo,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STUDENT-->
@@ -56,7 +47,7 @@
         DELETE /*MS-TP-STUDENT-DELETEBYPRIMARY*/ FROM
             TP_STUDENT
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        STUDENT_NO           = #{studentNo,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STUDENT-->
@@ -64,7 +55,7 @@
         SELECT /*MS-TP-STUDENT-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STUDENT
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        STUDENT_NO           = #{studentNo,jdbcType=BIGINT}
     </select>
 
     <!--根据主键获取数据:TP_STUDENT-->

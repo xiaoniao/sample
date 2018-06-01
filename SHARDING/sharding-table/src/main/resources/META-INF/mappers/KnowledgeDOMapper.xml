@@ -20,20 +20,14 @@
 
     <!--插入表:TP_KNOWLEDGE-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_KNOWLEDGE(
-            ID
-            ,KNOWLEDGE_NAME
+            KNOWLEDGE_NAME
             ,KNOWLEDGE_IMG
             ,KNOWLEDGE_STATUS
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{knowledgeName,jdbcType=VARCHAR}
+            #{knowledgeName,jdbcType=VARCHAR}
             , #{knowledgeImg,jdbcType=LONGVARCHAR}
             , #{knowledgeStatus,jdbcType=CHAR}
             , now()

@@ -3,10 +3,10 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudyKnowledgeProcessDOMapper">
     <!-- 自动生成,请修改 TP_STUDY_KNOWLEDGE_PROCESS.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyKnowledgeProcessDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
-        <result column="STUDENT_NO" property="studentNo" jdbcType="VARCHAR" javaType="String"/>
-        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="VARCHAR" javaType="String"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="Long"/>
+        <result column="STUDENT_NO" property="studentNo" jdbcType="BIGINT" javaType="Long"/>
+        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="FINISH_PERCENT" property="finishPercent" jdbcType="INTEGER" javaType="Integer"/>
         <result column="STATUS" property="status" jdbcType="CHAR" javaType="String"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -21,13 +21,8 @@
 
     <!--插入表:TP_STUDY_KNOWLEDGE_PROCESS-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDY_KNOWLEDGE_PROCESS(
-            ID
-            ,STUDY_NO
+           STUDY_NO
             ,STUDENT_NO
             ,KNOWLEDGE_NO
             ,FINISH_PERCENT
@@ -35,10 +30,10 @@
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{studyNo,jdbcType=VARCHAR}
-            , #{studentNo,jdbcType=VARCHAR}
-            , #{knowledgeNo,jdbcType=VARCHAR}
+
+            #{studyNo,jdbcType=BIGINT}
+            , #{studentNo,jdbcType=BIGINT}
+            , #{knowledgeNo,jdbcType=BIGINT}
             , #{finishPercent,jdbcType=INTEGER}
             , #{status,jdbcType=CHAR}
             , now()
@@ -47,17 +42,39 @@
     </insert>
 
     <!--更新表:TP_STUDY_KNOWLEDGE_PROCESS-->
+    <update id="updateProcess" >
+        UPDATE /*MS-TP-STUDY-KNOWLEDGE-PROCESS-UPDATE*/ TP_STUDY_KNOWLEDGE_PROCESS
+        SET
+            FINISH_PERCENT  = #{finishPercent,jdbcType=INTEGER}
+            ,LAST_UPDATED    = now()
+        WHERE
+            STUDY_NO        = #{studyNo,jdbcType=VARCHAR}
+            AND STUDENT_NO      = #{studentNo,jdbcType=VARCHAR}
+            AND KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateStatus" >
+        UPDATE /*MS-TP-STUDY-KNOWLEDGE-PROCESS-UPDATE*/ TP_STUDY_KNOWLEDGE_PROCESS
+        SET
+            STATUS          = #{status,jdbcType=CHAR}
+            ,LAST_UPDATED    = now()
+        WHERE
+            STUDY_NO        = #{studyNo,jdbcType=BIGINT}
+            AND STUDENT_NO      = #{studentNo,jdbcType=BIGINT}
+            AND KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
+    </update>
+
     <update id="update" >
         UPDATE /*MS-TP-STUDY-KNOWLEDGE-PROCESS-UPDATE*/ TP_STUDY_KNOWLEDGE_PROCESS
         SET
-            STUDY_NO        = #{studyNo,jdbcType=VARCHAR}
-            ,STUDENT_NO      = #{studentNo,jdbcType=VARCHAR}
-            ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
-            ,FINISH_PERCENT  = #{finishPercent,jdbcType=INTEGER}
-            ,STATUS          = #{status,jdbcType=CHAR}
-            ,LAST_UPDATED    = now()
+        STUDY_NO        = #{studyNo,jdbcType=BIGINT}
+        ,STUDENT_NO      = #{studentNo,jdbcType=BIGINT}
+        ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
+        ,FINISH_PERCENT  = #{finishPercent,jdbcType=INTEGER}
+        ,STATUS          = #{status,jdbcType=CHAR}
+        ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STUDY_KNOWLEDGE_PROCESS-->
@@ -65,7 +82,7 @@
         DELETE /*MS-TP-STUDY-KNOWLEDGE-PROCESS-DELETEBYPRIMARY*/ FROM
             TP_STUDY_KNOWLEDGE_PROCESS
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+            ID = #{id,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STUDY_KNOWLEDGE_PROCESS-->
@@ -73,6 +90,6 @@
         SELECT /*MS-TP-STUDY-KNOWLEDGE-PROCESS-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STUDY_KNOWLEDGE_PROCESS
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+            ID = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

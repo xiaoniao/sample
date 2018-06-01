@@ -26,6 +26,12 @@ public interface StudyProcessDOMapper{
      * @return Long
      */
     Long update(StudyProcessDO entity);
+
+
+    Long updateProcess(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo, @Param("finishPercent") Integer finishPercent);
+
+    Long updateStatus(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo, @Param("status") String status);
+
     /**
      * desc:根据主键删除数据:TP_STUDY_PROCESS.<br/>
      * descSql =  DELETE FROM TP_STUDY_PROCESS WHERE ID = #{id,jdbcType=INTEGER}

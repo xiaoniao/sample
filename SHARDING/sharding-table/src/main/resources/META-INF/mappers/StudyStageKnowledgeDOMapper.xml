@@ -3,9 +3,9 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudyStageKnowledgeDOMapper">
     <!-- 自动生成,请修改 TP_STUDY_STAGE_KNOWLEDGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyStageKnowledgeDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STAGE_ID" property="stageId" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="VARCHAR" javaType="String"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="STAGE_ID" property="stageId" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="LONG"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     </resultMap>
@@ -18,20 +18,14 @@
 
     <!--插入表:TP_STUDY_STAGE_KNOWLEDGE-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDY_STAGE_KNOWLEDGE(
-            ID
-            ,STAGE_ID
+            STAGE_ID
             ,KNOWLEDGE_NO
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{stageId,jdbcType=INTEGER}
-            , #{knowledgeNo,jdbcType=VARCHAR}
+            #{stageId,jdbcType=BIGINT}
+            , #{knowledgeNo,jdbcType=BIGINT}
             , now()
             , now()
         )
@@ -41,11 +35,11 @@
     <update id="update" >
         UPDATE /*MS-TP-STUDY-STAGE-KNOWLEDGE-UPDATE*/ TP_STUDY_STAGE_KNOWLEDGE
         SET
-            STAGE_ID        = #{stageId,jdbcType=INTEGER}
-            ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=VARCHAR}
+            STAGE_ID        = #{stageId,jdbcType=BIGINT}
+            ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STUDY_STAGE_KNOWLEDGE-->
@@ -53,7 +47,7 @@
         DELETE /*MS-TP-STUDY-STAGE-KNOWLEDGE-DELETEBYPRIMARY*/ FROM
             TP_STUDY_STAGE_KNOWLEDGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STUDY_STAGE_KNOWLEDGE-->
@@ -61,6 +55,6 @@
         SELECT /*MS-TP-STUDY-STAGE-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STUDY_STAGE_KNOWLEDGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

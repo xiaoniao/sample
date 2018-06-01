@@ -11,16 +11,16 @@ import java.util.Collection;
 /**
  * Created by liuzz on 2018/05/31
  */
-public class KnowledgeRangeShardingAlgorithm implements RangeShardingAlgorithm<Long> {
-    private Logger log = LoggerFactory.getLogger(KnowledgeRangeShardingAlgorithm.class);
+public class DefaultRangeShardingAlgorithm implements RangeShardingAlgorithm<Long> {
+    private Logger log = LoggerFactory.getLogger(DefaultRangeShardingAlgorithm.class);
 
-    public KnowledgeRangeShardingAlgorithm() {
-        log.info("-------------------- KnowledgeRangeShardingAlgorithm init");
+    public DefaultRangeShardingAlgorithm() {
+        log.info("-------------------- DefaultRangeShardingAlgorithm init");
     }
 
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
-        log.info("-------------------- KnowledgePreciseShardingAlgorithm Range");
+        log.info("-------------------- DefaultRangeShardingAlgorithm Range");
         Range<Long> range = shardingValue.getValueRange();
         return availableTargetNames;
     }

@@ -3,9 +3,9 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudyAssignmentDOMapper">
     <!-- 自动生成,请修改 TP_STUDY_ASSIGNMENT.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyAssignmentDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
-        <result column="STUDENT_NO" property="studentNo" jdbcType="VARCHAR" javaType="String"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="Long"/>
+        <result column="STUDENT_NO" property="studentNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="STATUS" property="status" jdbcType="INTEGER" javaType="Integer"/>
     </resultMap>
 
@@ -17,19 +17,13 @@
 
     <!--插入表:TP_STUDY_ASSIGNMENT-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDY_ASSIGNMENT(
-            ID
-            ,STUDY_NO
+            STUDY_NO
             ,STUDENT_NO
             ,STATUS
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{studyNo,jdbcType=VARCHAR}
-            , #{studentNo,jdbcType=VARCHAR}
+            #{studyNo,jdbcType=BIGINT}
+            , #{studentNo,jdbcType=BIGINT}
             , #{status,jdbcType=INTEGER}
         )
     </insert>
@@ -39,8 +33,8 @@
         SELECT /*MS-TP-STUDY-ASSIGNMENT-GETBYSTUDENTNOANDSTUDYNO*/  <include refid="Base_Column_List" />
         FROM TP_STUDY_ASSIGNMENT
         WHERE
-        STUDY_NO = #{studyNo,jdbcType=VARCHAR}
-        AND STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
+        STUDY_NO = #{studyNo,jdbcType=BIGINT}
+        AND STUDENT_NO = #{studentNo,jdbcType=BIGINT}
     </select>
 
     <!--根据主键获取数据:TP_STUDY-->
@@ -48,6 +42,6 @@
         SELECT /*MS-TP-STUDY-ASSIGNMENT-LISTBYSTUDENT*/  <include refid="Base_Column_List" />
         FROM TP_STUDY_ASSIGNMENT
         WHERE
-            STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
+            STUDENT_NO = #{studentNo,jdbcType=BIGINT}
     </select>
 </mapper>

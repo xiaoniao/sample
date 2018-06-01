@@ -10,15 +10,15 @@ public class StudyStageKnowledgeDO{
     /**
      * id 主键.
      */
-    private Integer id;
+    private Long id;
     /**
      * stageId 阶段ID.
      */
-    private Integer stageId;
+    private Long stageId;
     /**
      * knowledgeNo 知识点编号.
      */
-    private String knowledgeNo;
+    private Long knowledgeNo;
     /**
      * dateCreated 创建时间.
      */
@@ -28,83 +28,43 @@ public class StudyStageKnowledgeDO{
      */
     private Date lastUpdated;
 
-    /**
-     * Set id 主键.
-     */
-    public void setId(Integer id){
-        this.id = id;
-    }
-
-    /**
-     * Get id 主键.
-     *
-     * @return the string
-     */
-    public Integer getId(){
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Set stageId 阶段ID.
-     */
-    public void setStageId(Integer stageId){
-        this.stageId = stageId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * Get stageId 阶段ID.
-     *
-     * @return the string
-     */
-    public Integer getStageId(){
+    public Long getStageId() {
         return stageId;
     }
 
-    /**
-     * Set knowledgeNo 知识点编号.
-     */
-    public void setKnowledgeNo(String knowledgeNo){
-        this.knowledgeNo = knowledgeNo;
+    public void setStageId(Long stageId) {
+        this.stageId = stageId;
     }
 
-    /**
-     * Get knowledgeNo 知识点编号.
-     *
-     * @return the string
-     */
-    public String getKnowledgeNo(){
+    public Long getKnowledgeNo() {
         return knowledgeNo;
     }
 
-    /**
-     * Set dateCreated 创建时间.
-     */
-    public void setDateCreated(Date dateCreated){
-        this.dateCreated = dateCreated;
+    public void setKnowledgeNo(Long knowledgeNo) {
+        this.knowledgeNo = knowledgeNo;
     }
 
-    /**
-     * Get dateCreated 创建时间.
-     *
-     * @return the string
-     */
-    public Date getDateCreated(){
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    /**
-     * Set lastUpdated 最后一次修改时间.
-     */
-    public void setLastUpdated(Date lastUpdated){
-        this.lastUpdated = lastUpdated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    /**
-     * Get lastUpdated 最后一次修改时间.
-     *
-     * @return the string
-     */
-    public Date getLastUpdated(){
+    public Date getLastUpdated() {
         return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

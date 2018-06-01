@@ -9,81 +9,50 @@ public class StudyAssignmentDO{
     /**
      * id ID.
      */
-    private Integer id;
+    private Long id;
     /**
      * studyNo STUDY_NO.
      */
-    private String studyNo;
+    private Long studyNo;
     /**
      * studentNo STUDENT_NO.
      */
-    private String studentNo;
+    private Long studentNo;
     /**
      * status STATUS.
      */
     private Integer status;
 
-    /**
-     * Set id ID.
-     */
-    public void setId(Integer id){
-        this.id = id;
-    }
 
-    /**
-     * Get id ID.
-     *
-     * @return the string
-     */
-    public Integer getId(){
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Set studyNo STUDY_NO.
-     */
-    public void setStudyNo(String studyNo){
-        this.studyNo = studyNo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * Get studyNo STUDY_NO.
-     *
-     * @return the string
-     */
-    public String getStudyNo(){
+    public Long getStudyNo() {
         return studyNo;
     }
 
-    /**
-     * Set studentNo STUDENT_NO.
-     */
-    public void setStudentNo(String studentNo){
-        this.studentNo = studentNo;
+    public void setStudyNo(Long studyNo) {
+        this.studyNo = studyNo;
     }
 
-    /**
-     * Get studentNo STUDENT_NO.
-     *
-     * @return the string
-     */
-    public String getStudentNo(){
+    public Long getStudentNo() {
         return studentNo;
     }
 
-    /**
-     * Set status STATUS.
-     */
-    public void setStatus(Integer status){
-        this.status = status;
+    public void setStudentNo(Long studentNo) {
+        this.studentNo = studentNo;
     }
 
-    /**
-     * Get status STATUS.
-     *
-     * @return the string
-     */
-    public Integer getStatus(){
+    public Integer getStatus() {
         return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

@@ -3,8 +3,7 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StudyDOMapper">
     <!-- 自动生成,请修改 TP_STUDY.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="STUDY_NO" property="studyNo" jdbcType="VARCHAR" javaType="String"/>
+        <id column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="LONG"/>
         <result column="NAME" property="name" jdbcType="VARCHAR" javaType="String"/>
         <result column="STATUS" property="status" jdbcType="CHAR" javaType="String"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -13,27 +12,19 @@
 
 
     <sql id="Base_Column_List">
-        ID,STUDY_NO,NAME,STATUS,DATE_CREATED,LAST_UPDATED
+        STUDY_NO,NAME,STATUS,DATE_CREATED,LAST_UPDATED
     </sql>
 
 
     <!--插入表:TP_STUDY-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STUDY(
-            ID
-            ,STUDY_NO
-            ,NAME
+            NAME
             ,STATUS
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{studyNo,jdbcType=VARCHAR}
-            , #{name,jdbcType=VARCHAR}
+            #{name,jdbcType=VARCHAR}
             , #{status,jdbcType=CHAR}
             , now()
             , now()
@@ -44,12 +35,11 @@
     <update id="update" >
         UPDATE /*MS-TP-STUDY-UPDATE*/ TP_STUDY
         SET
-            STUDY_NO        = #{studyNo,jdbcType=VARCHAR}
             ,NAME            = #{name,jdbcType=VARCHAR}
             ,STATUS          = #{status,jdbcType=CHAR}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        STUDY_NO              = #{studyNo,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STUDY-->
@@ -57,7 +47,7 @@
         DELETE /*MS-TP-STUDY-DELETEBYPRIMARY*/ FROM
             TP_STUDY
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        STUDY_NO              = #{studyNo,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STUDY-->
@@ -65,7 +55,7 @@
         SELECT /*MS-TP-STUDY-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STUDY
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        STUDY_NO              = #{studyNo,jdbcType=BIGINT}
     </select>
 
     <!--根据主键获取数据:TP_STUDY-->
@@ -73,7 +63,7 @@
         SELECT /*MS-TP-STUDY-GETBYSTUDYNO*/  <include refid="Base_Column_List" />
         FROM TP_STUDY
         WHERE
-        STUDY_NO = #{studyNo,jdbcType=VARCHAR}
+        STUDY_NO              = #{studyNo,jdbcType=BIGINT}
     </select>
 
     <!--根据主键获取数据:TP_STUDY-->

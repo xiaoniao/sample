@@ -31,24 +31,24 @@ public interface StudyDOMapper{
     /**
      * desc:根据主键删除数据:TP_STUDY.<br/>
      * descSql =  DELETE FROM TP_STUDY WHERE ID = #{id,jdbcType=INTEGER}
-     * @param id id
+     * @param studyNo studyNo
      * @return Long
      */
-    Long deleteByPrimary(Integer id);
+    Long deleteByPrimary(Long studyNo);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY WHERE ID = #{id,jdbcType=INTEGER}
-     * @param id id
+     * @param studyNo studyNo
      * @return StudyDO
      */
-    StudyDO getByPrimary(Integer id);
+    StudyDO getByPrimary(Long studyNo);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY WHERE STUDY_NO = #{studyNo,jdbcType=VARCHAR}
      * @param studyNo studyNo
      * @return StudyDO
      */
-    StudyDO getByStudyNo(String studyNo);
+    StudyDO getByStudyNo(Long studyNo);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY

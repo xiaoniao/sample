@@ -3,7 +3,7 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.StageDOMapper">
     <!-- 自动生成,请修改 TP_STAGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StageDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="LONG"/>
         <result column="STAGE_NAME" property="stageName" jdbcType="VARCHAR" javaType="String"/>
         <result column="STAGE_DESC" property="stageDesc" jdbcType="VARCHAR" javaType="String"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -18,19 +18,13 @@
 
     <!--插入表:TP_STAGE-->
     <insert id="insert" >
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT
-            LAST_INSERT_ID()
-        </selectKey>
         INSERT INTO TP_STAGE(
-            ID
-            ,STAGE_NAME
+            STAGE_NAME
             ,STAGE_DESC
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-             #{id,jdbcType=INTEGER}
-            , #{stageName,jdbcType=VARCHAR}
+            #{stageName,jdbcType=VARCHAR}
             , #{stageDesc,jdbcType=VARCHAR}
             , now()
             , now()
@@ -45,7 +39,7 @@
             ,STAGE_DESC      = #{stageDesc,jdbcType=VARCHAR}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+            ID              = #{id,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_STAGE-->
@@ -53,7 +47,7 @@
         DELETE /*MS-TP-STAGE-DELETEBYPRIMARY*/ FROM
             TP_STAGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_STAGE-->
@@ -61,6 +55,6 @@
         SELECT /*MS-TP-STAGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_STAGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        ID              = #{id,jdbcType=BIGINT}
     </select>
 </mapper>

@@ -10,11 +10,11 @@ import java.util.Collection;
 /**
  * Created by liuzz on 2018/05/31
  */
-public class KnowledgePreciseShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
-    private Logger log = LoggerFactory.getLogger(KnowledgePreciseShardingAlgorithm.class);
+public class DefaultPreciseShardingAlgorithm implements PreciseShardingAlgorithm<Long> {
+    private Logger log = LoggerFactory.getLogger(DefaultPreciseShardingAlgorithm.class);
 
-    public KnowledgePreciseShardingAlgorithm() {
-        log.info("-------------------- KnowledgePreciseShardingAlgorithm init");
+    public DefaultPreciseShardingAlgorithm() {
+        log.info("-------------------- DefaultPreciseShardingAlgorithm init");
     }
 
     @Override

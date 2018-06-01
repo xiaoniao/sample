@@ -10,15 +10,15 @@ public class StudyStageDO{
     /**
      * id 主键.
      */
-    private Integer id;
+    private Long id;
     /**
      * studyNo 学习编号.
      */
-    private String studyNo;
+    private Long studyNo;
     /**
      * stageId 阶段ID.
      */
-    private Integer stageId;
+    private Long stageId;
     /**
      * sortNum 阶段序号.
      */
@@ -32,99 +32,52 @@ public class StudyStageDO{
      */
     private Date lastUpdated;
 
-    /**
-     * Set id 主键.
-     */
-    public void setId(Integer id){
-        this.id = id;
-    }
 
-    /**
-     * Get id 主键.
-     *
-     * @return the string
-     */
-    public Integer getId(){
+    public Long getId() {
         return id;
     }
 
-    /**
-     * Set studyNo 学习编号.
-     */
-    public void setStudyNo(String studyNo){
-        this.studyNo = studyNo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * Get studyNo 学习编号.
-     *
-     * @return the string
-     */
-    public String getStudyNo(){
+    public Long getStudyNo() {
         return studyNo;
     }
 
-    /**
-     * Set stageId 阶段ID.
-     */
-    public void setStageId(Integer stageId){
-        this.stageId = stageId;
+    public void setStudyNo(Long studyNo) {
+        this.studyNo = studyNo;
     }
 
-    /**
-     * Get stageId 阶段ID.
-     *
-     * @return the string
-     */
-    public Integer getStageId(){
+    public Long getStageId() {
         return stageId;
     }
 
-    /**
-     * Set sortNum 阶段序号.
-     */
-    public void setSortNum(Integer sortNum){
-        this.sortNum = sortNum;
+    public void setStageId(Long stageId) {
+        this.stageId = stageId;
     }
 
-    /**
-     * Get sortNum 阶段序号.
-     *
-     * @return the string
-     */
-    public Integer getSortNum(){
+    public Integer getSortNum() {
         return sortNum;
     }
 
-    /**
-     * Set dateCreated 创建时间.
-     */
-    public void setDateCreated(Date dateCreated){
-        this.dateCreated = dateCreated;
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 
-    /**
-     * Get dateCreated 创建时间.
-     *
-     * @return the string
-     */
-    public Date getDateCreated(){
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    /**
-     * Set lastUpdated 最后一次修改时间.
-     */
-    public void setLastUpdated(Date lastUpdated){
-        this.lastUpdated = lastUpdated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    /**
-     * Get lastUpdated 最后一次修改时间.
-     *
-     * @return the string
-     */
-    public Date getLastUpdated(){
+    public Date getLastUpdated() {
         return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

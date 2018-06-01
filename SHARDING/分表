@@ -24,3 +24,22 @@ ShardingStrategy
 
 
 
+坑、框架设计不够好
+
+
+
+
+建议使用代码 不使用配置文件 坑太多无从下手
+
+
+直接使用最新版本3.0
+
+
+---
+
+SpringBootConfiguration io.shardingjdbc.spring.boot
+
+SpringBootShardingRuleConfigurationProperties
+    YamlShardingRuleConfiguration
+
+

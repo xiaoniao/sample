@@ -26,6 +26,11 @@ public interface StudyKnowledgeProcessDOMapper{
      * @return Long
      */
     Long update(StudyKnowledgeProcessDO entity);
+
+    Long updateProcess(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo, @Param("knowledgeNo") Long knowledgeNo, @Param("finishPercent") Integer finishPercent);
+
+    Long updateStatus(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo, @Param("knowledgeNo") Long knowledgeNo, @Param("status") String status);
+
     /**
      * desc:根据主键删除数据:TP_STUDY_KNOWLEDGE_PROCESS.<br/>
      * descSql =  DELETE FROM TP_STUDY_KNOWLEDGE_PROCESS WHERE ID = #{id,jdbcType=INTEGER}
