@@ -17,7 +17,7 @@
 
 
     <!--插入表:TP_STUDENT-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="studentNo">
         INSERT INTO TP_STUDENT(
             NAME
             ,STATUS

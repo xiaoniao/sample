@@ -16,7 +16,7 @@
 
 
     <!--插入表:TP_STUDY_ASSIGNMENT-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO TP_STUDY_ASSIGNMENT(
             STUDY_NO
             ,STUDENT_NO

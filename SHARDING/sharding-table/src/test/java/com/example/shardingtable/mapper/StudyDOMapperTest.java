@@ -53,13 +53,13 @@
 //    }
 //
 //    @Before
-//    public void queryAll() {
+//    public void preSetBasicData() {
 //        knowledgeDOList = knowledgeDOMapper.listAll();
 //        studentDOList = studentDOMapper.listAll();
 //        studyDOList = studyDOMapper.listAll();
 //    }
 //
-//    public String getRandomKnowledgeNo() {
+//    public String queryARandomKnowledgeNo() {
 //        Random random = new Random();
 //        int randomNum = random.nextInt(1000);
 //        return knowledgeDOList.get(randomNum).getKnowledgeNo();
@@ -87,7 +87,7 @@
 //    }
 //
 //    @Test
-//    public void testAddStudy() {
+//    public void testBatchAddStudy() {
 //        for (int i = 0; i < 1000; i++) {
 //            StudyDO studyDO = new StudyDO();
 //            studyDO.setStudyNo(CodeUtil.getCodeByHead("STY"));
@@ -110,7 +110,7 @@
 //                for (int k = 0; k < 3; k++) {
 //                    StudyStageKnowledgeDO studyStageKnowledgeDO = new StudyStageKnowledgeDO();
 //                    studyStageKnowledgeDO.setStageId(stageDO.getId());
-//                    studyStageKnowledgeDO.setKnowledgeNo(getRandomKnowledgeNo());
+//                    studyStageKnowledgeDO.setKnowledgeNo(queryARandomKnowledgeNo());
 //                    result = studyStageKnowledgeDOMapper.insert(studyStageKnowledgeDO);
 //                    assetResult(result);
 //                }
@@ -119,7 +119,7 @@
 //    }
 //
 //    @Test
-//    public void testAssignStudent() {
+//    public void testBatchAssignStudy() {
 //        for (StudentDO studentDO : studentDOList) {
 //            for (StudyDO studyDO : studyDOList) {
 //                if (studyAssignmentDOMapper.getByStudentNoAndStudyNo(studyDO.getStudyNo(), studentDO.getStudentNo()) != null) {

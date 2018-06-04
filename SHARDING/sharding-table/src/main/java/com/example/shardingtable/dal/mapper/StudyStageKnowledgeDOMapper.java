@@ -4,6 +4,8 @@ import com.example.shardingtable.dal.dataobject.StudyStageKnowledgeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 由于需要对分页支持,请直接使用对应的DAO类
  * The Table TP_STUDY_STAGE_KNOWLEDGE.
@@ -40,4 +42,9 @@ public interface StudyStageKnowledgeDOMapper{
      * @return StudyStageKnowledgeDO
      */
     StudyStageKnowledgeDO getByPrimary(Integer id);
+
+
+    List<StudyStageKnowledgeDO> listByStudyNos(List<Long> list);
+
+    List<StudyStageKnowledgeDO> listByStudyNo(Long studyNo);
 }

@@ -22,7 +22,7 @@ public class DefaultPreciseShardingAlgorithm implements PreciseShardingAlgorithm
         long dbIndex = Math.abs(shardingValue.getValue()) % 2;
         for (String each : availableTargetNames) {
             if (each.endsWith(String.valueOf(dbIndex))) {
-                log.info("value : {} --------------------{}", shardingValue.getValue(), each);
+                // log.info("value : {} --------------------{}", shardingValue.getValue(), each);
                 return each;
             }
         }

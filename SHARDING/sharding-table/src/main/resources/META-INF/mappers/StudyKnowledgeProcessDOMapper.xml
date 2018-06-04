@@ -20,7 +20,7 @@
 
 
     <!--插入表:TP_STUDY_KNOWLEDGE_PROCESS-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO TP_STUDY_KNOWLEDGE_PROCESS(
            STUDY_NO
             ,STUDENT_NO
@@ -91,5 +91,14 @@
         FROM TP_STUDY_KNOWLEDGE_PROCESS
         WHERE
             ID = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getByStudyNoAndStudentNoAndKnowledgeNo" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-KNOWLEDGE-PROCESS-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_KNOWLEDGE_PROCESS
+        WHERE
+            STUDY_NO        = #{studyNo,jdbcType=BIGINT}
+            AND STUDENT_NO      = #{studentNo,jdbcType=BIGINT}
+            AND KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
     </select>
 </mapper>

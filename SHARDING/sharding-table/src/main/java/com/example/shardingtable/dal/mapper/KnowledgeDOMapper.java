@@ -48,4 +48,6 @@ public interface KnowledgeDOMapper{
      * @return List<KnowledgeDO>
      */
     List<KnowledgeDO> listAll();
+
+    List<KnowledgeDO> listByKnowledgeNos(List<Long> list);
 }

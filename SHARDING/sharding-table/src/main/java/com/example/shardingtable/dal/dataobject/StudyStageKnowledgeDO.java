@@ -5,16 +5,16 @@ import java.util.Date;
 /**
  * The table TP_STUDY_STAGE_KNOWLEDGE
  */
-public class StudyStageKnowledgeDO{
+public class StudyStageKnowledgeDO {
 
     /**
      * id 主键.
      */
     private Long id;
     /**
-     * stageId 阶段ID.
+     * 学习ID.
      */
-    private Long stageId;
+    private Long studyNo;
     /**
      * knowledgeNo 知识点编号.
      */
@@ -28,6 +28,10 @@ public class StudyStageKnowledgeDO{
      */
     private Date lastUpdated;
 
+    private String stageName;
+
+    private Integer sortNum;
+
     public Long getId() {
         return id;
     }
@@ -36,12 +40,12 @@ public class StudyStageKnowledgeDO{
         this.id = id;
     }
 
-    public Long getStageId() {
-        return stageId;
+    public Long getStudyNo() {
+        return studyNo;
     }
 
-    public void setStageId(Long stageId) {
-        this.stageId = stageId;
+    public void setStudyNo(Long studyNo) {
+        this.studyNo = studyNo;
     }
 
     public Long getKnowledgeNo() {
@@ -66,5 +70,21 @@ public class StudyStageKnowledgeDO{
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public String getStageName() {
+        return stageName;
+    }
+
+    public void setStageName(String stageName) {
+        this.stageName = stageName;
+    }
+
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 }

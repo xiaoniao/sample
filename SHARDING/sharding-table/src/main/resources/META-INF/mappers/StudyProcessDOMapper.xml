@@ -19,7 +19,7 @@
 
 
     <!--插入表:TP_STUDY_PROCESS-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO TP_STUDY_PROCESS(
             STUDY_NO
@@ -85,5 +85,13 @@
         FROM TP_STUDY_PROCESS
         WHERE
             ID = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getByStudyNoAndStudentNo" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-PROCESS-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_PROCESS
+        WHERE
+            STUDY_NO = #{studyNo,jdbcType=BIGINT}
+            AND STUDENT_NO = #{studentNo,jdbcType=BIGINT}
     </select>
 </mapper>

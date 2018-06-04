@@ -19,7 +19,7 @@
 
 
     <!--插入表:TP_KNOWLEDGE-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="knowledgeNo">
         INSERT INTO TP_KNOWLEDGE(
             KNOWLEDGE_NAME
             ,KNOWLEDGE_IMG
@@ -68,5 +68,15 @@
     <select id="listAll" resultMap="BaseResultMap">
         SELECT /*MS-TP-KNOWLEDGE-LISTALL*/  <include refid="Base_Column_List" />
         FROM TP_KNOWLEDGE
+    </select>
+
+    <select id="listByKnowledgeNos" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-LISTALL*/  <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+        WHERE
+            KNOWLEDGE_NO IN
+            <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+                #{item,jdbcType=BIGINT}
+            </foreach>
     </select>
 </mapper>

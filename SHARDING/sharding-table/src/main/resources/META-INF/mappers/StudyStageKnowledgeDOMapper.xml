@@ -17,30 +17,24 @@
 
 
     <!--插入表:TP_STUDY_STAGE_KNOWLEDGE-->
-    <insert id="insert" >
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO TP_STUDY_STAGE_KNOWLEDGE(
-            STAGE_ID
+            STUDY_NO
+            ,STAGE_NAME
+            ,SORT_NUM
             ,KNOWLEDGE_NO
             ,DATE_CREATED
             ,LAST_UPDATED
         )VALUES(
-            #{stageId,jdbcType=BIGINT}
+            #{studyNo,jdbcType=BIGINT}
+            , #{stageName,jdbcType=VARCHAR}
+            , #{sortNum,jdbcType=TINYINT}
             , #{knowledgeNo,jdbcType=BIGINT}
             , now()
             , now()
         )
     </insert>
 
-    <!--更新表:TP_STUDY_STAGE_KNOWLEDGE-->
-    <update id="update" >
-        UPDATE /*MS-TP-STUDY-STAGE-KNOWLEDGE-UPDATE*/ TP_STUDY_STAGE_KNOWLEDGE
-        SET
-            STAGE_ID        = #{stageId,jdbcType=BIGINT}
-            ,KNOWLEDGE_NO    = #{knowledgeNo,jdbcType=BIGINT}
-            ,LAST_UPDATED    = now()
-        WHERE
-        ID              = #{id,jdbcType=BIGINT}
-    </update>
 
     <!--根据主键删除数据:TP_STUDY_STAGE_KNOWLEDGE-->
     <delete id="deleteByPrimary" >
@@ -56,5 +50,22 @@
         FROM TP_STUDY_STAGE_KNOWLEDGE
         WHERE
         ID              = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="listByStudyNos" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-STAGE-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_STAGE_KNOWLEDGE
+        WHERE
+            STUDY_NO IN
+            <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+                #{item,jdbcType=BIGINT}
+            </foreach>
+    </select>
+
+    <select id="listByStudyNo" resultMap="BaseResultMap">
+        SELECT /*MS-TP-STUDY-STAGE-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_STAGE_KNOWLEDGE
+        WHERE
+            STUDY_NO = #{studyNo,jdbcType=BIGINT}
     </select>
 </mapper>

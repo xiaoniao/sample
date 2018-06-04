@@ -46,4 +46,7 @@ public interface StudyProcessDOMapper{
      * @return StudyProcessDO
      */
     StudyProcessDO getByPrimary(Integer id);
+
+
+    StudyProcessDO getByStudyNoAndStudentNo(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo);
 }
