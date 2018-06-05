@@ -28,12 +28,6 @@ import java.util.stream.Collectors;
 public class StudyProcessMapperTest {
     private Logger log = LoggerFactory.getLogger(StudyProcessMapperTest.class);
 
-    private static final int STUDENT_COUNT = 1000;
-    private static final int KNOWLEDGE_COUNT = 1000;
-    private static final int STUDY_COUNT = 1000;
-    private static final int STUDY_STAGE_COUNT = 3;
-    private static final int STUDY_STAGE_KNOWLEDGE_COUNT = 3;
-
     @Autowired
     private StudyStageKnowledgeDOMapper studyStageKnowledgeDOMapper;
 
@@ -45,7 +39,6 @@ public class StudyProcessMapperTest {
 
     @Autowired
     private StudyKnowledgeProcessDOMapper studyKnowledgeProcessDOMapper;
-
 
     @Test
     public void testUpdateStudyProcess() {

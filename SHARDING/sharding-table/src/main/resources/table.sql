@@ -11,7 +11,7 @@
  Target Server Version : 50640
  File Encoding         : utf-8
 
- Date: 06/04/2018 16:28:08 PM
+ Date: 06/05/2018 14:45:51 PM
 */
 
 SET NAMES utf8mb4;
@@ -22,14 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_knowledge_0`;
 CREATE TABLE `tp_knowledge_0` (
-  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `KNOWLEDGE_NO` bigint(20) DEFAULT NULL COMMENT '知识点编号',
+  `KNOWLEDGE_NO` bigint(20) NOT NULL COMMENT '知识点编号',
   `KNOWLEDGE_NAME` varchar(100) DEFAULT NULL COMMENT '知识名称',
   `KNOWLEDGE_IMG` text COMMENT '知识点图片地址',
   `KNOWLEDGE_STATUS` char(1) DEFAULT NULL COMMENT '状态，1_归档，2_过期，3_发布中，4_隐藏，5_删除',
   `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
   `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后修改时间',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`KNOWLEDGE_NO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 -- ----------------------------
@@ -37,14 +36,13 @@ CREATE TABLE `tp_knowledge_0` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tp_knowledge_1`;
 CREATE TABLE `tp_knowledge_1` (
-  `ID` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `KNOWLEDGE_NO` bigint(20) DEFAULT NULL COMMENT '知识点编号',
+  `KNOWLEDGE_NO` bigint(20) NOT NULL COMMENT '知识点编号',
   `KNOWLEDGE_NAME` varchar(100) DEFAULT NULL COMMENT '知识名称',
   `KNOWLEDGE_IMG` text COMMENT '知识点图片地址',
   `KNOWLEDGE_STATUS` char(1) DEFAULT NULL COMMENT '状态，1_归档，2_过期，3_发布中，4_隐藏，5_删除',
   `DATE_CREATED` datetime DEFAULT NULL COMMENT '创建时间',
   `LAST_UPDATED` datetime DEFAULT NULL COMMENT '最后修改时间',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`KNOWLEDGE_NO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 -- ----------------------------
@@ -102,10 +100,10 @@ CREATE TABLE `tp_study_1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='任务表';
 
 -- ----------------------------
---  Table structure for `tp_study_assignment_0`
+--  Table structure for `tp_study_assign_base_student_0`
 -- ----------------------------
-DROP TABLE IF EXISTS `tp_study_assignment_0`;
-CREATE TABLE `tp_study_assignment_0` (
+DROP TABLE IF EXISTS `tp_study_assign_base_student_0`;
+CREATE TABLE `tp_study_assign_base_student_0` (
   `ID` bigint(20) NOT NULL DEFAULT '0',
   `STUDY_NO` bigint(20) DEFAULT NULL,
   `STUDENT_NO` bigint(20) DEFAULT NULL,
@@ -114,10 +112,34 @@ CREATE TABLE `tp_study_assignment_0` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `tp_study_assignment_1`
+--  Table structure for `tp_study_assign_base_student_1`
 -- ----------------------------
-DROP TABLE IF EXISTS `tp_study_assignment_1`;
-CREATE TABLE `tp_study_assignment_1` (
+DROP TABLE IF EXISTS `tp_study_assign_base_student_1`;
+CREATE TABLE `tp_study_assign_base_student_1` (
+  `ID` bigint(20) NOT NULL DEFAULT '0',
+  `STUDY_NO` bigint(20) DEFAULT NULL,
+  `STUDENT_NO` bigint(20) DEFAULT NULL,
+  `STATUS` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `tp_study_assign_base_study_0`
+-- ----------------------------
+DROP TABLE IF EXISTS `tp_study_assign_base_study_0`;
+CREATE TABLE `tp_study_assign_base_study_0` (
+  `ID` bigint(20) NOT NULL DEFAULT '0',
+  `STUDY_NO` bigint(20) DEFAULT NULL,
+  `STUDENT_NO` bigint(20) DEFAULT NULL,
+  `STATUS` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `tp_study_assign_base_study_1`
+-- ----------------------------
+DROP TABLE IF EXISTS `tp_study_assign_base_study_1`;
+CREATE TABLE `tp_study_assign_base_study_1` (
   `ID` bigint(20) NOT NULL DEFAULT '0',
   `STUDY_NO` bigint(20) DEFAULT NULL,
   `STUDENT_NO` bigint(20) DEFAULT NULL,
