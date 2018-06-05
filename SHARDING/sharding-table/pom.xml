@@ -76,6 +76,12 @@
             <version>3.0.0.M1</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-transaction</artifactId>
+            <version>3.0.0.M1</version>
+        </dependency>
+
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

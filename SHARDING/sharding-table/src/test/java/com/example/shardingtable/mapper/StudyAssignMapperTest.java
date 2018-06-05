@@ -63,6 +63,8 @@ public class StudyAssignMapperTest {
             long time = System.currentTimeMillis();
 
             for (StudyDO studyDO : studyDOList) {
+                // TODO 添加事务
+
                 if (studyAssignmentDOMapper.getByStudentNoAndStudyNo(studyDO.getStudyNo(), studentDO.getStudentNo()) == null) {
                     StudyAssignmentDO studyAssignmentDO = new StudyAssignmentDO();
                     studyAssignmentDO.setStudentNo(studentDO.getStudentNo());
