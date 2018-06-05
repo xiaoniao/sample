@@ -20,7 +20,7 @@ public class DefaultRangeShardingAlgorithm implements RangeShardingAlgorithm<Lon
 
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
-        log.info("-------------------- DefaultRangeShardingAlgorithm Range");
+        log.info("****************************** DefaultRangeShardingAlgorithm Range");
         Range<Long> range = shardingValue.getValueRange();
         return availableTargetNames;
     }

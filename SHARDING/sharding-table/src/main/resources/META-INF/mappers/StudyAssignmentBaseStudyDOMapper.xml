@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.shardingtable.dal.mapper.StudyAssignmentDOMapper">
+<mapper namespace="com.example.shardingtable.dal.mapper.StudyAssignmentBaseStudyDOMapper">
     <!-- 自动生成,请修改 TP_STUDY_ASSIGNMENT.xml -->
-    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyAssignmentDO">
+    <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyAssignmentBaseStudyDO">
         <id column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
         <result column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="STUDENT_NO" property="studentNo" jdbcType="BIGINT" javaType="Long"/>
@@ -17,7 +17,7 @@
 
     <!--插入表:TP_STUDY_ASSIGNMENT-->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO TP_STUDY_ASSIGN_BASE_STUDENT(
+        INSERT INTO TP_STUDY_ASSIGN_BASE_STUDY(
             STUDY_NO
             ,STUDENT_NO
             ,STATUS
@@ -30,8 +30,8 @@
 
     <!--根据主键获取数据:TP_STUDY-->
     <select id="getByStudentNoAndStudyNo" resultMap="BaseResultMap">
-        SELECT /*MS-TP-STUDY-ASSIGN-BASE-STUDENT-GETBYSTUDENTNOANDSTUDYNO*/  <include refid="Base_Column_List" />
-        FROM TP_STUDY_ASSIGN_BASE_STUDENT
+        SELECT /*MS-TP-STUDY-ASSIGN-BASE-STUDY-GETBYSTUDENTNOANDSTUDYNO*/  <include refid="Base_Column_List" />
+        FROM TP_STUDY_ASSIGN_BASE_STUDY
         WHERE
         STUDY_NO = #{studyNo,jdbcType=BIGINT}
         AND STUDENT_NO = #{studentNo,jdbcType=BIGINT}
@@ -40,14 +40,14 @@
     <!--根据主键获取数据:TP_STUDY-->
     <select id="listByStudent" resultMap="BaseResultMap">
         SELECT /*MS-TP-STUDY-ASSIGNMENT-LISTBYSTUDENT*/  <include refid="Base_Column_List" />
-        FROM TP_STUDY_ASSIGN_BASE_STUDENT
+        FROM TP_STUDY_ASSIGN_BASE_STUDY
         WHERE
             STUDENT_NO = #{studentNo,jdbcType=BIGINT}
     </select>
 
     <select id="listByStudyNo" resultMap="BaseResultMap">
         SELECT /*MS-TP-STUDY-ASSIGNMENT-LISTBYSTUDENT*/  <include refid="Base_Column_List" />
-        FROM TP_STUDY_ASSIGN_BASE_STUDENT
+        FROM TP_STUDY_ASSIGN_BASE_STUDY
         WHERE
             STUDY_NO = #{studyNo,jdbcType=BIGINT}
     </select>

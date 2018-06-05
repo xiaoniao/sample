@@ -20,7 +20,7 @@ public class KnowledgeRangeShardingAlgorithm implements RangeShardingAlgorithm<L
 
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
-        log.info("-------------------- KnowledgePreciseShardingAlgorithm Range");
+        log.info("****************************** DefaultRangeShardingAlgorithm Range");
         Range<Long> range = shardingValue.getValueRange();
         return availableTargetNames;
     }

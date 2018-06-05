@@ -50,4 +50,8 @@ public interface KnowledgeDOMapper{
     List<KnowledgeDO> listAll();
 
     List<KnowledgeDO> listByKnowledgeNos(List<Long> list);
+
+    List<KnowledgeDO> listByBetween(@Param("start")Long start, @Param("end") Long end);
+
+    List<KnowledgeDO> listByBetweenAnd(@Param("start")Long start, @Param("end") Long end);
 }

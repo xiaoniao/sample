@@ -4,7 +4,9 @@
     <!-- 自动生成,请修改 TP_STUDY_STAGE_KNOWLEDGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.StudyStageKnowledgeDO">
         <id column="ID" property="id" jdbcType="BIGINT" javaType="LONG"/>
-        <result column="STAGE_ID" property="stageId" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="STUDY_NO" property="studyNo" jdbcType="BIGINT" javaType="LONG"/>
+        <result column="STAGE_NAME" property="stageName" jdbcType="VARCHAR" javaType="String"/>
+        <result column="SORT_NUM" property="sortNum" jdbcType="INTEGER" javaType="Integer"/>
         <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="LONG"/>
         <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
@@ -12,7 +14,7 @@
 
 
     <sql id="Base_Column_List">
-        ID,STAGE_ID,KNOWLEDGE_NO,DATE_CREATED,LAST_UPDATED
+        ID,STUDY_NO,STAGE_NAME,KNOWLEDGE_NO,DATE_CREATED,LAST_UPDATED
     </sql>
 
 

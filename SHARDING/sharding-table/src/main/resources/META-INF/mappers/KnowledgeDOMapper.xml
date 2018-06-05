@@ -3,8 +3,7 @@
 <mapper namespace="com.example.shardingtable.dal.mapper.KnowledgeDOMapper">
     <!-- 自动生成,请修改 TP_KNOWLEDGE.xml -->
     <resultMap id="BaseResultMap"  type="com.example.shardingtable.dal.dataobject.KnowledgeDO">
-        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
-        <result column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="Long"/>
+        <id column="KNOWLEDGE_NO" property="knowledgeNo" jdbcType="BIGINT" javaType="Long"/>
         <result column="KNOWLEDGE_NAME" property="knowledgeName" jdbcType="VARCHAR" javaType="String"/>
         <result column="KNOWLEDGE_IMG" property="knowledgeImg" jdbcType="LONGVARCHAR" javaType="String"/>
         <result column="KNOWLEDGE_STATUS" property="knowledgeStatus" jdbcType="CHAR" javaType="String"/>
@@ -14,7 +13,7 @@
 
 
     <sql id="Base_Column_List">
-        ID,KNOWLEDGE_NO,KNOWLEDGE_NAME,KNOWLEDGE_IMG,KNOWLEDGE_STATUS,DATE_CREATED,LAST_UPDATED
+        KNOWLEDGE_NO,KNOWLEDGE_NAME,KNOWLEDGE_IMG,KNOWLEDGE_STATUS,DATE_CREATED,LAST_UPDATED
     </sql>
 
 
@@ -45,7 +44,7 @@
             ,KNOWLEDGE_STATUS = #{knowledgeStatus,jdbcType=CHAR}
             ,LAST_UPDATED    = now()
         WHERE
-            ID              = #{id,jdbcType=INTEGER}
+        KNOWLEDGE_NO              = #{knowledgeNo,jdbcType=BIGINT}
     </update>
 
     <!--根据主键删除数据:TP_KNOWLEDGE-->
@@ -53,7 +52,7 @@
         DELETE /*MS-TP-KNOWLEDGE-DELETEBYPRIMARY*/ FROM
             TP_KNOWLEDGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        KNOWLEDGE_NO = #{knowledgeNo,jdbcType=BIGINT}
     </delete>
 
     <!--根据主键获取数据:TP_KNOWLEDGE-->
@@ -61,7 +60,7 @@
         SELECT /*MS-TP-KNOWLEDGE-GETBYPRIMARY*/  <include refid="Base_Column_List" />
         FROM TP_KNOWLEDGE
         WHERE
-            ID = #{id,jdbcType=INTEGER}
+        KNOWLEDGE_NO =  #{knowledgeNo,jdbcType=BIGINT}
     </select>
 
     <!--根据主键获取数据:TP_KNOWLEDGE-->
@@ -78,5 +77,20 @@
             <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
                 #{item,jdbcType=BIGINT}
             </foreach>
+    </select>
+
+    <select id="listByBetween" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-LISTALL*/  <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+        WHERE
+            KNOWLEDGE_NO >= #{start,jdbcType=BIGINT}
+            AND KNOWLEDGE_NO <![CDATA[ <= ]]> #{end,jdbcType=BIGINT}
+    </select>
+
+    <select id="listByBetweenAnd" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-LISTALL*/  <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+        WHERE
+        KNOWLEDGE_NO BETWEEN #{start,jdbcType=BIGINT} AND #{end,jdbcType=BIGINT}
     </select>
 </mapper>

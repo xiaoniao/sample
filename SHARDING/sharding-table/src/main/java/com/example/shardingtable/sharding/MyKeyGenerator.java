@@ -4,6 +4,9 @@ import io.shardingsphere.core.keygen.KeyGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  *
  * 测试自定义主键是否是递增的？
@@ -19,17 +22,21 @@ import org.slf4j.LoggerFactory;
 public class MyKeyGenerator implements KeyGenerator {
     private Logger log = LoggerFactory.getLogger(MyKeyGenerator.class);
 
-    private int a;
+    private int count = 0;
+    private volatile long a = 100000000;
 
     public MyKeyGenerator() {
         log.info("-------------------- MyKeyGenerator init");
     }
 
+    /**
+     * 需要考虑并发
+     */
     @Override
     public Number generateKey() {
         a++;
-        long result = 100000000L + a;
-        log.info("key : {}", result);
-        return result;
+        log.info("{} : {}   count:{)", this, a, count);
+        count++;
+        return a;
     }
 }

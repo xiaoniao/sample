@@ -1,10 +1,11 @@
 package com.example.shardingtable.dal.mapper;
 
+import com.example.shardingtable.dal.dataobject.StudyAssignmentBaseStudyDO;
 import com.example.shardingtable.dal.dataobject.StudyAssignmentDO;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 由于需要对分页支持,请直接使用对应的DAO类
@@ -12,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * TP_STUDY_ASSIGNMENT
  */
 @Mapper
-public interface StudyAssignmentDOMapper{
+public interface StudyAssignmentBaseStudyDOMapper {
 
     /**
      * desc:插入表:TP_STUDY_ASSIGNMENT.<br/>
@@ -20,7 +21,7 @@ public interface StudyAssignmentDOMapper{
      * @param entity entity
      * @return Long
      */
-    Long insert(StudyAssignmentDO entity);
+    Long insert(StudyAssignmentBaseStudyDO entity);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY_ASSIGNMENT WHERE STUDY_NO = #{studyNo,jdbcType=VARCHAR} AND STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
@@ -28,14 +29,14 @@ public interface StudyAssignmentDOMapper{
      * @param studentNo studentNo
      * @return StudyAssignmentDO
      */
-    StudyAssignmentDO getByStudentNoAndStudyNo(@Param("studyNo")Long studyNo,@Param("studentNo")Long studentNo);
+    StudyAssignmentBaseStudyDO getByStudentNoAndStudyNo(@Param("studyNo") Long studyNo, @Param("studentNo") Long studentNo);
     /**
      * desc:根据主键获取数据:TP_STUDY.<br/>
      * descSql =  SELECT * FROM TP_STUDY_ASSIGNMENT WHERE STUDENT_NO = #{studentNo,jdbcType=VARCHAR}
      * @param studentNo studentNo
      * @return List<StudyAssignmentDO>
      */
-    List<StudyAssignmentDO> listByStudent(Long studentNo);
+    List<StudyAssignmentBaseStudyDO> listByStudent(Long studentNo);
 
-    List<StudyAssignmentDO> listByStudyNo(Long studyNo);
+    List<StudyAssignmentBaseStudyDO> listByStudyNo(Long studyNo);
 }

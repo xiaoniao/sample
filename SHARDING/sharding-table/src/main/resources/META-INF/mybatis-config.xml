@@ -8,13 +8,12 @@
     </typeAliases>
     <mappers>
         <mapper resource="META-INF/mappers/KnowledgeDOMapper.xml"/>
-        <mapper resource="META-INF/mappers/StageDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudentDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudyAssignmentDOMapper.xml"/>
+        <mapper resource="META-INF/mappers/StudyAssignmentBaseStudyDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudyDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudyKnowledgeProcessDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudyProcessDOMapper.xml"/>
-        <mapper resource="META-INF/mappers/StudyStageDOMapper.xml"/>
         <mapper resource="META-INF/mappers/StudyStageKnowledgeDOMapper.xml"/>
     </mappers>
 </configuration>
