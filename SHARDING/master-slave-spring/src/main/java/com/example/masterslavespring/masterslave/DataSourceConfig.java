@@ -1,4 +1,4 @@
-//package com.example.masterslavespring;
+//package com.example.masterslavespring.masterslave;
 //
 //import com.zaxxer.hikari.HikariConfig;
 //import com.zaxxer.hikari.HikariDataSource;
