@@ -7,9 +7,9 @@ public @interface DataSource {
 
     String name() default DataSource.master;
 
-    String master = "dataSource1";
+    String master = "dataSourceMaster";
 
-    String slave1 = "dataSource2";
+    String slave1 = "dataSourceSlave1";
 
-    String slave2 = "dataSource3";
+    String slave2 = "dataSourceSlave2";
 }

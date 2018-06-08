@@ -34,15 +34,15 @@ public class CustomerConfig {
 
     @Qualifier("dataSourceMaster")
     @Autowired
-    DataSource dataSourceMaster;
+    private DataSource dataSourceMaster;
 
     @Qualifier("dataSourceSlave1")
     @Autowired
-    DataSource dataSourceSlave1;
+    private DataSource dataSourceSlave1;
 
     @Qualifier("dataSourceSlave2")
     @Autowired
-    DataSource dataSourceSlave2;
+    private DataSource dataSourceSlave2;
 
 
     @Bean("dataSourceMaster")
@@ -82,7 +82,7 @@ public class CustomerConfig {
     }
 
     @Bean
-    public DynamicDataSource dynamicDataSource(DataSource dataSourceMaster, DataSource dataSourceSlave1, DataSource dataSourceSlave2) {
+    DynamicDataSource dynamicDataSource(DataSource dataSourceMaster, DataSource dataSourceSlave1, DataSource dataSourceSlave2) {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put("dataSourceMaster", dataSourceMaster);
@@ -92,19 +92,6 @@ public class CustomerConfig {
         dynamicDataSource.setDefaultTargetDataSource(dataSourceMaster);
         return dynamicDataSource;
     }
-
-
-//    @Bean
-//    DataSource customerDataSource() {
-//        HikariConfig config = new HikariConfig();
-//        config.setJdbcUrl("jdbc:mysql://localhost:3306/my_sharding_test2");
-//        config.setUsername("root");
-//        config.setPassword("123456");
-//        config.addDataSourceProperty("cachePrepStmts", "true");
-//        config.addDataSourceProperty("prepStmtCacheSize", "250");
-//        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-//        return new HikariDataSource(config);
-//    }
 
     @Bean("customerEntityManagerFactory")
     LocalContainerEntityManagerFactoryBean customerEntityManagerFactory() {
