@@ -1,4 +1,4 @@
-package com.example.springaopandaspectjlearn.cglib.sample1;
+package com.example.springaopandaspectjlearn.cglib.sample1.callback;
 
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -12,9 +12,8 @@ public class TargetInterceptor implements MethodInterceptor {
 
     @Override
     public Object intercept(Object obj, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("调用前");
         Object result = methodProxy.invokeSuper(obj, objects);
-        System.out.println("调用后" + result);
+        System.out.println("调用后 - " + result);
         return result;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.springaopandaspectjlearn.cglib.sample1;
+package com.example.springaopandaspectjlearn.cglib.sample1.callback;
 
 /**
  *

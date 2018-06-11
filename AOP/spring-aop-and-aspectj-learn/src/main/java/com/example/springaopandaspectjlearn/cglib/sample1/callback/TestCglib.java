@@ -1,4 +1,4 @@
-package com.example.springaopandaspectjlearn.cglib.sample1;
+package com.example.springaopandaspectjlearn.cglib.sample1.callback;
 
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
@@ -11,6 +11,7 @@ import net.sf.cglib.proxy.NoOp;
 public class TestCglib {
 
     public static void main(String[] args) {
+        // basicUse();
         filter();
     }
 
@@ -28,9 +29,13 @@ public class TestCglib {
         enhancer.setCallbackFilter(callbackFilter);
 
         TargetObject targetObject = (TargetObject) enhancer.create();
-        System.out.println("result : " + targetObject.method1("hello"));
-        System.out.println("result : " + targetObject.method2(1));
-        System.out.println("result : " + targetObject.method3(2));
+        System.out.println("-----------------");
+        System.out.println(targetObject.method1("hello"));
+        System.out.println("-----------------");
+        System.out.println(targetObject.method2(1));
+        System.out.println("-----------------");
+        System.out.println(targetObject.method3(2));
+        System.out.println("-----------------");
     }
 
     private static void basicUse() {

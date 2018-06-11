@@ -1,10 +1,15 @@
-package com.example.springaopandaspectjlearn.cglib.sample1;
+package com.example.springaopandaspectjlearn.cglib.sample1.callback;
 
 import net.sf.cglib.proxy.CallbackFilter;
 
 import java.lang.reflect.Method;
 
 /**
+ *
+ * 指派方法和callback绑定
+ *
+ * map method and callback
+ *
  * Created by liuzz on 2018/06/11
  */
 public class TargetMethodCallbackFilter implements CallbackFilter {
@@ -12,15 +17,15 @@ public class TargetMethodCallbackFilter implements CallbackFilter {
     @Override
     public int accept(Method method) {
         if (method.getName().equals("method1")) {
-            System.out.println("filter method1 ==0");
+            System.out.println("filter method1 == 0");
             return 0;
         }
         if (method.getName().equals("method2")) {
-            System.out.println("filter method2 ==1");
+            System.out.println("filter method2 == 1");
             return 1;
         }
         if (method.getName().equals("method3")) {
-            System.out.println("filter method3 ==2");
+            System.out.println("filter method3 == 2");
             return 2;
         }
         return 0;
