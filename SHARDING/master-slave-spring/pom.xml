@@ -56,11 +56,18 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- aop -->
+        <!-- AOP -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!--&lt;!&ndash; AspectJ &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjrt</artifactId>-->
+            <!--<version>1.8.13</version>-->
+        <!--</dependency>-->
 
         <dependency>
 			<groupId>org.springframework.boot</groupId>

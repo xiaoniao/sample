@@ -1,7 +1,6 @@
 package com.example.masterslavespring.dal.config;
 
 
-import com.example.masterslavespring.masterslave.DynamicDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ import java.util.Map;
                 "com.example.masterslavespring.dal.repository"
         }
 )
-public class CustomerConfig {
+public class DataSourceConfig {
 
     @Qualifier("dataSourceMaster")
     @Autowired
