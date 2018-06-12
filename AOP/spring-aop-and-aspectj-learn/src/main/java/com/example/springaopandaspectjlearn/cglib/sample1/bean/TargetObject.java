@@ -1,4 +1,4 @@
-package com.example.springaopandaspectjlearn.cglib.sample1.callback;
+package com.example.springaopandaspectjlearn.cglib.sample1.bean;
 
 /**
  *
@@ -7,6 +7,8 @@ package com.example.springaopandaspectjlearn.cglib.sample1.callback;
  * Created by liuzz on 2018/06/11
  */
 public class TargetObject {
+
+    private String value;
 
     public String method1(String paramName) {
         return paramName;
@@ -18,6 +20,14 @@ public class TargetObject {
 
     public int method3(int count) {
         return count;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override

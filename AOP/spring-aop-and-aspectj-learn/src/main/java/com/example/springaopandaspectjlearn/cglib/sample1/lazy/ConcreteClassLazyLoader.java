@@ -1,6 +1,6 @@
 package com.example.springaopandaspectjlearn.cglib.sample1.lazy;
 
-import com.example.springaopandaspectjlearn.cglib.sample1.callback.TargetObject;
+import com.example.springaopandaspectjlearn.cglib.sample1.bean.TargetObject;
 import net.sf.cglib.proxy.LazyLoader;
 
 /**

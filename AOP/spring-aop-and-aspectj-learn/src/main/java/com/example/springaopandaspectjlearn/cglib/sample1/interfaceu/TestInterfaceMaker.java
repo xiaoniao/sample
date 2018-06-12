@@ -1,6 +1,6 @@
-package com.example.springaopandaspectjlearn.cglib.sample1;
+package com.example.springaopandaspectjlearn.cglib.sample1.interfaceu;
 
-import com.example.springaopandaspectjlearn.cglib.sample1.callback.TargetObject;
+import com.example.springaopandaspectjlearn.cglib.sample1.bean.TargetObject;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.InterfaceMaker;
 import net.sf.cglib.proxy.MethodInterceptor;

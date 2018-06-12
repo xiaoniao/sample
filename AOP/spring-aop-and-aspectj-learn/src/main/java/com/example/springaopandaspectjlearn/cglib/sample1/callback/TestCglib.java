@@ -1,5 +1,6 @@
 package com.example.springaopandaspectjlearn.cglib.sample1.callback;
 
+import com.example.springaopandaspectjlearn.cglib.sample1.bean.TargetObject;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
@@ -11,8 +12,8 @@ import net.sf.cglib.proxy.NoOp;
 public class TestCglib {
 
     public static void main(String[] args) {
-        // basicUse();
-        filter();
+         basicUse();
+//        filter();
     }
 
     private static void filter() {
