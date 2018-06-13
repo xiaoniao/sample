@@ -1,0 +1,44 @@
+12. Spring AOP APIs
+12.1 Introduction
+12.2 Pointcut API in Spring
+12.2.1 Concepts
+12.2.2 Operations on pointcuts
+12.2.3 AspectJ expression pointcuts
+12.2.4 Convenience pointcut implementations
+12.2.5 Pointcut superclasses
+12.2.6 Custom pointcuts
+
+12.3 Advice API in Spring
+12.3.1 Advice lifecycles
+12.3.2 Advice types in Spring
+
+12.4 Advisor API in Spring
+
+12.5 Using the ProxyFactoryBean to create AOP proxies
+12.5.1 Basics
+12.5.2 JavaBean properties
+12.5.3 JDK- and CGLIB-based proxies
+12.5.4 Proxying interfaces
+12.5.5 Proxying classes
+12.5.6 Using 'global' advisors
+12.6 Concise proxy definitions
+12.7 Creating AOP proxies programmatically with the ProxyFactory
+
+12.8 Manipulating advised objects
+
+12.9 Using the "auto-proxy" facility
+12.9.1 Autoproxy bean definitions
+12.9.2 Using metadata-driven auto-proxying
+
+12.10 Using TargetSources
+12.10.1 Hot swappable target sources
+12.10.2 Pooling target sources
+12.10.3 Prototype target sources
+12.10.4 ThreadLocal target sources
+
+12.11 Defining new Advice types
+12.12 Further resources
+
+
+
+
