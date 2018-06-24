@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package netty;
+
+option java_package = "io.netty.example.definitive.serialize.java";
+option java_outer_classname = "SubscribeRespProto";
+
+message SubscribeResp {
+    required int32 subReqID = 1;
+    required int32 respCode = 2;
+    required string desc = 3;
+}
