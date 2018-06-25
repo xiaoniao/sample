@@ -1,4 +1,4 @@
-package io.netty.example.definitive.time.serialize;
+package io.netty.example.definitive.time.messagepack;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

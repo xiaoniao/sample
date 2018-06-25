@@ -6,12 +6,10 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.example.definitive.serialize.java.UserInfo;
-import io.netty.example.definitive.time.serialize.MsgPackDecoder;
-import io.netty.example.definitive.time.serialize.MsgPackEncoder;
+import io.netty.example.definitive.time.messagepack.MsgPackDecoder;
+import io.netty.example.definitive.time.messagepack.MsgPackEncoder;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +66,7 @@ public final class TimeClient {
     }
 
     public static class TimeClientHandler extends ChannelInboundHandlerAdapter {
-        private Logger log = LoggerFactory.getLogger("LZZ-TimeClientHandler");
+        private Logger log = LoggerFactory.getLogger("LZZ-HttpClientHandler");
 
         private volatile int counter;
 
