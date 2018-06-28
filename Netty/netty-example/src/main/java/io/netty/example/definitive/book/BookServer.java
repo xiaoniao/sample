@@ -13,6 +13,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,7 @@ public final class BookServer {
                             p.addLast(new ProtobufVarint32LengthFieldPrepender());
                             p.addLast(new ProtobufEncoder());
                             p.addLast(new BookServerHandler());
+                            // p.addLast(new DefaultEventExecutorGroup(16), "businessHandler", new BusinessHandler());
                         }
                     });
 

@@ -8,6 +8,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.example.definitive.serialize.java.SubscribeReqProto;
 import io.netty.example.definitive.serialize.java.SubscribeRespProto;
 import io.netty.example.definitive.serialize.java.UserInfo;
+import io.netty.handler.codec.memcache.binary.BinaryMemcacheObjectAggregator;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
@@ -58,7 +59,7 @@ public final class BookClient {
         @Override
         public void channelActive(ChannelHandlerContext ctx) {
             log.info("#####channelActive");
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 1; i++) {
                 SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
                 builder.setSubReqID(1);
                 builder.setUserName("jack");

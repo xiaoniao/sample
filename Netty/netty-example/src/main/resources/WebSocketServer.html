@@ -1,0 +1,39 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+
+
+    <script type="text/javascript">
+
+        var socket;
+
+        if (!window.WebSocket) {
+            window.WebSocket = window.MozWebSocket;
+        }
+
+        if (!window.WebSocket) {
+            alert("不支持");
+        }
+
+        socket = new WebSocket("ws://localhost:8007/websocket");
+        socket.onmessage = function(event) {
+            alert(event.data);
+        };
+        socket.onopen = function(event) {
+            alert("打开");
+        };
+        socket.onclose = function(event) {
+            alert("关闭");
+        };
+
+
+        function send(message) {
+            socket.send(message);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

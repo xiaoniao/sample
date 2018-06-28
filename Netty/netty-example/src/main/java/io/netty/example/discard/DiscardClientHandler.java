@@ -69,8 +69,10 @@ public class DiscardClientHandler extends SimpleChannelInboundHandler<Object> {
         @Override
         public void operationComplete(ChannelFuture future) {
             if (future.isSuccess()) {
+                System.out.println("generateTraffic");
                 generateTraffic();
             } else {
+                System.out.println("close");
                 future.cause().printStackTrace();
                 future.channel().close();
             }
