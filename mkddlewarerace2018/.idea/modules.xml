@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/agent-demo/dubbo-mesh (1).iml" filepath="$PROJECT_DIR$/agent-demo/dubbo-mesh (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/dubbo-mesh (2).iml" filepath="$PROJECT_DIR$/services/dubbo-mesh (2).iml" />
+      <module fileurl="file://$PROJECT_DIR$/agent-demo/mesh-agent/mesh-agent.iml" filepath="$PROJECT_DIR$/agent-demo/mesh-agent/mesh-agent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/mesh-consumer/mesh-consumer.iml" filepath="$PROJECT_DIR$/services/mesh-consumer/mesh-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/mesh-provider/mesh-provider.iml" filepath="$PROJECT_DIR$/services/mesh-provider/mesh-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mkddlewarerace2018.iml" filepath="$PROJECT_DIR$/.idea/mkddlewarerace2018.iml" />
+    </modules>
+  </component>
+</project>

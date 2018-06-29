@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mesh-agent" />
+        <module name="mesh-consumer" />
+        <module name="mesh-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dubbo-mesh (1)" target="1.8" />
+      <module name="dubbo-mesh (2)" target="1.8" />
+      <module name="mesh-agent" target="1.8" />
+      <module name="mesh-consumer" target="1.8" />
+      <module name="mesh-provider" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
