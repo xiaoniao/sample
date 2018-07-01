@@ -1,0 +1,18 @@
+#GRPC
+A high performance, open-source universal RPC framework
+
+1. Simple service definition
+Define your service using Protocol Buffers, a powerful binary serialization toolset and language
+
+2. Works across languages and platforms
+Automatically generate idiomatic client and server stubs for your service in a variety of languages and platforms
+
+3. Start quickly and scale
+Install runtime and dev environments with a single line and also scale to millions of RPCs per second with the framework
+
+4. Bi-directional streaming and integrated auth
+Bi-directional streaming and fully integrated pluggable authentication with http/2 based transport
+
+
+
+
