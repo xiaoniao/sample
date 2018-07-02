@@ -1,0 +1,106 @@
+syntax = "proto3";  //指定该proto文件所采用的语法 http://www.cnblogs.com/miller-zou/p/8214101.html
+
+package com.example.grpclearn.model;  //定义proto文件的包,可以不用指定
+
+//指定proto文件生成的java类的包，可以不用指定，如果没有指定，将采用package的值
+option java_package = "com.example.grpclearn.model";
+
+/**
+ * 指定生产的java类的名字,如果没有指定，将使用proto文件的文件名作为类名.
+ * 如果文件名为 contact_address.proto, 生成的类名为ContactAddress.java
+ */
+option java_outer_classname = "MyDemo";
+
+/**
+ * 当为true的时候，表示将所有的message各自生成在一个java文件中;
+ * 当为false的时候，将所有的内容生成在同一个文件中
+ */
+option java_multiple_files = false;
+
+/**
+ * 指定服务，客户端和服务端的stub, 服务端需要实现接口，客户端直接调用该接口。
+ */
+service Demo {
+    /**
+     * 指定方法，必须以rpc开头，方法名(GetUserById)按照官网所给出的示例代码，均是大写，所以我们也按照这种方式定义。
+     *         MyRequest为方法的参数，必须指定，并且必须为message类型。
+     *      MyResponse为方法的返回类型，必须制定，并且必须为message类型。
+     */
+    rpc GetUserById(MyRequest) returns (MyResponse);
+
+    rpc GetInfos(InfoRequest) returns (InfoResponse);
+
+    //请求的参数为流
+    rpc Greeting(stream GreetRequest) returns (GreetResponse);
+
+    //返回的数据为流
+    rpc GetPeoplesByName(PeopleRequest) returns (stream PeopleList);
+
+    //请求参数和返回参数都为流
+    rpc GetStudents(stream StudentRequest) returns (stream StudentList);
+}
+
+/**
+ * 定义message
+ */
+message MyResponse {
+    string realname = 1;
+}
+
+message MyRequest {
+    int32 id = 1;
+}
+
+message InfoRequest {
+    string msg = 1;
+}
+
+//该message没有任何实用意义，只是为了演示数据类型
+message Info {
+    int32 age = 1;
+    string name = 2;
+    bool flag = 3;
+    map<int64, string> others = 4;
+}
+
+message InfoResponse {
+    repeated Info infos = 1;
+}
+
+message GreetRequest {
+    string name = 1;
+}
+
+message GreetResponse {
+    string msg = 1;
+    string date = 2;
+}
+
+message PeopleRequest {
+    string name = 1;
+}
+
+message People {
+    int32 age = 1;
+    string name = 2;
+    float height = 3;
+    double money = 4;
+    bool isMarried = 5;
+}
+
+message PeopleList {
+    repeated People peoples = 1;
+}
+
+message StudentRequest {
+    map<string, string> infos = 1;
+}
+
+message Student {
+    string name = 1;
+    int32 score = 2;
+}
+
+message StudentList {
+    repeated Student students = 1;
+}
