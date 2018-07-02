@@ -14,5 +14,57 @@ Install runtime and dev environments with a single line and also scale to millio
 Bi-directional streaming and fully integrated pluggable authentication with http/2 based transport
 
 
+----
 
+跨语言：在语言层面进行跨语言，需要各个语言按照GRPC的规则。 相比 ServiceMesh 代理的方式有点low，GRPC把跨语言的方向带篇了。？？？ 
+
+没有跑偏？？
+【Conduit：面向Kubernetes的轻量化服务网格】作为Linkerd面向Kubernetes的独立版本，Conduit拥有着其独特的理念，本文就为大家解析了Conduit的主体设计以及未来的发展路线，希望供感兴趣的朋友们参考。
+
+控制面API的设计目标在于尽可能通用，从而允许其它工具基于其进行构建。目前的初始版本尚不支持定制化功能，但未来gRPC插件将可以作为控制面的一部分运行，且无需重新编译Conduit。
+
+远程通信的三代方法 
+
+- 过去：SOAP ( HTTP + XML ) 
+- 现在：REST ( HTTP + JSON ) 
+- 未来：gRPC + Protocol Buffers 
+
+----
+遇到的问题：1、配置maven插件 2、没有生成service代码
+
+mvn protobuf:compile 生成Model
+mvn clean protobuf:compile-custom 生成Service
+----
+
+
+
+#What is gRPC?
+
+Working with Protocol Buffers
+
+
+#gRPC Concepts
+
+This document introduces some key gRPC concepts with an overview of gRPC’s architecture and RPC life cycle.
+
+1.Service definition
+
+2.gRPC lets you define four kinds of service method
+
+    - Unary RPCs
+        rpc SayHello(HelloRequest) returns (HelloResponse);
+    - Server streaming RPCs
+        rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+    -Client streaming RPCs
+        rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+    -Bidirectional streaming RPCs
+        rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+
+3.Using the API surface
+protocol buffer compiler plugins that generate client- and server-side code
+
+    -On the server side
+    -On the client side
+
+4.Synchronous vs. asynchronous
 
