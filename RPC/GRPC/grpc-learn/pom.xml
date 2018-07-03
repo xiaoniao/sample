@@ -9,7 +9,7 @@
     <modules>
         <module>grpc-client</module>
         <module>grpc-server</module>
-        <module>grpc-proto-gen</module>
+        <module>grpc-proto</module>
     </modules>
     <packaging>pom</packaging>
 

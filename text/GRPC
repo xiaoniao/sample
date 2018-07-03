@@ -67,4 +67,7 @@ protocol buffer compiler plugins that generate client- and server-side code
     -On the client side
 
 4.Synchronous vs. asynchronous
+    xxGrpc.newBlockingStub(channel);
+    xxGrpc.newStub(channel);
+    xxGrpc.newFutureStub(channel);
 

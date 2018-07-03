@@ -5,6 +5,7 @@ import com.example.grpclearn.model.DemoGrpc;
 import com.example.grpclearn.model.GreeterGrpc;
 import com.example.grpclearn.model.HelloProto;
 import com.example.grpclearn.model.MyDemo;
+import com.google.common.util.concurrent.ListenableFuture;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,6 +52,42 @@ class HelloClient {
 
     void shutdown() throws InterruptedException {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+    }
+
+
+    public void testAsynsOrSync() {
+        logger.info("------BlockingStub");
+        MyDemo.MyRequest request = MyDemo.MyRequest.newBuilder().setId(80000).build();
+        MyDemo.MyResponse resp = this.demoBlockingStub.getUserById(request);
+        logger.info("AAA 服务端返回的数据: {}", resp.getRealname());
+
+        logger.info("------NoBlockingStub");
+        demoStub.getUserById(request, new StreamObserver<MyDemo.MyResponse>() {
+            @Override
+            public void onNext(MyDemo.MyResponse myResponse) {
+                logger.info("BBB 服务端返回的数据: {}", myResponse.getRealname());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+        });
+
+        logger.info("------FutureStub");
+        ListenableFuture<MyDemo.MyResponse> listenableFuture = demoFutureStub.getUserById(request);
+        try {
+            MyDemo.MyResponse response = listenableFuture.get(); // 阻塞直到返回数据
+            logger.info("CCC 服务端返回的数据: {}", response.getRealname());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -138,35 +176,32 @@ class HelloClient {
     }
 
     /**
-     * TODO
+     * 双向通道
      */
     public void getStudentsList() {
         StreamObserver<MyDemo.StudentRequest> requestStream = demoStub.getStudents(new StreamObserver<MyDemo.StudentList>() {
+            @Override
+            public void onNext(MyDemo.StudentList studentList) {
+                MyDemo.Student s = studentList.getStudentsList().get(0);
+                logger.info("接收到的数据：name:{}" , s.getName());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                logger.info("", t);
+            }
 
             @Override
             public void onCompleted() {
-                logger.info("Client onCompleted 结束");
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-
-            }
-
-            @Override
-            public void onNext(MyDemo.StudentList studentList) {
-                for (MyDemo.Student s : studentList.getStudentsList()) {
-                    logger.info("Client 接收到的数据：name:{} score:{}" , s.getName(), s.getScore());
-                }
+                logger.info("onCompleted");
             }
         });
 
         for (int i = 0; i < 10; i++) {
             Map<String, String> map = new HashMap<>();
             map.put("xx", "XX" + i);
-            map.put("zz", "ZZ" + i);
             requestStream.onNext(MyDemo.StudentRequest.newBuilder().putAllInfos(map).build());
-            logger.info("Client sendMsg");
+            logger.info("send message {}", i);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -174,7 +209,7 @@ class HelloClient {
             }
         }
 
-        logger.info("#####客户端结束发送消息");
+        logger.info("Client onCompleted 客户端结束发送消息");
         requestStream.onCompleted();
     }
 }

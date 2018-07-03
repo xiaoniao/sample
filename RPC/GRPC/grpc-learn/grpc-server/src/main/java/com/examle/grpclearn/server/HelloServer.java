@@ -54,6 +54,14 @@ class HelloServer {
         @Override
         public void getUserById(MyDemo.MyRequest request, StreamObserver<MyDemo.MyResponse> responseObserver) {
             logger.info("接收到的参数：", request.getId());
+
+            logger.info("wait 10s");
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             responseObserver.onNext(MyDemo.MyResponse.newBuilder().setRealname("嘟嘟").build());
             responseObserver.onCompleted();
         }
@@ -122,41 +130,38 @@ class HelloServer {
         }
 
         /**
-         * TODO
-         * @param responseObserver
-         * @return
+         * 双向通道
          */
         @Override
         public StreamObserver<MyDemo.StudentRequest> getStudents(StreamObserver<MyDemo.StudentList> responseObserver) {
 
             return new StreamObserver<MyDemo.StudentRequest>() {
                 @Override
-                public void onNext(MyDemo.StudentRequest studentRequest) {
-                    Map<String, String> map = studentRequest.getInfosMap();
-                    logger.info("Server 接受到的数据：{}", map.get("xx"));
-                }
+                public void onNext(MyDemo.StudentRequest request) {
+                    logger.info("接收到的数据：{}", request.getInfosMap().get("xx"));
 
-                @Override
-                public void onError(Throwable throwable) {
-
-                }
-
-                @Override
-                public void onCompleted() {
                     for (int i = 0; i < 10; i++) {
                         MyDemo.Student s1 = MyDemo.Student.newBuilder().setName("张三" + i).setScore(1).build();
                         MyDemo.Student s2 = MyDemo.Student.newBuilder().setName("张嘎" + i).setScore(1).build();
                         responseObserver.onNext(MyDemo.StudentList.newBuilder().addAllStudents(Arrays.asList(s1, s2)).build());
-                        logger.info("Server sendMsg");
+                        logger.info("send message " + i);
 
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
+                }
 
-                    logger.info("#####服务端结束发送消息");
+                @Override
+                public void onError(Throwable t) {
+                    logger.info("", t);
+                }
+
+                @Override
+                public void onCompleted() {
+                    logger.info("onCompleted");
                     responseObserver.onCompleted();
                 }
             };
