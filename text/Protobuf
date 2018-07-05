@@ -1,0 +1,37 @@
+一、Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.
+
+1. What are protocol buffers?
+2. Pick your favorite language
+3. How do I start?
+
+
+
+
+二、Language Guide (proto3)
+
+    
+
+三、Style Guide
+
+    Message  -- CamelCase
+        Field  -- underscore_separated_names
+
+    Enums -- CamelCase
+        vvalue -- CAPITALS_WITH_UNDERSCORES
+
+    Service -- CamelCase
+        method -- CamelCase
+
+        
+四、Encoding
+
+    very useful to know how different protocol buffer formats affect the size of your encoded messages.
+
+
+
+五、Techniques （design patterns）
+
+    · Streaming Multiple Messages
+    · Large Data Sets
+    · Self-describing Messages
+

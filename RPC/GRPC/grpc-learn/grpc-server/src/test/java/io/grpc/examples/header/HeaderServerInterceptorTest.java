@@ -18,6 +18,8 @@ package io.grpc.examples.header;
 
 import io.grpc.*;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
+import io.grpc.examples.header.interceptor.HeaderClientInterceptor;
+import io.grpc.examples.header.interceptor.HeaderServerInterceptor;
 import io.grpc.examples.helloworld.GreeterGrpc;
 import io.grpc.examples.helloworld.GreeterGrpc.GreeterBlockingStub;
 import io.grpc.examples.helloworld.GreeterGrpc.GreeterImplBase;

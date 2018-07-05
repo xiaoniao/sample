@@ -14,23 +14,24 @@
  * limitations under the License.
  */
 
-package io.grpc.examples.header;
+package io.grpc.examples.header.interceptor;
 
 import com.google.common.annotations.VisibleForTesting;
 import io.grpc.*;
 import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
 import io.grpc.ForwardingClientCallListener.SimpleForwardingClientCallListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.logging.Logger;
 
 /**
  * A interceptor to handle client header.
  */
 public class HeaderClientInterceptor implements ClientInterceptor {
-    private static final Logger logger = Logger.getLogger(HeaderClientInterceptor.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + HeaderClientInterceptor.class.getName());
 
     @VisibleForTesting
-    static final Metadata.Key<String> CUSTOM_HEADER_KEY = Metadata.Key.of("custom_client_header_key", Metadata.ASCII_STRING_MARSHALLER);
+    public static final Metadata.Key<String> CUSTOM_HEADER_KEY = Metadata.Key.of("custom_client_header_key", Metadata.ASCII_STRING_MARSHALLER);
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {

@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+import "other.proto";
+
+import "google/protobuf/any.proto";
+
+package com.example.protobuf.proto;
+
+option java_package = "com.example.protobuf.proto";
+
+message SearchRequest {
+    string query = 1;
+    int32 page_num = 2;
+    int32 result_per_page = 3;
+
+
+    enum Corpus {
+
+        UNIVERSAL = 0;
+        WEB = 1;
+        IMAGES = 2;
+        LOCAL = 3;
+        NEWS = 4;
+        PRODUCTS = 5;
+        VIDEO = 6;
+    }
+
+    Corpus corpus = 4;
+}
+
+
+message SearchResult {
+
+    repeated Result results = 1;
+
+    Student student = 2;
+}
+
+
+message Result {
+    string url = 1;
+    string title = 2;
+    repeated string snippets = 3;
+}
+
+
+message ErrorStatus {
+    string message = 1;
+    google.protobuf.Any detail =2;
+}
+
+
+
+message SampleMessage {
+    oneof test_oneof {
+        string name = 1;
+        string nick_name = 2;
+    }
+    map<string, string> map = 3;
+}
+
+
+
+message Foo {
+    reserved 2, 15, 9 to 11;
+
+    reserved "foo", "bar";
+}
+
+
+
+// service
+
+
+service SearchService {
+    rpc Search(SearchRequest) returns (SearchResult);
+}
+
+
+

@@ -17,13 +17,14 @@
 package io.grpc.examples.header;
 
 import io.grpc.*;
+import io.grpc.examples.header.interceptor.HeaderClientInterceptor;
 import io.grpc.examples.helloworld.GreeterGrpc;
 import io.grpc.examples.helloworld.HelloReply;
 import io.grpc.examples.helloworld.HelloRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A simple client that like {@link io.grpc.examples.helloworld.HelloWorldClient}.
@@ -31,7 +32,7 @@ import java.util.logging.Logger;
  * This client can help you create custom headers.
  */
 public class CustomHeaderClient {
-    private static final Logger logger = Logger.getLogger(CustomHeaderClient.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + CustomHeaderClient.class.getName());
 
     private final ManagedChannel originChannel;
     private final GreeterGrpc.GreeterBlockingStub blockingStub;
@@ -52,11 +53,7 @@ public class CustomHeaderClient {
     public static void main(String[] args) throws Exception {
         CustomHeaderClient client = new CustomHeaderClient("localhost", 50051);
         try {
-            String user = "world";
-            if (args.length > 0) {
-                user = args[0]; /* Use the arg as the name to greet if provided */
-            }
-            client.greet(user);
+            client.greet("world");
         } finally {
             client.shutdown();
         }
@@ -76,7 +73,7 @@ public class CustomHeaderClient {
         try {
             response = blockingStub.sayHello(request);
         } catch (StatusRuntimeException e) {
-            logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
+            logger.warn("RPC failed: {0}", e.getStatus());
             return;
         }
         logger.info("Greeting: " + response.getMessage());

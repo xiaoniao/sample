@@ -74,25 +74,25 @@ public class HelloWorldClientTls {
      */
     public static void main(String[] args) throws Exception {
 
-        if (args.length < 2 || args.length == 4 || args.length > 5) {
+        /*if (args.length < 2 || args.length == 4 || args.length > 5) {
             System.out.println("USAGE: HelloWorldClientTls host port [trustCertCollectionFilePath] " +
                     "[clientCertChainFilePath] [clientPrivateKeyFilePath]\n  Note: clientCertChainFilePath and " +
                     "clientPrivateKeyFilePath are only needed if mutual auth is desired. And if you specify " +
                     "clientCertChainFilePath you must also specify clientPrivateKeyFilePath");
             System.exit(0);
-        }
+        }*/
 
-        HelloWorldClientTls client;
-        switch (args.length) {
-            case 2:
-                client = new HelloWorldClientTls(args[0], Integer.parseInt(args[1]), buildSslContext(null, null, null));
-                break;
-            case 3:
-                client = new HelloWorldClientTls(args[0], Integer.parseInt(args[1]), buildSslContext(args[2], null, null));
-                break;
-            default:
-                client = new HelloWorldClientTls(args[0], Integer.parseInt(args[1]), buildSslContext(args[2], args[3], args[4]));
-        }
+        String host = "localhost";
+        int port = 8888;
+        String trustCertCollectionFilePath = null;
+        String clientCertChainFilePath = null;
+        String clientPrivateKeyFilePath = null;
+
+        args = new String[] {};
+
+        HelloWorldClientTls client = new HelloWorldClientTls(host, port, buildSslContext(null, null, null));
+        HelloWorldClientTls client2 =new HelloWorldClientTls(host, port, buildSslContext(trustCertCollectionFilePath, null, null));
+        HelloWorldClientTls client3 =new HelloWorldClientTls(host, port, buildSslContext(trustCertCollectionFilePath, clientCertChainFilePath, clientPrivateKeyFilePath));
 
         try {
             String user = "world";

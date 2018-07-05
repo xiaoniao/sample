@@ -66,8 +66,8 @@ public class HelloWorldServerTls {
 
         int port = 8888;
         String host = "localhost";
-        String certChainFilePath = "/Users/xiezx/TLS/server.crt";
-        String privateKeyFilePath = "/Users/xiezx/TLS/server.key";
+        String certChainFilePath = "/Users/xiezx/TLS/example_com.crt";
+        String privateKeyFilePath = "/Users/xiezx/TLS/example_com.key";
         String trustCertCollectionFilePath = null;
 
         final HelloWorldServerTls server = new HelloWorldServerTls(host,

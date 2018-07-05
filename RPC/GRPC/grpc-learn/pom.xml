@@ -63,6 +63,23 @@
             <scope>test</scope>
         </dependency>
 
+        <!--
+            Netty/TomcatNative [OpenSSL Dynamic]
+            A Mavenized fork of Tomcat Native which incorporates various patches. This artifact is dynamically linked to OpenSSL and Apache APR.
+        -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative</artifactId>
+            <version>2.0.12.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-tcnative-boringssl-static</artifactId>
+            <version>2.0.12.Final</version>
+        </dependency>
+
+
+
 
 
         <dependency>

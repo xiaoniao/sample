@@ -19,21 +19,23 @@ package io.grpc.examples.header;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.ServerInterceptors;
+import io.grpc.examples.header.interceptor.HeaderServerInterceptor;
 import io.grpc.examples.helloworld.GreeterGrpc;
 import io.grpc.examples.helloworld.HelloReply;
 import io.grpc.examples.helloworld.HelloRequest;
 import io.grpc.stub.StreamObserver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
  * A simple server that like {@link io.grpc.examples.helloworld.HelloWorldServer}.
  *
- * You can get and response any header in {@link io.grpc.examples.header.HeaderServerInterceptor}.
+ * You can get and response any header in {@link HeaderServerInterceptor}.
  */
 public class CustomHeaderServer {
-    private static final Logger logger = Logger.getLogger(CustomHeaderServer.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + CustomHeaderServer.class.getName());
 
     private static final int PORT = 50051;
     private Server server;
