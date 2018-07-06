@@ -1,1 +1,40 @@
 TODO
+
+
+
+概览：
+
+一、Core:
+    Extensible Event Model
+
+    Universal Communication API
+    
+    Zero-Copy-Capable Rich Byte Buffer
+
+
+
+二、Transport Services:
+
+    Socket & Datagram
+
+    HTTP Tunnel
+
+    In-VM Pipe
+
+
+三、Protocol Support:
+
+    HTTP & SebSocket
+    
+    SSL - StartTLS
+
+    Google Protobuf
+
+    zlib/gzip Compression
+
+    Large File Transfer
+
+    RTSP(实时流传输协议（real time streaming protocol）)
+
+    Legacy Text - Binary Protocols with Unit Testability
+
