@@ -1,0 +1,42 @@
+官网：http://www.sofastack.tech/
+SOFA 是蚂蚁金服开源的用于快速构建金融级分布式架构的一套中间件，可无缝和 SpringCloud/Dubbo 集成。
+
+
+#SOFAStack SOFA技术栈
+
+sofa-bolt
+https://github.com/alipay/sofa-bolt
+SOFABolt 是蚂蚁金融服务集团开发的一套基于 Netty 实现的网络通信框架。
+
+sofa-rpc
+https://github.com/alipay/sofa-rpc
+SOFARPC 是一个高可扩展性、高性能、生产级的 Java RPC 框架。
+
+sofa-boot
+https://github.com/alipay/sofa-boot
+SOFABoot 是蚂蚁金服开源的基于 Spring Boot 的研发框架，它在 Spring Boot 的基础上，提供了诸如 Readiness Check，类隔离，日志空间隔离等等能力。
+
+sofa-rpc-boot-projects
+https://github.com/alipay/sofa-rpc-boot-projects
+rpc-sofa-boot-starter 的作用就是将 SOFARPC 功能集成到 SOFABoot 中。rpc-sofa-boot-starter 提供了统一方便的编程界面、配置方式，同时提供了 SOFABoot 的健康检查，类隔离，日志空间隔离等基础能力。
+
+sofa-ark
+https://github.com/alipay/sofa-ark
+SOFAArk 是一款基于 Java 实现的轻量级类隔离容器
+
+sofa-tracer
+https://github.com/alipay/sofa-tracer
+SOFATracer 是一个用于分布式系统调用跟踪的组件，通过统一的 traceId 将调用链路中的各种网络调用情况以日志的方式记录下来，以达到透视化网络调用的目的。
+
+sofa-lookout
+https://github.com/alipay/sofa-lookout
+SOFALookout 是一个利用多维度的 metrics 对目标系统进行度量和监控的项目，可做数据可视化展示。
+
+sofa-common-tools
+https://github.com/alipay/sofa-common-tools
+通用工具包，通过自动感知应用的日志实现，提供中间件与应用隔离的日志空间打印能力。
+
+sofa-hessian
+https://github.com/alipay/sofa-hessian
+SOFA-Hessian 基于原生 Hessian v3.1.3 进行改进, 修复了一些 bug，增强了一些功能，并且添加了一些特性。
+
