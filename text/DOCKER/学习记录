@@ -57,3 +57,27 @@ docker pull ubuntu
 docker pull django
 docker pull haproxy
 docker pull redis
+
+
+
+
+---------------------------------------------------------------
+
+Dockerfile
+
+
+FROM nginx
+RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+
+
+FROM     引入镜像
+RUN      执行命令
+
+
+docker build -t nginx:v3 .
+
+
+docker run --name web2 -d -p 81:80 nginx:v2
+
+
+
