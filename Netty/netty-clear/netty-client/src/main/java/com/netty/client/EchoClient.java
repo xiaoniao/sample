@@ -44,9 +44,11 @@ public class EchoClient {
                     });
 
             ChannelFuture f = b.connect().sync();
-            log.info("get ChanelFuture");
+            log.info("A");
 
             f.channel().closeFuture().sync();
+
+            log.info("B");
         } finally {
             eventLoopGroup.shutdownGracefully().sync();
             log.info("eventLoopGroup shutdownGracefully");

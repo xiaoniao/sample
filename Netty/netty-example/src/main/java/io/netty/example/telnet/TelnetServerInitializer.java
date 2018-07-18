@@ -36,7 +36,7 @@ public class TelnetServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SslContext sslCtx;
 
-    public TelnetServerInitializer(SslContext sslCtx) {
+    TelnetServerInitializer(SslContext sslCtx) {
         this.sslCtx = sslCtx;
     }
 

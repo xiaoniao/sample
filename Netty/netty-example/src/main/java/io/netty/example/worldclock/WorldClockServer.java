@@ -24,18 +24,20 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Receives a list of continent/city pairs from a {@link WorldClockClient} to
  * get the local times of the specified cities.
  */
 public final class WorldClockServer {
+    private static Logger log = LoggerFactory.getLogger(WorldClockServer.class);
 
-    static final boolean SSL = System.getProperty("ssl") != null;
-    static final int PORT = Integer.parseInt(System.getProperty("port", "8463"));
+    private static final boolean SSL = System.getProperty("ssl") != null;
+    private static final int PORT = Integer.parseInt(System.getProperty("port", "8463"));
 
     public static void main(String[] args) throws Exception {
-        // Configure SSL.
         final SslContext sslCtx;
         if (SSL) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();
@@ -49,11 +51,14 @@ public final class WorldClockServer {
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new WorldClockServerInitializer(sslCtx));
+                    .channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new WorldClockServerInitializer(sslCtx));
 
+
+            log.info("A");
             b.bind(PORT).sync().channel().closeFuture().sync();
+            log.info("B");
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

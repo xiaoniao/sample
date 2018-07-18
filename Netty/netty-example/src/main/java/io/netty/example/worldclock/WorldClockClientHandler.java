@@ -18,11 +18,9 @@ package io.netty.example.worldclock;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.example.worldclock.WorldClockProtocol.Continent;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTime;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTimes;
-import io.netty.example.worldclock.WorldClockProtocol.Location;
-import io.netty.example.worldclock.WorldClockProtocol.Locations;
+import io.netty.example.worldclock.WorldClockProtocol.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,32 +31,37 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Pattern;
 
 public class WorldClockClientHandler extends SimpleChannelInboundHandler<LocalTimes> {
+    private static final Logger log = LoggerFactory.getLogger(WorldClockClientHandler.class);
 
     private static final Pattern DELIM = Pattern.compile("/");
 
     // Stateful properties
     private volatile Channel channel;
-    private final BlockingQueue<LocalTimes> answer = new LinkedBlockingQueue<LocalTimes>();
+    private final BlockingQueue<LocalTimes> answer = new LinkedBlockingQueue<>();
 
-    public WorldClockClientHandler() {
+    WorldClockClientHandler() {
         super(false);
     }
 
-    public List<String> getLocalTimes(Collection<String> cities) {
+
+    /**
+     * 发送消息给服务端，并等待服务端返回数据。
+     * @param cities
+     * @return
+     */
+    List<String> getLocalTimes(Collection<String> cities) {
+
+        // 客户端发送数据
         Locations.Builder builder = Locations.newBuilder();
-
-        for (String c: cities) {
+        for (String c : cities) {
             String[] components = DELIM.split(c);
-            builder.addLocation(Location.newBuilder().
-                setContinent(Continent.valueOf(components[0].toUpperCase())).
-                setCity(components[1]).build());
+            builder.addLocation(Location.newBuilder().setContinent(Continent.valueOf(components[0].toUpperCase())).setCity(components[1]).build());
         }
-
         channel.writeAndFlush(builder.build());
 
         LocalTimes localTimes;
         boolean interrupted = false;
-        for (;;) {
+        for (; ; ) {
             try {
                 localTimes = answer.take();
                 break;
@@ -66,16 +69,15 @@ public class WorldClockClientHandler extends SimpleChannelInboundHandler<LocalTi
                 interrupted = true;
             }
         }
+        log.info("get form queue");
 
         if (interrupted) {
             Thread.currentThread().interrupt();
         }
 
-        List<String> result = new ArrayList<String>();
-        for (LocalTime lt: localTimes.getLocalTimeList()) {
-            result.add(
-                    new Formatter().format(
-                            "%4d-%02d-%02d %02d:%02d:%02d %s",
+        List<String> result = new ArrayList<>();
+        for (LocalTime lt : localTimes.getLocalTimeList()) {
+            result.add(new Formatter().format("%4d-%02d-%02d %02d:%02d:%02d %s",
                             lt.getYear(),
                             lt.getMonth(),
                             lt.getDayOfMonth(),
@@ -84,7 +86,6 @@ public class WorldClockClientHandler extends SimpleChannelInboundHandler<LocalTi
                             lt.getSecond(),
                             lt.getDayOfWeek().name()).toString());
         }
-
         return result;
     }
 
@@ -95,6 +96,7 @@ public class WorldClockClientHandler extends SimpleChannelInboundHandler<LocalTi
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, LocalTimes times) throws Exception {
+        log.info("channelRead0");
         answer.add(times);
     }
 

@@ -27,8 +27,12 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf byteBuf) throws Exception {
         log.info("接收到的数据：{}", byteBuf.toString(CharsetUtil.UTF_8));
+
+        // 客服端自己关闭
+        // log.info("关闭 channel");
+        // ctx.pipeline().channel().close();
     }
 
     @Override

@@ -45,9 +45,10 @@ public class EchoServer {
                         }
                     });
             ChannelFuture f = b.bind().sync();
-            log.info("get ChannelFuture");
+            log.info("A");
 
             f.channel().closeFuture().sync();
+            log.info("B");
         } finally {
             group.shutdownGracefully().sync();
         }

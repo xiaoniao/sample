@@ -77,7 +77,7 @@ RUN      执行命令
 docker build -t nginx:v3 .
 
 
-docker run --name web2 -d -p 81:80 nginx:v2
+docker run --name web2 -d -p 81:80 nginx:v3
 
 
 

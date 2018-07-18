@@ -20,15 +20,19 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Keep reconnecting to the server while printing out the current uptime and
- * connection attempt getStatus.
+ * Keep reconnecting to the server while printing out the current uptime and connection attempt getStatus.
+ *
+ * 利用netty事件，进行超时重联，心跳检查。
  */
 @Sharable
 public class UptimeClientHandler extends SimpleChannelInboundHandler<Object> {
+    private Logger log = LoggerFactory.getLogger(UptimeClientHandler.class);
 
     long startTime = -1;
 
@@ -68,12 +72,9 @@ public class UptimeClientHandler extends SimpleChannelInboundHandler<Object> {
     public void channelUnregistered(final ChannelHandlerContext ctx) throws Exception {
         println("Sleeping for: " + UptimeClient.RECONNECT_DELAY + 's');
 
-        ctx.channel().eventLoop().schedule(new Runnable() {
-            @Override
-            public void run() {
-                println("Reconnecting to: " + UptimeClient.HOST + ':' + UptimeClient.PORT);
-                UptimeClient.connect();
-            }
+        ctx.channel().eventLoop().schedule(() -> {
+            println("Reconnecting to: " + UptimeClient.HOST + ':' + UptimeClient.PORT);
+            UptimeClient.connect();
         }, UptimeClient.RECONNECT_DELAY, TimeUnit.SECONDS);
     }
 
@@ -85,9 +86,9 @@ public class UptimeClientHandler extends SimpleChannelInboundHandler<Object> {
 
     void println(String msg) {
         if (startTime < 0) {
-            System.err.format("[SERVER IS DOWN] %s%n", msg);
+            log.info("[SERVER IS DOWN] {}", msg);
         } else {
-            System.err.format("[UPTIME: %5ds] %s%n", (System.currentTimeMillis() - startTime) / 1000, msg);
+            log.info("[UPTIME: {}] {}", (System.currentTimeMillis() - startTime) / 1000, msg);
         }
     }
 }

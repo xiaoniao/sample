@@ -21,6 +21,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 @Sharable
 public class UptimeServerHandler extends SimpleChannelInboundHandler<Object> {
+
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         // discard

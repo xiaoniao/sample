@@ -24,10 +24,14 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        log.info("回传数据");
-        ChannelFuture channelFuture = ctx.writeAndFlush(Unpooled.copiedBuffer("服务器收到消息", CharsetUtil.UTF_8));
+        ByteBuf msg = Unpooled.copiedBuffer("服务器收到消息", CharsetUtil.UTF_8);
+        log.info("发送数据数据{}", msg);
+        ChannelFuture channelFuture = ctx.writeAndFlush(msg);
         // ChannelFuture channelFuture = ctx.channel().writeAndFlush(Unpooled.copiedBuffer("服务器收到消息", CharsetUtil.UTF_8)); // 直接使用channel 会从出站handler开始流动
-        channelFuture.addListener(ChannelFutureListener.CLOSE); // 关闭后客户端也随之关闭
+
+        // 服务端关闭
+        //log.info("关闭channel");
+        //channelFuture.addListener(ChannelFutureListener.CLOSE); // 关闭后客户端也随之关闭
     }
 
     @Override

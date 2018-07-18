@@ -17,12 +17,7 @@ package io.netty.example.worldclock;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.example.worldclock.WorldClockProtocol.Continent;
-import io.netty.example.worldclock.WorldClockProtocol.DayOfWeek;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTime;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTimes;
-import io.netty.example.worldclock.WorldClockProtocol.Location;
-import io.netty.example.worldclock.WorldClockProtocol.Locations;
+import io.netty.example.worldclock.WorldClockProtocol.*;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -36,9 +31,8 @@ public class WorldClockServerHandler extends SimpleChannelInboundHandler<Locatio
         long currentTime = System.currentTimeMillis();
 
         LocalTimes.Builder builder = LocalTimes.newBuilder();
-        for (Location l: locations.getLocationList()) {
-            TimeZone tz = TimeZone.getTimeZone(
-                    toString(l.getContinent()) + '/' + l.getCity());
+        for (Location l : locations.getLocationList()) {
+            TimeZone tz = TimeZone.getTimeZone(toString(l.getContinent()) + '/' + l.getCity());
             Calendar calendar = getInstance(tz);
             calendar.setTimeInMillis(currentTime);
 
