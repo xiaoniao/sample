@@ -1,0 +1,63 @@
+
+
+
+app.gateway
+    ylc-operate - ActivityFacade 活动 BannerAdvertFacade 广告、NoticeFacade 公告
+    ylc-hedge - PrivateFundAttachFacade 私募 、CrmGiftFacade 礼品、GiftOrderFacade 礼品订单、PriInvitatioFacade 私募邀请 PrivateFundFacade
+    ylc-data - DictionaryFacade 字典 EasybaoFacade NetValueFacade 净值 DividendFacade 分红 FundInfoFacade 基金概况 FundSummaryFacade 用户基金份额、FundPositionFacade 持仓、ThematicDescribeFacade 主题基金
+    ylc-base - TradeFundFacade 交易
+    ylc-ucenter - PayChannelFacade 支付渠道、UserBankCardFacade 银行卡、RiskPaperFacade 风险评测
+ 
+    daxiang-mobileim - UserFriendInfoFacade 宝宝im
+    jcy-customercore - UserFacade 金诚逸用户中心、OaUserFacade
+    jcy-activity - ActivityFacade 逸活动
+
+
+
+
+app.gateway
+    -> ylc-operate
+    -> ylc-hedge
+    -> ylc-data
+    -> ylc-base
+    -> ylc-ucenter
+
+    -> daxiang-mobileim
+    -> jcy-customercore
+    -> jcy-activity
+
+ylc-admin-gateway
+    -> ylc-operate
+    -> ylc-hedge
+    -> jcy-customercore
+
+
+ylc-ucenter
+    -> ylc-hs-bridge
+
+
+ylc-hedge
+    -> ylc-crmbridge
+    -> jctown
+    -> jcy-base
+
+ylc-data
+    -> ylc-crmbridge
+    -> ylc-hs-bridge
+    -> jcy-base
+
+ylc-base
+    -> ylc-hs-bridge
+    
+
+最底层
+-> ylc-crmbridge
+-> ylc-hs-bridge
+-> ylc-operate
+
+
+
+
+
+
+

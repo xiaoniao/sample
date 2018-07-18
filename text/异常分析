@@ -1,0 +1,20 @@
+2018-04-28 09:10:08,289 ERROR [com.alibaba.druid.pool.DruidDataSource][ROW=1387] - discard connection
+java.sql.SQLException: Io exception: Connection reset
+
+
+getYiShenBaoFundInfo
+
+MmYieldPerformanceDOMapper
+    select * from (           select t.*, ROWNUM num from (             SELECT ID, InnerCode, DailyProfit,RRInSingleMonth,RRInThreeMonth,LatestWeeklyYield,UnitNV,RRINSINGLEYEAR, TradingDay                 FROM MF_MMYIELDPERFORMANCE             WHERE               InnerCode = ?               and DailyProfit is not null and LatestWeeklyYield is not null             ORDER BY tradingday desc               )t              )tt           where tt.num = 1
+
+
+
+
+
+
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: 
+Could not get JDBC Connection; nested exception is com.alibaba.druid.pool.GetConnectionTimeoutException: wait millis 10000, active 1, maxActive 200, creating 1
+
+
+
+not full timeout retry : 1

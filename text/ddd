@@ -1,0 +1,31 @@
+单词
+    Conversion n. 转换；变换；[金融] 兑换；改变信仰
+    Converter n. [电] 变流器，整流器；转化器
+    Generic adj. 类的；一般的；属的；非商标的
+    Conditional adj. 有条件的；假定的
+    Configurable adj. 可配置的；结构的
+    Pair n. 一对，一双，一副
+    Descriptor n. 描述符号
+    Resolvable adj. 可分解的；可解决的；可溶解的
+    Decorating n. 装饰；美化
+
+ConversionService
+ConverterRegistry
+
+ConfigurableConversionService
+GenericConversionService
+
+Converter
+GenericConverter
+ConditionalConverter
+ConditionalGenericConverter
+ConverterFactory
+
+
+TypeDescriptor
+ResolvableType
+DecoratingProxy
+
+
+
+

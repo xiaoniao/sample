@@ -1,0 +1,80 @@
+https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8
+
+
+
+
+
+
+如何设置为让连接池知道数据库已经断开了，并且自动测试连接查询
+
+<!-- 用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。 -->
+<property name="validationQuery" value="SELECT 1" />
+<property name="testOnBorrow" value="false" />
+<property name="testOnReturn" value="false" />
+<property name="testWhileIdle" value="true" />
+
+
+DruidDataSource参考配置
+ <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+
+      <!-- 基本属性 url、user、password -->
+      <property name="url" value="${jdbc_url}" />
+      <property name="username" value="${jdbc_user}" />
+      <property name="password" value="${jdbc_password}" />
+        
+      <!-- 配置初始化大小、最小、最大 -->
+      <property name="initialSize" value="1" />
+      <property name="minIdle" value="1" /> 
+      <property name="maxActive" value="20" />
+   
+      <!-- 配置获取连接等待超时的时间 -->
+      <property name="maxWait" value="60000" />
+   
+      <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+      <property name="timeBetweenEvictionRunsMillis" value="60000" />
+   
+      <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+      <property name="minEvictableIdleTimeMillis" value="300000" />
+    
+      <property name="validationQuery" value="SELECT 'x'" />
+      <property name="testWhileIdle" value="true" />
+      <property name="testOnBorrow" value="false" />
+      <property name="testOnReturn" value="false" />
+   
+      <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+      <property name="poolPreparedStatements" value="true" />
+      <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+   
+      <!-- 配置监控统计拦截的filters -->
+      <property name="filters" value="stat" /> 
+  </bean>
+
+注意事项
+    如果用Oracle，则把 poolPreparedStatements 配置为true，mysql可以配置为false。分库分表较多的数据库，建议配置为false。
+    removeabandoned 不建议在生产环境中打开
+
+
+<property name="removeAbandoned" value="true" /> <!-- 打开removeAbandoned功能 -->
+<property name="removeAbandonedTimeout" value="1800" /> <!-- 1800秒，也就是30分钟 -->
+<property name="logAbandoned" value="true" /> <!-- 关闭abanded连接时输出错误日志 -->
+
+当程序存在缺陷时，申请的连接忘记关闭，这时候，就存在连接泄漏了。Druid提供了RemoveAbandanded相关配置，用来关闭长时间不使用的连接。
+配置removeAbandoned对性能会有一些影响，建议怀疑存在泄漏之后再打开。在上面的配置中，如果连接超过30分钟未关闭，就会被强行回收，并且日志记录连接申请时的调用堆栈。
+
+
+issues：
+DruidDataSource高可用问题：Oracle数据库服务器断电之后，15分钟左右客户端才能感知到数据源已不可用
+https://github.com/alibaba/druid/issues/2070
+
+    Druid-1.1.5版本发布，修复连接池testWhileIdle某些场景不起作用的问题
+    https://github.com/alibaba/druid/releases/tag/1.1.5
+
+数据库连接假死，程序一直持该连接，实际上该连接已经超时并且不可用, 但是应用一直持用导致应用线程卡死
+https://github.com/alibaba/druid/issues/1523
+
+CreateConnectionTask
+    createPhysicalConnection
+CreateConnectionThread
+
+
+DataSourceUtils

@@ -1,0 +1,15 @@
+EXPLAIN PLAN FOR (
+  select * from (
+          select t.*, ROWNUM num from (
+            SELECT ID, InnerCode, DailyProfit,RRInSingleMonth,RRInThreeMonth,LatestWeeklyYield,UnitNV,RRINSINGLEYEAR, TradingDay
+                FROM MF_MMYIELDPERFORMANCE
+            WHERE
+              InnerCode = '29894'
+              and DailyProfit is not null and LatestWeeklyYield is not null
+            ORDER BY tradingday desc
+              )t
+             )tt
+          where tt.num = 1
+);
+
+SELECT plan_table_output FROM TABLE(DBMS_XPLAN.DISPLAY('PLAN_TABLE'));
