@@ -8,7 +8,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lzz-spring-boot-starter" />
         <module name="payment" />
+        <module name="payment-spring-boot-starter" />
         <module name="payment-spring-boot-starter-application" />
+        <module name="spring-boot-sample" />
         <module name="third.library" />
       </profile>
     </annotationProcessing>
@@ -18,8 +20,10 @@
       <module name="hornetq-spring-boot-starter" target="1.5" />
       <module name="lzz-spring-boot-starter" target="1.8" />
       <module name="payment" target="1.8" />
+      <module name="payment-spring-boot-starter" target="1.8" />
       <module name="payment-spring-boot-starter-application" target="1.8" />
       <module name="spring-boot-master-auto-configuration" target="1.5" />
+      <module name="spring-boot-sample" target="1.8" />
       <module name="starterDemo" target="1.8" />
       <module name="third.library" target="1.8" />
     </bytecodeTargetLevel>

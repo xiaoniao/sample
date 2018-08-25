@@ -5,7 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Mine.iml" filepath="$PROJECT_DIR$/.idea/Mine.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment-spring-boot-starter/lzz-spring-boot-starter.iml" filepath="$PROJECT_DIR$/payment-spring-boot-starter/lzz-spring-boot-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment/payment.iml" filepath="$PROJECT_DIR$/payment/payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment/payment.iml" filepath="$PROJECT_DIR$/payment/payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-spring-boot-starter/payment-spring-boot-starter.iml" filepath="$PROJECT_DIR$/payment-spring-boot-starter/payment-spring-boot-starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/payment-spring-boot-starter-application/payment-spring-boot-starter-application.iml" filepath="$PROJECT_DIR$/payment-spring-boot-starter-application/payment-spring-boot-starter-application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-sample/payment-spring-boot-starter-application.iml" filepath="$PROJECT_DIR$/spring-boot-sample/payment-spring-boot-starter-application.iml" />
     </modules>
   </component>
 </project>

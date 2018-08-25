@@ -25,18 +25,16 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
 
-		<!-- Option -->
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>payment</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-autoconfigure</artifactId>
 		</dependency>
 
 	</dependencies>
