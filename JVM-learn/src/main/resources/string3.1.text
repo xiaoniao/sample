@@ -1,0 +1,198 @@
+Classfile /Users/liuzhuang/github/sample/JVM-learn/target/classes/com/example/JVMlearn/StringEqualsClass.class
+  Last modified Aug 16, 2018; size 1139 bytes
+  MD5 checksum 2a18311f0187a0f15f0a9d651eff21d5
+  Compiled from "StringEqualsClass.java"
+public class com.example.JVMlearn.classs.StringEqualsClass
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #14.#32        // java/lang/Object."<init>":()V
+   #2 = String             #33            // Hello
+   #3 = String             #25            // lo
+   #4 = Fieldref           #34.#35        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = Methodref          #36.#37        // java/io/PrintStream.println:(Z)V
+   #6 = Fieldref           #38.#39        // com/example/JVMlearn/StringOtherClass.hello:Ljava/lang/String;
+   #7 = Class              #40            // java/lang/StringBuilder
+   #8 = Methodref          #7.#32         // java/lang/StringBuilder."<init>":()V
+   #9 = String             #41            // Hel
+  #10 = Methodref          #7.#42         // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #11 = Methodref          #7.#43         // java/lang/StringBuilder.toString:()Ljava/lang/String;
+  #12 = Methodref          #44.#45        // java/lang/String.intern:()Ljava/lang/String;
+  #13 = Class              #46            // com/example/JVMlearn/StringEqualsClass
+  #14 = Class              #47            // java/lang/Object
+  #15 = Utf8               <init>
+  #16 = Utf8               ()V
+  #17 = Utf8               Code
+  #18 = Utf8               LineNumberTable
+  #19 = Utf8               LocalVariableTable
+  #20 = Utf8               this
+  #21 = Utf8               Lcom/example/JVMlearn/StringEqualsClass;
+  #22 = Utf8               string
+  #23 = Utf8               hello
+  #24 = Utf8               Ljava/lang/String;
+  #25 = Utf8               lo
+  #26 = Utf8               StackMapTable
+  #27 = Class              #46            // com/example/JVMlearn/StringEqualsClass
+  #28 = Class              #48            // java/lang/String
+  #29 = Class              #49            // java/io/PrintStream
+  #30 = Utf8               SourceFile
+  #31 = Utf8               StringEqualsClass.java
+  #32 = NameAndType        #15:#16        // "<init>":()V
+  #33 = Utf8               Hello
+  #34 = Class              #50            // java/lang/System
+  #35 = NameAndType        #51:#52        // out:Ljava/io/PrintStream;
+  #36 = Class              #49            // java/io/PrintStream
+  #37 = NameAndType        #53:#54        // println:(Z)V
+  #38 = Class              #55            // com/example/JVMlearn/StringOtherClass
+  #39 = NameAndType        #23:#24        // hello:Ljava/lang/String;
+  #40 = Utf8               java/lang/StringBuilder
+  #41 = Utf8               Hel
+  #42 = NameAndType        #56:#57        // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #43 = NameAndType        #58:#59        // toString:()Ljava/lang/String;
+  #44 = Class              #48            // java/lang/String
+  #45 = NameAndType        #60:#59        // intern:()Ljava/lang/String;
+  #46 = Utf8               com/example/JVMlearn/StringEqualsClass
+  #47 = Utf8               java/lang/Object
+  #48 = Utf8               java/lang/String
+  #49 = Utf8               java/io/PrintStream
+  #50 = Utf8               java/lang/System
+  #51 = Utf8               out
+  #52 = Utf8               Ljava/io/PrintStream;
+  #53 = Utf8               println
+  #54 = Utf8               (Z)V
+  #55 = Utf8               com/example/JVMlearn/StringOtherClass
+  #56 = Utf8               append
+  #57 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #58 = Utf8               toString
+  #59 = Utf8               ()Ljava/lang/String;
+  #60 = Utf8               intern
+{
+  public com.example.JVMlearn.classs.StringEqualsClass();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 6: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/example/JVMlearn/StringEqualsClass;
+
+  public void string();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=3, args_size=1
+         0: ldc           #2                  // String Hello
+         2: astore_1
+         3: ldc           #3                  // String lo
+         5: astore_2
+         6: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         9: aload_1
+        10: ldc           #2                  // String Hello
+        12: if_acmpne     19
+        15: iconst_1
+        16: goto          20
+        19: iconst_0
+        20: invokevirtual #5                  // Method java/io/PrintStream.println:(Z)V
+        23: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        26: getstatic     #6                  // Field com/example/JVMlearn/StringOtherClass.hello:Ljava/lang/String;
+        29: aload_1
+        30: if_acmpne     37
+        33: iconst_1
+        34: goto          38
+        37: iconst_0
+        38: invokevirtual #5                  // Method java/io/PrintStream.println:(Z)V
+        41: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        44: aload_1
+        45: ldc           #2                  // String Hello
+        47: if_acmpne     54
+        50: iconst_1
+        51: goto          55
+        54: iconst_0
+        55: invokevirtual #5                  // Method java/io/PrintStream.println:(Z)V
+        58: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        61: aload_1
+        62: new           #7                  // class java/lang/StringBuilder
+        65: dup
+        66: invokespecial #8                  // Method java/lang/StringBuilder."<init>":()V
+        69: ldc           #9                  // String Hel
+        71: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        74: aload_2
+        75: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        78: invokevirtual #11                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        81: if_acmpne     88
+        84: iconst_1
+        85: goto          89
+        88: iconst_0
+        89: invokevirtual #5                  // Method java/io/PrintStream.println:(Z)V
+        92: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        95: aload_1
+        96: new           #7                  // class java/lang/StringBuilder
+        99: dup
+       100: invokespecial #8                  // Method java/lang/StringBuilder."<init>":()V
+       103: ldc           #9                  // String Hel
+       105: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       108: aload_2
+       109: invokevirtual #10                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+       112: invokevirtual #11                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+       115: invokevirtual #12                 // Method java/lang/String.intern:()Ljava/lang/String;
+       118: if_acmpne     125
+       121: iconst_1
+       122: goto          126
+       125: iconst_0
+       126: invokevirtual #5                  // Method java/io/PrintStream.println:(Z)V
+       129: return
+      LineNumberTable:
+        line 9: 0
+        line 10: 3
+        line 12: 6
+        line 13: 23
+        line 14: 41
+        line 15: 58
+        line 16: 92
+        line 17: 129
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     130     0  this   Lcom/example/JVMlearn/StringEqualsClass;
+            3     127     1 hello   Ljava/lang/String;
+            6     124     2    lo   Ljava/lang/String;
+      StackMapTable: number_of_entries = 10
+        frame_type = 255 /* full_frame */
+          offset_delta = 19
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+        frame_type = 80 /* same_locals_1_stack_item */
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+        frame_type = 79 /* same_locals_1_stack_item */
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+        frame_type = 96 /* same_locals_1_stack_item */
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+        frame_type = 99 /* same_locals_1_stack_item */
+          stack = [ class java/io/PrintStream ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 0
+          locals = [ class com/example/JVMlearn/StringEqualsClass, class java/lang/String, class java/lang/String ]
+          stack = [ class java/io/PrintStream, int ]
+}
+SourceFile: "StringEqualsClass.java"
