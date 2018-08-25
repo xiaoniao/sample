@@ -1,0 +1,58 @@
+canal
+背景/项目介绍/工作原理
+https://github.com/alibaba/canal
+
+
+QuickStart
+mysql初始化/启动步骤
+https://github.com/alibaba/canal/wiki/QuickStart
+
+
+ClientExample
+使用canal.example工程/从头创建工程
+https://github.com/alibaba/canal/wiki/ClientExample
+
+
+AdminGuide[server description]
+canal配置
+https://github.com/alibaba/canal/wiki/AdminGuide
+
+
+ClientAPI
+https://github.com/alibaba/canal/wiki/ClientAPI
+
+
+DevGuide
+https://github.com/alibaba/canal/wiki/DevGuide
+
+
+BinlogChange(mysql5.6)
+增加binlog checksum/INSERT/UPDATE/DELETE协议变化/RowsQueryLogEvent事件新增/其他协议变化/新增type : TIME2/DATETIME2/TIMESTAMP2
+https://github.com/alibaba/canal/wiki/BinlogChange%28mysql5.6%29
+
+    server-id=1
+    binlog-checksum=CRC32
+    #binlog-checksum=NONE
+    master-verify-checksum=1
+    slave-sql-verify-checksum=1
+    log-bin=mysql-bin
+    binlog-format=ROW
+    binlog-rows-query-log-events=true
+    log-bin-use-v1-row-events=1
+    binlog_cache_size=2M
+    max_binlog_size=512M
+    sync_binlog=0
+    character-set-server = utf8
+    #default-character-set = utf8
+    collation-server = utf8_unicode_ci
+    [mysql]
+    default-storage-engine=INNODB
+    default-character-set=utf8
+
+Performance
+https://github.com/alibaba/canal/wiki/Performance
+
+FAQ
+https://github.com/alibaba/canal/wiki/FAQ
+
+    INSERT/UPDATE/DELETE被解析为Query或DDL语句？

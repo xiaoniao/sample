@@ -1,0 +1,30 @@
+com.sun.tools.javac.processing
+PrintingProcessor
+
+https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-tools/spring-boot-configuration-processor/src/main/java/org/springframework/boot/configurationprocessor/ConfigurationMetadataAnnotationProcessor.java
+ConfigurationMetadataAnnotationProcessor
+
+
+
+
+Title: Java Annotation Processing and Creating a Builder
+
+1. Introduction
+2. Applications of Annotation Processing
+3. Annotation Processing API
+4. Setting Up the Project
+5. Defining an Annotation
+6. Implementing a Processor
+    6.1. Creating an AbstractProcessor Subclass
+    6.2. Gathering Data
+    6.3. Generating the Output File
+7. Running the Example
+
+8. Alternative Ways of Registering a Processor
+    8.1. Using the Annotation Processor Tool 【废弃】
+    8.2. Using the Compiler Key javac命令编译
+    8.3. Using Maven
+    8.4. Adding a Processor Jar to the Classpath
+    8.5. Using the Google auto-service Library
+
+9. Conclusion

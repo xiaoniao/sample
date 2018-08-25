@@ -1,0 +1,66 @@
+
+#操作
+#kibana
+#curl
+
+#新建索引（默认5个分片，一个副本）
+PUT blog
+curl -XPUT "http://localhost:9200/blog"
+
+
+    新建索引（3个分片，0个副本）
+    PUT blog
+    {
+    "settings": {
+        "number_of_shards": 3,
+        "number_of_replicas": 0
+    }
+    }
+    curl -XPUT "http://localhost:9200/blog" -H 'Content-Type: application/json' -d'
+    {
+    "settings": {
+        "number_of_shards": 3,
+        "number_of_replicas": 0
+    }
+    }'
+
+
+#查看索引配置
+GET blog/_settings
+curl -XGET "http://localhost:9200/blog/_settings"
+
+
+#设置索引权限
+
+
+#更新索引
+
+
+#删除索引
+DELETE blog
+curl -XDELETE "http://localhost:9200/blog"
+
+
+
+
+
+
+
+
+
+问题：
+{
+  "error": {
+    "root_cause": [
+      {
+        "type": "cluster_block_exception",
+        "reason": "blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];"
+      }
+    ],
+    "type": "cluster_block_exception",
+    "reason": "blocked by: [FORBIDDEN/12/index read-only / allow delete (api)];"
+  },
+  "status": 403
+}
+FORBIDDEN/12/index read-only / allow delete (api)]
+https://discuss.elastic.co/t/forbidden-12-index-read-only-allow-delete-api/110282

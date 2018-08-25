@@ -1,0 +1,30 @@
+https://blog.csdn.net/jeasonlzy/article/details/74273851
+
+https://www.jianshu.com/p/07ef8ba80562
+
+TODO
+https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-tools/spring-boot-configuration-processor/src/main/java/org/springframework/boot/configurationprocessor/ConfigurationMetadataAnnotationProcessor.java
+
+https://www.jianshu.com/p/50d95fbf635c
+
+
+Spring Configuration Metadata
+https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html
+
+使用注解处理器产生自己的元数据
+https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/X.%20Appendices/B.2.%20Generating%20your%20own%20meta-data%20using%20the%20annotation%20processor.html
+
+
+https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html
+
+https://www.baeldung.com/java-annotation-processing-builder
+https://liuzhengyang.github.io/2017/10/20/annotation-processing/
+
+
+获取泛型真实类型
+https://blog.csdn.net/hustspy1990/article/details/78011301
+从APT中获取运行时类信息
+https://segmentfault.com/a/1190000004978358
+
+Java Code Examples for javax.lang.model.type.DeclaredType
+https://www.programcreek.com/java-api-examples/?api=javax.lang.model.type.DeclaredType

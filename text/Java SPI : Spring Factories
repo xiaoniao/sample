@@ -1,0 +1,13 @@
+http://rensanning.iteye.com/blog/2372584
+（1）Java Service Loader 
+    JDBC 
+    Logger 
+（2）Spring Factories Loader 
+    spring-boot-autoconfigure-1.5.2.RELEASE.jar/META-INF/spring.factories 
+
+Java Service Loader vs Spring Factories Loader
+    https://blog.frankel.ch/java-service-loader-vs-spring-factories/
+
+
+聊聊Java SPI机制
+https://www.cnblogs.com/doit8791/p/8871832.html

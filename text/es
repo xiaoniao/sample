@@ -1,0 +1,421 @@
+POST blog/_open
+
+GET blog
+
+POST _reindex
+{
+  "source":{"index":"blog"},
+  "dest":{"index": "blog_new"}
+}
+
+GET /_aliases
+
+
+
+----
+
+PUT blog/article/1
+{
+  "id":1,
+  "title": "Git",
+  "content": "版本控制工具",
+  "posttime": "2018-08-08"
+}
+
+POST blog/article
+{
+  "id": 2,
+  "title": "Git",
+  "content": "版本控制工具",
+  "posttime": "2018-08-08"
+}
+
+POST test/type1/1/_update
+{
+  "script" : {
+    "source": "ctx._source.counter += params.count",
+    "lang": "painless",
+    "params": {
+      "count": 4
+    }
+  }
+}
+
+POST test/type1/1/_update
+{
+  "script" : {
+    "source": "ctx._source.tags.add(params.tag)",
+    "lang": "painless",
+    "params": {
+      "tag": "blue"
+    }
+  }
+}
+
+POST test/type1/1/_update
+{
+  "script" : "ctx._source.new_field=\"111\""
+}
+
+POST test/type1/1/_update
+{
+  "script" : "ctx._source.remove(\"new_field\")"
+}
+
+POST test/type1/1/_update
+{
+  "script" : {
+    "source": "ctx._source.counter += params.count",
+    "lang": "painless",
+    "params": {
+      "count": 4
+    }
+  },
+  "upsert" : {
+      "counter" : 100
+    }
+}
+
+----
+
+设置索引配置
+
+PUT books
+{
+  "settings": {
+    "number_of_replicas": 1,
+    "number_of_shards": 3
+  },
+  "mappings": {
+    "IT": {
+      "properties": {
+        "id": {
+          "type": "long"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        },
+        "language": {
+          "type": "keyword"
+        },
+        "author": {
+          "type": "keyword"
+        },
+        "price": {
+          "type": "double"
+        },
+        "year": {
+          "type": "date",
+          "format": "yyy-MM-dd"
+        },
+        "description": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        }
+      }
+    }
+  }
+}
+
+导入数据到ES
+curl -H'Content-Type: application/json' -XPOST 'http://localhost:9200/_bulk?pretty' --data-binary @books2.json
+
+查询
+GET books/_search
+{
+  "from": 0,
+  "size": 5, 
+  "query": {
+    "term": {
+      "title": {
+        "value": "javascript"
+      }
+    }
+  },
+  "_source": ["id", "title"],
+  "version": false,
+  "min_score": 0.00001,
+  "highlight": {
+    "fields": {
+      "title": {}
+    }
+  }
+}
+
+--
+GET books/_search
+{
+  "query": {
+    "term": {
+      "title": "java 编程"
+    }
+  }
+}
+
+GET books/_search
+{
+  "query": {
+    "match": {
+      "title": "java 编程"
+    }
+  }
+}
+
+term搜索和match搜索比对
+
+# term
+GET books/_search
+{
+  "query": {
+    "term": {
+      "title": "java 编程"
+    }
+  }
+}
+
+# match
+GET books/_search
+{
+  "query": {
+    "match": {
+      "title": "java 编程"
+    }
+  }
+}
+
+# multi_match
+GET books/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "java 编程",
+      "fields": ["title", "description"]
+    }
+  }
+}
+
+# terms
+GET books/_search
+{
+  "query": {
+    "terms": {
+      "title": ["java", "科学"]
+    }
+  }
+}
+
+# range
+GET books/_search
+{
+  "query": {
+    "range": {
+      "price": {
+        "gte": 70,
+        "lte": 90
+      }
+    }
+  }
+}
+
+
+# 扁平化
+PUT my_index/my_type/1
+{
+  "group": "fans",
+  "user": [
+      {
+        "first":"liu",
+        "last":"zhuang"
+      },
+      {
+        "first":"song",
+        "last":"hana"
+      }
+    ]
+}
+
+实际是 user.first['liuz', 'song'] user.last['zhuang, 'hana']
+
+搜索
+GET my_index/_search
+{
+  "query":{
+    "bool":{
+      "must": [
+        {
+          "match": {
+            "user.first": "liu"
+          }
+        },
+        {
+          "match": {
+            "user.last": "hanna"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# 设置nested 嵌套类型
+PUT /my_index
+{
+  "mappings": {
+    "my_type": {
+      "properties": {
+        "user":{
+          "type": "nested"
+        }
+      }
+    }
+  }
+}
+
+GET my_index/_mapping
+
+# 嵌套查询  ----不支持了
+GET my_index/_search
+{
+	"query": {
+		"nested": {
+			"path": "user",
+			"query": {
+				"bool": {
+					"must": [
+					  {
+							"match": {
+								"user.first": "liu"
+							}
+						},
+						{
+							"match": {
+								"user.last": "zhuang"
+							}
+						}
+					]
+				}
+			}
+		}
+	}
+}
+
+
+# 最大值
+GET books/_search
+{
+  "size": 0,
+  "aggs": {
+    "max_id": {
+      "max": {
+        "field": "id"
+      }
+    }
+  }
+}
+
+CAT APIs
+GET /_cat/allocation
+GET /_cat/shards?v
+GET /_cat/shards/{index}
+GET /_cat/master?v
+GET /_cat/nodes
+GET /_cat/tasks
+GET /_cat/indices
+GET /_cat/indices/{index}
+GET /_cat/segments
+GET /_cat/segments/{index}
+GET /_cat/count
+GET /_cat/count/{index}
+GET /_cat/recovery
+GET /_cat/recovery/{index}
+GET /_cat/health
+GET /_cat/pending_tasks
+GET /_cat/aliases
+GET /_cat/aliases/{alias}
+GET /_cat/thread_pool
+GET /_cat/thread_pool/{thread_pools}
+GET /_cat/plugins
+GET /_cat/fielddata
+GET /_cat/fielddata/{fields}
+GET /_cat/nodeattrs
+GET /_cat/repositories
+GET /_cat/snapshots/{repository}
+GET /_cat/templates
+
+
+
+
+TYPE 是一个不能理解的概念
+
+
+ES的索引和Lucene的索引概念不一样
+
+ES的索引是一组lucene索引组成
+
+这是文档
+{
+  "name" : "jack",
+  "age" : 18;
+}
+
+ES描述索引  (/book 索引组名)
+PUT /book
+{
+  "mappings": {
+    "person": {
+      "properties": {
+        "user": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "title": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        },
+        "desc": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word"
+        }
+      }
+    }
+  }
+}'
+
+实际lucene的索引
+user text
+title text
+desc text
+
+ES做了一层抽象，但是命名太让人困惑了。
+
+
+--
+
+Elasticsearch 别名
+
+----
+
+在java里怎么使用elasticsearch
+
+REST 
+  直接用rest方式不推荐，缺少程序封装
+
+java API
+
+1. Node 连接方式已经被删除 在5.0版本
+
+2. transport 连接方式将在7.0中废弃，8.0中删除
+
+3. 当前版本 6.0 推荐使用：Java High Level REST Client 连接方式
+
+
+
+启动
+es
+es-head npm run start
+kibana
+

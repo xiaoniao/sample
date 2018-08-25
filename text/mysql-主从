@@ -15,16 +15,16 @@ docker pull mysql:5.6 以5.6版本为例
 
 3. 启动docker
 
-docker run -p 3306:3306 --name mymysql      -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
-docker run -p 3307:3306 --name mymysql-sla1 -v $PWD/conf-sla1:/etc/mysql/conf.d -v $PWD/logs-sla1:/logs -v $PWD/data-sla1:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
-docker run -p 3308:3306 --name mymysql-sla2 -v $PWD/conf-sla2:/etc/mysql/conf.d -v $PWD/logs-sla2:/logs -v $PWD/data-sla2:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+docker run -p 3306:3306 --name mymysql-master -v $PWD/mysql/conf:/etc/mysql/conf.d -v $PWD/mysql/logs:/logs -v $PWD/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+docker run -p 3307:3306 --name mymysql-sla1 -v $PWD/mysql/conf-sla1:/etc/mysql/conf.d -v $PWD/mysql/logs-sla1:/logs -v $PWD/mysql/data-sla1:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
+docker run -p 3308:3306 --name mymysql-sla2 -v $PWD/mysql/conf-sla2:/etc/mysql/conf.d -v $PWD/mysql/logs-sla2:/logs -v $PWD/mysql/data-sla2:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
 
 
--p 3306:3306                    将容器的 3306 端口映射到主机的 3306 端口
--v $PWD/conf:/etc/mysql/conf.d  将主机当前目录下的 conf/my.cnf 挂载到容器的 /etc/mysql/my.cnf
--v $PWD/logs:/logs              将主机当前目录下的 logs 目录挂载到容器的 /logs
--v $PWD/data:/var/lib/mysql     将主机当前目录下的data目录挂载到容器的 /var/lib/mysql
--e MYSQL_ROOT_PASSWORD=123456   初始化 root 用户的密码
+-p 3306:3306                         将容器的 3306 端口映射到主机的 3306 端口
+-v $PWD/mysql/conf:/etc/mysql/conf.d  将主机当前目录下的 /mysql/conf/my.cnf 挂载到容器的 /etc/mysql/my.cnf
+-v $PWD/mysql/logs:/logs              将主机当前目录下的 /mysqllogs 目录挂载到容器的 /logs
+-v $PWD/mysql/data:/var/lib/mysql     将主机当前目录下的 /mysqldata目录挂载到容器的 /var/lib/mysql
+-e MYSQL_ROOT_PASSWORD=123456         初始化 root 用户的密码
 
 
 4. 查看docker启动状况
@@ -36,6 +36,8 @@ docker ps
 二、设置主从数据库
 
 1. 设置数据库配置文件
+
+再conf conf-sla1 conf-sla2 下创建my.cnf
 
 主
 [mysqld]
@@ -84,6 +86,11 @@ CREATE USER 'slave'@'%' IDENTIFIED BY '123456';
 GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'slave'@'%';
 
 
+CREATE USER canal IDENTIFIED BY 'canal';
+GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
+-- GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' ;
+FLUSH PRIVILEGES;
+
 
 6. 查看Master状态
 
@@ -107,5 +114,12 @@ master_connect_retry    当重新建立主从连接时，如果连接失败，�
 
 show slave status \G;
 
-
+开启主从同步
 start slave;
+
+
+
+----
+参考
+http://www.runoob.com/docker/docker-install-mysql.html#1
+https://www.jianshu.com/p/ab20e835a73f#1

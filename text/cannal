@@ -1,0 +1,13 @@
+canal
+https://github.com/alibaba/canal
+基于mysql.binlog的增量订阅&消费服务
+
+基于日志增量订阅&消费支持的业务：
+    1.数据库镜像
+    2.数据库实时备份
+    3.多级索引 (卖家和买家各自分库索引)
+    4.search build
+    5.业务cache刷新
+    6.价格变化等重要业务消息
+
+

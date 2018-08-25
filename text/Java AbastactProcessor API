@@ -1,0 +1,9 @@
+父抽象：Element
+类：TypeElement
+方法：ExecutableElement
+变量：VariableElement
+
+
+
+TypeMirror
+代表Java类型，包括基本类型，class类型，接口类型，数组类型，类型变量，null类型。也代表通配符类型参数，方法签名和返回类型。

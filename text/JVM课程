@@ -1,0 +1,23 @@
+JVM实用参数（一）JVM类型以及编译器模式
+http://ifeve.com/useful-jvm-flags-part-1-jvm-types-and-compiler-modes-2/
+
+JVM实用参数（二）参数分类和即时（JIT）编译器诊断
+http://ifeve.com/useful-jvm-flags-part-2-flag/
+
+JVM实用参数（三）打印所有XX参数及值
+http://ifeve.com/useful-jvm-flags-part-3-printing-all-xx-flags-and-their-values/
+
+JVM实用参数（四）内存调优
+http://ifeve.com/useful-jvm-flags-part-4-heap-tuning/
+
+JVM实用参数（五）新生代垃圾回收
+http://ifeve.com/useful-jvm-flags-part-5-young-generation-garbage-collection/
+
+JVM实用参数（六） 吞吐量收集器
+http://ifeve.com/useful-jvm-flags-part-6-throughput-collector/
+
+JVM实用参数（七）CMS收集器
+http://ifeve.com/useful-jvm-flags-part-7-cms-collector/
+
+JVM实用参数（八）GC日志
+http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
