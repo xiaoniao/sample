@@ -21,6 +21,9 @@ public class DaoMapperTest {
         result.forEach(System.out::println);
     }
 
+    /**
+     * Mybatis mapper 动态代理
+     */
     static class MyInvocationHandler implements InvocationHandler {
 
         @Override
