@@ -1,0 +1,226 @@
+封装了运行时环境（跨平台），运维可编程化，从0到1，从1到无穷复制
+
+
+docker pull ubuntu
+docker pull django
+docker pull haproxy
+docker pull redis
+
+docker run  -it --name redis-master redis /bin/bash
+
+
+sudo docker run -v /Users/liuzhuang/docker/volume/redis/data:/data -v /Users/liuzhuang/docker/volume/redis/conf/redis.conf:/etc/redis/redis.conf -it --name redis-master -d redis redis-server /etc/redis/redis.conf
+
+sudo docker run -v /Users/liuzhuang/docker/volume/redis-slave1/data:/data -v /Users/liuzhuang/docker/volume/redis-slave1/conf/redis.conf:/etc/redis/redis.conf -it --name redis-slave1 --link redis-master:master -d redis redis-server /etc/redis/redis.conf
+
+sudo docker run -v /Users/liuzhuang/docker/volume/redis-slave2/data:/data -v /Users/liuzhuang/docker/volume/redis-slave2/conf/redis.conf:/etc/redis/redis.conf -it --name redis-slave2 --link redis-master:master -d redis redis-server /etc/redis/redis.conf
+
+sudo docker run -it --name APP1 --link redis-master:db -v /Users/liuzhuang/docker/volume/Django/APP1:/usr/src/app django /bin/bash
+
+sudo docker run -it --name APP2 --link redis-master:db -v /Users/liuzhuang/docker/volume/Django/APP2:/usr/src/app django /bin/bash
+
+sudo docker run -it --name HAProxy --link APP1:APP1 --link APP2:APP2 -p 6301:6301 -v /Users/liuzhuang/docker/volume/HAProxu:/tmp haproxy /bin/bash
+
+
+docker run \
+-v /Users/liuzhuang/docker/volume/redis/data:/data  \
+-v /Users/liuzhuang/docker/volume/redis/conf/redis.conf:/etc/redis/redis.conf  \
+--name redis-master  \
+redis
+
+docker run \
+-v /Users/liuzhuang/docker/volume/redis-slave1/data:/data  \
+-v /Users/liuzhuang/docker/volume/redis-slave1/conf/redis.conf:/etc/redis/redis.conf  \
+--name redis-slave1  \
+--link redis-master:master  \
+redis
+
+
+# redis master
+docker run \
+-p 6379:6379 \
+-v /Users/liuzhuang/docker/volume/redis/data:/data \
+-v /Users/liuzhuang/docker/volume/redis/conf/redis.conf:/etc/redis/redis.conf \
+--privileged=true \
+--name redis-master \
+-d redis redis-server /etc/redis/redis.conf
+
+#客户端连接
+docker exec -it 9088aa24c3c2 /bin/bash
+127.0.0.1:6379> AUTH "password"
+OK
+
+# redis slave1
+docker run \
+-p 6380:6379 \
+-v /Users/liuzhuang/docker/volume/redis-slave1/data:/data \
+-v /Users/liuzhuang/docker/volume/redis-slave1/conf/redis.conf:/etc/redis/redis.conf \
+--privileged=true \
+--name redis-slave1 \
+--link redis-master:master \
+-d redis redis-server /etc/redis/redis.conf
+
+# redis slave2
+docker run \
+-p 6381:6379 \
+-v /Users/liuzhuang/docker/volume/redis-slave2/data:/data \
+-v /Users/liuzhuang/docker/volume/redis-slave2/conf/redis.conf:/etc/redis/redis.conf \
+--privileged=true \
+--name redis-slave2 \
+--link redis-master:master \
+-d redis redis-server /etc/redis/redis.conf
+
+
+
+
+
+
+
+
+mac 上查看虚拟机
+进入linux环境
+screen /Users/liuzhuang/Library/Containers/com.docker.docker/Data/vms/0/tty
+cd /var/lib/docker/
+
+
+
+
+测试--link
+docker run -d --name db training/postgres
+docker run -d -P --name web --link db:webdb training/webapp python app.py
+
+
+docker run -d -P -p 5000:5000 --name web --link db:webdb training/webapp python app.py
+
+
+
+
+
+
+
+vagrant 命令行创建虚拟机，比手动创建快捷
+通过创建多个lunix系统，模拟docker通信。模拟微服务调用。
+
+
+基础命令：
+mkdir centos7
+cd centos7
+vagrant init centos/7  # 生成描述文件 Vagrantfile
+vagrant up  # 下载文件并安装
+vagrant ssh # 进入虚拟机
+sudo yum update # yum更新一些package
+exit
+
+vagrant status
+vagrant halt  # 停止虚拟机
+vagrant destroy # 删除虚拟机
+
+
+centos安装docker: 从rep中下载安装
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+
+$ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+$ sudo yum install docker-ce
+
+$ sudo systemctl start docker
+
+$ sudo docker run hello-world
+
+卸载docker:
+$ sudo yum remove docker-ce
+$ sudo rm -rf /var/lib/docker
+
+
+
+docker-machine 安装 docker-engine
+docker-machine create demo  # 创建一个linux虚拟机，并安装好docker
+docker-machine ssh demo # 进入虚拟机
+docker-machine ls
+可以远程创建docker
+
+
+添加用户组 免sudo
+sudo groupadd docker
+sudo gpasswd -a vagrant docker
+
+
+bugfix
+vagrant plugin install vagrant-vbguest
+vagrant vbguest
+
+
+
+
+
+
+
+
+
+---
+
+sudo docker network ls # 列举当前网络
+sudo docker network create backend # 创建网络 默认是bridge方式
+sudo docker network create frontend # 创建网络 ### ps:创建网络的时候会自动在linux主机上创建网卡
+
+# 创建容器并指定网络
+sudo docker run -it --name container1 --net backend busybox
+sudo docker run -it --name container2 --net backend busybox
+sudo docker run -it --name container3 --net frontend busybox
+sudo docker run -it --name con1  busybox
+
+sudo docker network connect frontend container3 # 容器加入到指定网络
+sudo docker network inspect # 查看网络明细
+sudo docker network ls # 查看网络
+
+sudo yum -y install net-tools # 安装网络包
+
+ifconfig # 查看本机网卡
+route -n # 查看内核路由表
+sudo brctl show # 查看网桥和其端口
+
+# 添加网桥并指定ip
+sudo brctl addbr br0 # 添加网桥
+sudo ifconfig br0 188.18.0.1 # 指定ip
+ifconfig
+
+
+# 容器主机名和DNS
+
+# 设置
+docker run
+-h 设置主机名
+-dns 设置DNS
+
+# 查看
+/etc/hostname
+/etc/hosts
+/etc/resolv.conf
+
+
+
+指定网络模式
+--network bridge 默认
+--network none
+--network host
+
+
+
+
+
+

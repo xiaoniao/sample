@@ -43,8 +43,8 @@ public final class BookServer {
                             p.addLast(new ProtobufDecoder(SubscribeReqProto.SubscribeReq.getDefaultInstance()));
                             p.addLast(new ProtobufVarint32LengthFieldPrepender());
                             p.addLast(new ProtobufEncoder());
+                            p.addLast(new DefaultEventExecutorGroup(16), "businessHandler", new BusinessHandler());
                             p.addLast(new BookServerHandler());
-                            // p.addLast(new DefaultEventExecutorGroup(16), "businessHandler", new BusinessHandler());
                         }
                     });
 

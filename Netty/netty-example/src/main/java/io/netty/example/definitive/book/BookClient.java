@@ -7,8 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.example.definitive.serialize.java.SubscribeReqProto;
 import io.netty.example.definitive.serialize.java.SubscribeRespProto;
-import io.netty.example.definitive.serialize.java.UserInfo;
-import io.netty.handler.codec.memcache.binary.BinaryMemcacheObjectAggregator;
+import io.netty.example.echo.EchoServerHandler;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
@@ -22,6 +21,7 @@ public final class BookClient {
 
     public static void main(String[] args) throws Exception {
 
+        BookClientHandler bookClientHandler = new BookClientHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
@@ -37,11 +37,21 @@ public final class BookClient {
                             p.addLast(new ProtobufDecoder(SubscribeRespProto.SubscribeResp.getDefaultInstance()));
                             p.addLast(new ProtobufVarint32LengthFieldPrepender());
                             p.addLast(new ProtobufEncoder());
-                            p.addLast(new BookClientHandler());
+                            p.addLast(bookClientHandler);
                         }
                     });
 
             ChannelFuture f = b.connect("127.0.0.1", 8007).sync();
+
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                bookClientHandler.sendMsg();
+                f.channel().close();
+            }).start();
 
             f.channel().closeFuture().sync();
 
@@ -54,19 +64,31 @@ public final class BookClient {
     public static class BookClientHandler extends ChannelInboundHandlerAdapter {
         private Logger log = LoggerFactory.getLogger("LZZ-HttpClientHandler");
 
+        private static ChannelHandlerContext channelHandlerContext;
+
         private volatile int counter;
+
+        public void sendMsg() {
+            SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
+            builder.setSubReqID(1);
+            builder.setUserName("jack");
+            builder.setProductName("taoBao");
+            builder.setAddress("hz");
+            channelHandlerContext.writeAndFlush(builder.build());
+        }
 
         @Override
         public void channelActive(ChannelHandlerContext ctx) {
+            channelHandlerContext = ctx;
             log.info("#####channelActive");
-            for (int i = 0; i < 1; i++) {
-                SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
-                builder.setSubReqID(1);
-                builder.setUserName("jack");
-                builder.setProductName("taoBao");
-                builder.setAddress("hz");
-                ctx.writeAndFlush(builder.build());
-            }
+//            for (int i = 0; i < 1; i++) {
+//                SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq.newBuilder();
+//                builder.setSubReqID(1);
+//                builder.setUserName("jack");
+//                builder.setProductName("taoBao");
+//                builder.setAddress("hz");
+//                ctx.writeAndFlush(builder.build());
+//            }
         }
 
         @Override

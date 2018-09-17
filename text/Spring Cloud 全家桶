@@ -1,0 +1,144 @@
+ 
+Spring Cloud provides tools for developers to quickly build some of the common patterns in
+distributed systems (e.g. configuration management, service discovery, circuit breakers, 
+intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, 
+cluster state). Coordination of distributed systems leads to boiler plate patterns, and 
+using Spring Cloud developers can quickly stand up services and applications that implement those patterns. 
+They will work well in any distributed environment, including the developer's own laptop, bare metal data centres, and 
+managed platforms such as Cloud Foundry.
+
+Spring Cloud为开发人员提供了一些快速构建分布式系统中常见模式的工具（例如配置管理，服务发现，断路器，智能路由，微代理，控制总线，一次性令牌，
+全局锁定，领导选举，分布式会话，集群状态）。 
+分布式系统的协调导致锅炉板模式，使用Spring Cloud开发人员可以快速站起来实现这些模式的服务和应用程序。 
+它们适用于任何分布式环境，包括开发人员自己的笔记本电脑，裸机数据中心和Cloud Foundry等托管平台。
+
+    什么是“锅炉板模式”（boiler plate patterns）？ https://www.oschina.net/question/3210513_2218453
+        分布式系统间的协作产生了一些样板性质的模式，开发者使用 Spring Cloud 就可以快速地构建基于这些模式的服务和应用。
+        boiler plate patterns 参考了 boilerplate code，就是一些代码量很少，可以拿过来放到系统中直接使用的样板代码。
+        我认为  boiler plate patterns 可以白话地理解为套路模式。
+        分布式系统间的协作都是有套路的，开发者使用 Spring Cloud 就可以快速地构建包括这些套路的服务和应用。
+
+
+    Boilerplate code https://en.wikipedia.org/wiki/Boilerplate_code
+        
+
+
+功能：
+Spring Cloud focuses on providing good out of box experience for typical use cases and extensibility mechanism to cover others.
+
+Distributed/versioned configuration
+Service registration and discovery
+Routing
+Service-to-service calls
+Load balancing
+Circuit Breakers
+Global locks
+Leadership election and cluster state
+Distributed messaging
+
+
+项目：
+1. Spring Cloud Config
+Centralized external configuration management backed by a git repository. The configuration resources map directly to Spring `Environment` but could be used by non-Spring applications if desired.
+由git存储库支持的集中式外部配置管理。配置资源直接映射到Spring`Environment`，但如果需要，可以由非Spring应用程序使用。
+
+2. Spring Cloud Netflix
+Integration with various Netflix OSS components (Eureka, Hystrix, Zuul, Archaius, etc.).
+与各种Netflix OSS组件集成（Eureka，Hystrix，Zuul，Archaius等）
+
+3. Spring Cloud Bus
+An event bus for linking services and service instances together with distributed messaging. Useful for propagating state changes across a cluster (e.g. config change events).
+用于将服务和服务实例与分布式消息传递链接在一起的事件总线 用于在群集中传播状态更改（例如，配置更改事件）。
+
+4. Spring Cloud for Cloud Foundry
+Integrates your application with Pivotal Cloud Foundry. Provides a service discovery implementation and also makes it easy to implement SSO and OAuth2 protected resources.
+将您的应用程序与Pivotal Cloud Foundry集成。提供服务发现实现，还可以轻松实现受SSO和OAuth2保护的资源。
+
+5. Spring Cloud Open Service Broker
+Provides a starting point for building a service broker that implements the Open Service Broker API.
+提供构建实现Open Service Broker API的服务代理的起点。
+
+6. Spring Cloud Cluster
+Leadership election and common stateful patterns with an abstraction and implementation for Zookeeper, Redis, Hazelcast, Consul.
+领导者选举和共同的有状态模式与Zookeeper，Redis，Hazelcast，Consul的抽象和实现。
+
+7. Spring Cloud Consul
+Service discovery and configuration management with Hashicorp Consul.
+Hashicorp Consul的服务发现和配置管理。
+
+8. Spring Cloud Security
+Provides support for load-balanced OAuth2 rest client and authentication header relays in a Zuul proxy.
+为Zuul代理中的负载平衡OAuth2 rest客户端和身份验证头中继提供支持
+
+9. Spring Cloud Sleuth
+Distributed tracing for Spring Cloud applications, compatible with Zipkin, HTrace and log-based (e.g. ELK) tracing.
+Spring Cloud应用程序的分布式跟踪，兼容Zipkin，HTrace和基于日志（例如ELK）的跟踪。
+
+10. Spring Cloud Data Flow
+A cloud-native orchestration service for composable microservice applications on modern runtimes. Easy-to-use DSL, drag-and-drop GUI, and REST-APIs together simplifies the overall orchestration of microservice based data pipelines.
+适用于现代运行时的可组合微服务应用程序的云本机编排服务。易于使用的DSL，拖放式GUI和REST-API共同简化了基于微服务的数据管道的整体编排。
+
+11. Spring Cloud Stream
+A lightweight event-driven microservices framework to quickly build applications that can connect to external systems. Simple declarative model to send and receive messages using Apache Kafka or RabbitMQ between Spring Boot apps.
+轻量级事件驱动的微服务框架，可快速构建可连接到外部系统的应用程序。在Spring Boot应用程序之间使用Apache Kafka或RabbitMQ发送和接收消息的简单声明模型。
+
+12. Spring Cloud Stream App Starters
+Spring Cloud Stream App Starters are Spring Boot based Spring Integration applications that provide integration with external systems.
+Spring Cloud Stream App Starters是基于Spring Boot的Spring Integration应用程序，可提供与外部系统的集成。
+
+13. Spring Cloud Task
+A short-lived microservices framework to quickly build applications that perform finite amounts of data processing. Simple declarative for adding both functional and non-functional features to Spring Boot apps.
+一种短命的微服务框架，用于快速构建执行有限数据处理的应用程序。用于向Spring Boot应用程序添加功能和非功能功能的简单声明。
+
+14. Spring Cloud Task App Starters
+Spring Cloud Task App Starters are Spring Boot applications that may be any process including Spring Batch jobs that do not run forever, and they end/stop after a finite period of data processing.
+Spring Cloud Task App Starters是Spring Boot应用程序，可能是任何进程，包括不能永久运行的Spring Batch作业，它们在有限的数据处理期后结束/停止。
+
+15. Spring Cloud Zookeeper
+Service discovery and configuration management with Apache Zookeeper.
+使用Apache Zookeeper进行服务发现和配置管理。
+
+16. Spring Cloud for Amazon Web Services
+Easy integration with hosted Amazon Web Services. It offers a convenient way to interact with AWS provided services using well-known Spring idioms and APIs, such as the messaging or caching API. Developers can build their application around the hosted services without having to care about infrastructure or maintenance.
+与托管的Amazon Web Services轻松集成。它提供了一种使用众所周知的Spring习语和API（如消息传递或缓存API）与AWS提供的服务进行交互的便捷方式。开发人员可以围绕托管服务构建应用程序，而无需关心基础结构或维护。
+
+17. Spring Cloud Connectors
+Makes it easy for PaaS applications in a variety of platforms to connect to backend services like databases and message brokers (the project formerly known as "Spring Cloud").
+使各种平台中的PaaS应用程序可以轻松连接到数据库和消息代理（该项目以前称为“Spring Cloud”）等后端服务。
+
+18. Spring Cloud Starters
+Spring Boot-style starter projects to ease dependency management for consumers of Spring Cloud. (Discontinued as a project and merged with the other projects after Angel.SR2.)
+Spring Boot风格的入门项目，可以简化Spring Cloud用户的依赖管理。（作为项目停产并在Angel.SR2之后与其他项目合并。）
+
+19. Spring Cloud CLI
+Spring Boot CLI plugin for creating Spring Cloud component applications quickly in Groovy
+Spring Boot CLI插件，用于在Groovy中快速创建Spring Cloud组件应用程序
+
+20. Spring Cloud Contract
+Spring Cloud Contract is an umbrella project holding solutions that help users in successfully implementing the Consumer Driven Contracts approach.
+Spring Cloud Contract是一个总体项目，其中包含帮助用户成功实施消费者驱动合同方法的解决方案
+
+21. Spring Cloud Gateway
+Spring Cloud Gateway is an intelligent and programmable router based on Project Reactor.
+Spring Cloud Gateway是一款基于Project Reactor的智能可编程路由器。
+
+22. Spring Cloud OpenFeign
+Spring Cloud OpenFeign provides integrations for Spring Boot apps through autoconfiguration and binding to the Spring Environment and other Spring programming model idioms.
+Spring Cloud OpenFeign通过自动配置和Spring环境以及其他Spring编程模型习惯用法提供Spring Boot应用程序的集成。
+
+23. Spring Cloud Pipelines
+Spring Cloud Pipelines provides an opinionated deployment pipeline with steps to ensure that your application can be deployed in zero downtime fashion and easilly rolled back of something goes wrong.
+Spring Cloud Pipelines提供了一个固定意见的部署管道，其中包含确保您的应用程序可以零停机方式部署并轻松回滚出错的步骤。
+
+24. Spring Cloud Function
+Spring Cloud Function promotes the implementation of business logic via functions. It supports a uniform programming model across serverless providers, as well as the ability to run standalone (locally or in a PaaS).
+Spring Cloud Function通过函数促进业务逻辑的实现。它支持无服务器提供商之间的统一编程模型，以及独立运行（本地或PaaS）的能力。
+
+
+
+
+
+
+
+
+

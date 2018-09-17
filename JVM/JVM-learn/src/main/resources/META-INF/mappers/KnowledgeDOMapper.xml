@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.JVMlearn.basic.dal.mapper.KnowledgeDOMapper">
+
+    <resultMap id="BaseResultMap"  type="com.example.JVMlearn.basic.dal.dataobject.KnowledgeDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="KNOWLEDGE_NAME" property="knowledgeName" jdbcType="VARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_IMG" property="knowledgeImg" jdbcType="LONGVARCHAR" javaType="String"/>
+        <result column="KNOWLEDGE_STATUS" property="knowledgeStatus" jdbcType="CHAR" javaType="String"/>
+        <result column="DATE_CREATED" property="dateCreated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="LAST_UPDATED" property="lastUpdated" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,KNOWLEDGE_NAME,KNOWLEDGE_IMG,KNOWLEDGE_STATUS,DATE_CREATED,LAST_UPDATED
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TP_KNOWLEDGE(
+            KNOWLEDGE_NAME
+            ,KNOWLEDGE_IMG
+            ,KNOWLEDGE_STATUS
+            ,DATE_CREATED
+            ,LAST_UPDATED
+        )VALUES(
+            #{knowledgeName,jdbcType=VARCHAR}
+            , #{knowledgeImg,jdbcType=LONGVARCHAR}
+            , #{knowledgeStatus,jdbcType=CHAR}
+            , now()
+            , now()
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE /*MS-TP-KNOWLEDGE-UPDATE*/ TP_KNOWLEDGE
+        SET
+            KNOWLEDGE_NAME  = #{knowledgeName,jdbcType=VARCHAR}
+            ,KNOWLEDGE_IMG   = #{knowledgeImg,jdbcType=LONGVARCHAR}
+            ,KNOWLEDGE_STATUS = #{knowledgeStatus,jdbcType=CHAR}
+            ,LAST_UPDATED    = now()
+        WHERE
+        ID = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimary" >
+        DELETE /*MS-TP-KNOWLEDGE-DELETEBYPRIMARY*/ FROM TP_KNOWLEDGE
+        WHERE
+        ID = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="getByPrimary" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-GETBYPRIMARY*/ <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+        WHERE
+        ID = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="listKnowledge" resultMap="BaseResultMap">
+        SELECT /*MS-TP-KNOWLEDGE-GETBYPRIMARY*/ <include refid="Base_Column_List" />
+        FROM TP_KNOWLEDGE
+    </select>
+</mapper>

@@ -50,8 +50,10 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
                 <configuration>
+					<!-- 镜像名称 -->
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <buildArgs>
+						<!-- jar包地址 -->
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>

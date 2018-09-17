@@ -1,5 +1,8 @@
 package com.liuzhuang.thread.forkjoin;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
@@ -17,8 +20,10 @@ public class CountTask extends RecursiveTask<Integer> {
 	private int start;
 	private int end;
 
+	private static HashMap<String, Integer> countThreadNameHashMap = new HashMap<>();
+
 	public CountTask(int start, int end) {
-		System.out.println("CountTask start:" + start + " end:" + end);
+		// System.out.println("CountTask start:" + start + " end:" + end);
 		this.start = start;
 		this.end = end;
 	}
@@ -33,6 +38,14 @@ public class CountTask extends RecursiveTask<Integer> {
 		if (canCompute) {
 			// 递归结束条件
 			for (int i = start; i <= end; i++) {
+				int count = countThreadNameHashMap.getOrDefault(Thread.currentThread().getName(), 0);
+				countThreadNameHashMap.put(Thread.currentThread().getName(), count + 1);
+
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				sum += i;
 			}
 		} else {
@@ -56,5 +69,11 @@ public class CountTask extends RecursiveTask<Integer> {
 		forkJoinPool.submit(countTask);
 		int result = countTask.get();
 		System.out.println("result:" + result);
+
+		for (Map.Entry<String,Integer> entry : countThreadNameHashMap.entrySet()) {
+			System.out.println(entry.getKey() + ":" + entry.getValue());
+		}
+
+		Thread.sleep(100000);
 	}
 }

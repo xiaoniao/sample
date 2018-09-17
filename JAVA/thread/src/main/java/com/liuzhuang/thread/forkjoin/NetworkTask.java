@@ -1,6 +1,7 @@
 package com.liuzhuang.thread.forkjoin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
@@ -17,6 +18,8 @@ public class NetworkTask extends RecursiveTask<List<NetworkBean>> {
     private static final int THRESHOLD = 1; // 阀值 一个线程只一次网络请求
     private int startPage;
     private int endPage;
+
+    private HashMap<String, Integer> countThreadNameHashMap = new HashMap<>();
 
     public NetworkTask(int startPage, int endPage) {
         this.startPage = startPage;

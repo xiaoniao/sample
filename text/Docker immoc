@@ -1,0 +1,97 @@
+
+Docker的架构和底层技术
+
+Infrastructure(physical/virtual 基础设施) / Docker Engine / Application
+
+Docker 隔离了底层和应用
+
+Docker Engine
+    后台进程(dockerd)[docker daemon]
+    REST API Server
+    CLI接口(docker)[docker client]
+
+----------------------------------------
+|  Client  |  Docker  |  HOST Registry |
+----------------------------------------
+
+
+底层技术支持
+namespace
+cgroups
+union file system
+
+
+
+
+
+
+-------持久化存储和数据存储
+
+
+
+上传目录到Linux虚拟机
+vagrant scp ./aa docker-node1:/home/vagrant/aa
+
+
+sudo docker run -d -v mysql:/var/lib/mysql --name mysql-1 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
+
+
+sudo docker run -d -v /home/vagrant/test/mysql:/var/lib/mysql --name mysql-2 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
+
+
+
+------Docker 镜像
+
+docker commit / docker build
+
+一、docke commit (根据容器制作镜像)
+docker run -it centos
+yum install -y vim
+exit
+docker ps -a
+docker commit xx lzz/centos-vim
+docker images
+docker history 查看分层
+
+不推荐这种方式，不安全，不透明。
+
+二、docker build
+
+在docker history中可以看到进行了什么操作命令。
+
+vi Dockerfile
+FROM centos
+RUN yum install -y vim
+
+sudo docker build -t lzz/centos-vim-dockerfile .
+
+
+
+------
+
+FORM scratch
+LABEL 
+WORKDIR /tmp
+RUN pwd
+ADD/COPY
+ENV MYSQL-VERSION 6
+VOLUME 存储
+EXPOSE 网络
+CMD
+ENTRYPOINT
+
+
+RUN:执行命令并创建新的Image Layer
+CMD:设置容器启动后默认执行的命令和参数   只会执行最后一个，如果指定了命令则不会执行CMD
+ENTRYPOINT:设置容器启动时运行的命令    一定会执行
+
+
+# ENTRAYPOING 结合 CMD 使用
+
+比如命令行工具
+FROM ubuntu
+RUN apt-get update && apt-get install -y stress
+ENTRAYPOING ["usr/bin/stress"]
+CMD ["ls"]
+
+

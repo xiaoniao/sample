@@ -1,4 +1,4 @@
-package com.example.JVMlearn.oom;
+package com.example.JVMlearn.basic.controller.oom;
 
 /**
  * Created by liuzhuang on 2018/8/13.

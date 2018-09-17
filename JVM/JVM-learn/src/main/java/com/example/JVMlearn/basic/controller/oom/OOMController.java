@@ -1,4 +1,4 @@
-package com.example.JVMlearn.oom;
+package com.example.JVMlearn.basic.controller.oom;
 
 import com.example.JVMlearn.bytecode.TestClass;
 import org.springframework.web.bind.annotation.RequestMapping;
