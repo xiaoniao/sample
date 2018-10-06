@@ -1,6 +1,7 @@
 package com.example.designpattern.pattern.creational.abstractfactory;
 
 import com.example.designpattern.pattern.creational.abstractfactory.basic.Article;
+import com.example.designpattern.pattern.creational.abstractfactory.basic.Code;
 import com.example.designpattern.pattern.creational.abstractfactory.basic.Video;
 import com.example.designpattern.pattern.creational.abstractfactory.factory.CourseFactory;
 import com.example.designpattern.pattern.creational.abstractfactory.factory.JavaCourseFactory;
@@ -19,7 +20,9 @@ public class Test {
         CourseFactory courseFactory = new JavaCourseFactory();
         Video video = courseFactory.getVideo();
         Article article = courseFactory.getArticle();
+        Code code = courseFactory.getCode();
         video.startPlay();
         article.getContent();
+        code.submit();
     }
 }
