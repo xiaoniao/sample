@@ -1,0 +1,18 @@
+
+
+安装：https://alibaba.github.io/arthas/install-detail.html#linux-unix-mac
+
+    1.curl -L https://alibaba.github.io/arthas/install.sh | sh
+
+    2.如果没有设置JAVA_HOME环境变量，设置它
+    vi .bash_profile
+    export JAVA_HOME=/Library/java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+
+
+使用命令：
+
+    dashboard
+
+
+    watch
+

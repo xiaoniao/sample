@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>dalgen</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>dalgen</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.5.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>cn.dalgen.plugins</groupId>
+				<artifactId>mybatis-maven-plugin</artifactId>
+				<version>1.1.7</version>
+			</plugin>
+
+			<!--<plugin>-->
+				<!--<groupId>cn.dalgen.plugins</groupId>-->
+				<!--<artifactId>mybatis-maven-plugin</artifactId>-->
+				<!--<version>1.1.7</version>-->
+				<!--<configuration>-->
+					<!--&lt;!&ndash; 可选 不填写 使用默认路径&ndash;&gt;-->
+					<!--<templateDirectory>mysqlTemplates</templateDirectory>-->
+					<!--&lt;!&ndash; 代码输出路径 &ndash;&gt;-->
+					<!--<outputDirectory>src/</outputDirectory>-->
+					<!--&lt;!&ndash; 配置文件 &ndash;&gt;-->
+					<!--<config>config/config.xml</config>-->
+					<!--&lt;!&ndash; 自动复制模板 第一次需要设置为true,后续如果templates中的模板有修改需求需要设置为false否则会自动覆盖 &ndash;&gt;-->
+					<!--<copyTemplate>true</copyTemplate>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+		</plugins>
+	</build>
+
+
+</project>

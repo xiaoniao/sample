@@ -1,0 +1,17 @@
+Spring Boot 查看自动配置报告
+
+debug=true
+
+分为
+CONDITIONS EVALUATION REPORT
+    Positive matches:
+    Negative matches:
+    Exclusions:
+    Unconditional classes:
+
+
+重要的几个类
+DispatcherServletAutoConfiguration
+WebMvcAutoConfiguration
+ErrorMvcAutoConfiguration
+HttpEncodingAutoConfiguration

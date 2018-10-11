@@ -1,0 +1,54 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="class" physicalName="class" remark="CLASS">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID,CLASS_NAME,FLAG,SCORE
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.CLASS_NAME,sf.FLAG,sf.SCORE
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:class">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+        INSERT INTO class(
+            ID
+            ,CLASS_NAME
+            ,FLAG
+            ,SCORE
+        )VALUES(
+             null
+            , #{className,jdbcType=VARCHAR}
+            , #{flag,jdbcType=INTEGER}
+            , #{score,jdbcType=INTEGER}
+        )
+        ]]>
+    </operation>
+
+    <!-- foreach 可以自定义类型，paramtype="primitive" foreach->javatype="自己书写的类"  -->
+    <!-- 只有一个参数且为List时必须将参数命名为list -->
+    <operation name="insertBatch" paramtype="objectList" remark="批量插入表:class">
+        INSERT INTO class(
+            ID
+            ,CLASS_NAME
+            ,FLAG
+            ,SCORE
+        )VALUES
+        <foreach collection="list"  item="item" separator=",">
+            (
+                 null
+                , #{item.className,jdbcType=VARCHAR}
+                , #{item.flag,jdbcType=INTEGER}
+                , #{item.score,jdbcType=INTEGER}
+            )
+        </foreach>
+    </operation>
+
+
+</table>

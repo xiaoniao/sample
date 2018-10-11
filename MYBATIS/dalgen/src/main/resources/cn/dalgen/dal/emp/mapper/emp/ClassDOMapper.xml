@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.dalgen.dal.emp.mapper.ClassDOMapper">
+    <!-- 自动生成,请修改 CLASS.xml -->
+    <resultMap id="BaseResultMap"  type="cn.dalgen.dal.emp.dataobject.ClassDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" javaType="String"/>
+        <result column="FLAG" property="flag" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="SCORE" property="score" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.CLASS_NAME,sf.FLAG,sf.SCORE
+    </sql>
+    <sql id="Base_Column_List">
+        ID,CLASS_NAME,FLAG,SCORE
+    </sql>
+
+
+    <!--插入表:class-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        <![CDATA[
+        INSERT INTO class(
+            ID
+            ,CLASS_NAME
+            ,FLAG
+            ,SCORE
+        )VALUES(
+             null
+            , #{className,jdbcType=VARCHAR}
+            , #{flag,jdbcType=INTEGER}
+            , #{score,jdbcType=INTEGER}
+        )
+        ]]>
+    </insert>
+
+    <!--批量插入表:class-->
+    <insert id="insertBatch" >
+        INSERT INTO class(
+            ID
+            ,CLASS_NAME
+            ,FLAG
+            ,SCORE
+        )VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                 null
+                , #{item.className,jdbcType=VARCHAR}
+                , #{item.flag,jdbcType=INTEGER}
+                , #{item.score,jdbcType=INTEGER}
+            )
+        </foreach>
+    </insert>
+</mapper>

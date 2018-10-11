@@ -9,10 +9,18 @@ import com.example.designpattern.pattern.creational.abstractfactory.factory.Java
 /**
  * Created by geely
  *
- * 抽象工厂模式
- *    1.抽象factory
- *    2.抽象业务
- *    factory实例化对象
+ * 产品族（多个产品），一个工厂类生产多个产品，例如Video，Article，Code
+ *
+ * 抽象出一个工厂类CourseFactory，多个产品类Video，Article，Code
+ *
+ * 适合于抽象出来的产品族是固定的，而具体的产品是不固定的。
+ *
+ *  例如增加：Python产品
+ *      PythonArticle
+ *      PythonCode
+ *      PythonVideo
+ *      PythonCourseFactory
+ *
  */
 public class Test {
 
@@ -21,6 +29,7 @@ public class Test {
         Video video = courseFactory.getVideo();
         Article article = courseFactory.getArticle();
         Code code = courseFactory.getCode();
+
         video.startPlay();
         article.getContent();
         code.submit();
